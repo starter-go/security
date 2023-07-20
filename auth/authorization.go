@@ -2,14 +2,12 @@ package auth
 
 import (
 	"context"
-
-	"github.com/starter-go/security/rbac"
 )
 
 // Authorization 表示一个授权请求
 type Authorization interface {
 	Context() context.Context
-	User() rbac.User
+	User() User
 }
 
 // Authorizer 表示一个授权组件
@@ -18,7 +16,27 @@ type Authorizer interface {
 	Support(a Authorization) bool
 }
 
-// Authorizers 表示一组授权组件
-type Authorizers interface {
-	Authorize(a Authorization) error
+////////////////////////////////////////////////////////////////////////////////
+
+type innerAuthorization struct {
+	ctx  context.Context
+	user User
 }
+
+func (inst *innerAuthorization) Context() context.Context {
+	return inst.ctx
+}
+
+func (inst *innerAuthorization) User() User {
+	return inst.user
+}
+
+// NewAuthorization 新建一个 Authorization 的实例
+func NewAuthorization(c context.Context, user User) Authorization {
+	return &innerAuthorization{
+		ctx:  c,
+		user: user,
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////

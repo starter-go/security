@@ -14,5 +14,6 @@ require (
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/starter-go/afs v0.9.1 // indirect
 	github.com/starter-go/configen v0.9.2 // indirect
+	github.com/starter-go/libgorm v0.9.6 // indirect
 	github.com/starter-go/vlog v0.9.5 // indirect
 )

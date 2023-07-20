@@ -13,12 +13,6 @@ type UserID int64
 // UserName 表示用户名
 type UserName string
 
-// User 表示经过验证的用户
-type User interface {
-	Name() UserName // 取用户名
-	ID() UserID     // 取用户ID
-}
-
 // UserEntity 表示 User 的数据库实体
 type UserEntity struct {
 	ID UserID
