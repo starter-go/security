@@ -9,26 +9,26 @@ import (
 
 // BaseEntity 是基本的数据库实体
 type BaseEntity struct {
+	UUID lang.UUID
+
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 
-	UUID lang.UUID
-
-	Owner     UserID
-	Creator   UserID
-	Committer UserID
+	Owner   UserID
+	Creator UserID
+	Updater UserID
 }
 
 // BaseDTO 是基本的 DTO
 type BaseDTO struct {
+	UUID lang.UUID `json:"uuid"`
+
 	CreatedAt lang.Time `json:"created_at"`
 	UpdatedAt lang.Time `json:"updated_at"`
 	DeletedAt lang.Time `json:"deleted_at"`
 
-	UUID lang.UUID `json:"uuid"`
-
-	Owner     UserID `json:"owner"`
-	Creator   UserID `json:"creator"`
-	Committer UserID `json:"committer"`
+	Owner   UserID `json:"owner"`
+	Creator UserID `json:"creator"`
+	Updater UserID `json:"updater"`
 }

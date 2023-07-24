@@ -54,3 +54,11 @@ type RoleService interface {
 type RoleDAO interface {
 	Find(db *gorm.DB, id RoleID) (*RoleEntity, error)
 }
+
+// RoleConvertor 负责 dto <==> entity 的转换
+type RoleConvertor interface {
+	ConvertE2D(c context.Context, entity *RoleEntity) (*RoleDTO, error)
+	ConvertD2E(c context.Context, dto *RoleDTO) (*RoleEntity, error)
+
+	ConvertListE2D(c context.Context, entity []*RoleEntity) ([]*RoleDTO, error)
+}

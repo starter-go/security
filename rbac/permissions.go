@@ -41,3 +41,11 @@ type PermissionService interface {
 type PermissionDAO interface {
 	Find(db *gorm.DB, id PermissionID) (*PermissionEntity, error)
 }
+
+// PermissionConvertor 负责 dto <==> entity 的转换
+type PermissionConvertor interface {
+	ConvertE2D(c context.Context, entity *PermissionEntity) (*PermissionDTO, error)
+	ConvertD2E(c context.Context, dto *PermissionDTO) (*PermissionEntity, error)
+
+	ConvertListE2D(c context.Context, entity []*PermissionEntity) ([]*PermissionDTO, error)
+}

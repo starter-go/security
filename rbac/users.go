@@ -2,12 +2,13 @@ package rbac
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/starter-go/base/lang"
 	"gorm.io/gorm"
 )
 
-// UserID 表示用户标识符
+// UserID 是通用的用户标识符
 type UserID int64
 
 // UserName 表示用户名
@@ -53,3 +54,29 @@ type UserService interface {
 type UserDAO interface {
 	Find(db *gorm.DB, id UserID) (*UserEntity, error)
 }
+
+// UserConvertor 负责 dto <==> entity 的转换
+type UserConvertor interface {
+	ConvertE2D(c context.Context, entity *UserEntity) (*UserDTO, error)
+	ConvertD2E(c context.Context, dto *UserDTO) (*UserEntity, error)
+
+	ConvertListE2D(c context.Context, entity []*UserEntity) ([]*UserDTO, error)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+func (id UserID) String() string {
+	n := int64(id)
+	return strconv.FormatInt(n, 10)
+}
+
+// ParseUserID 把字符串解析为 UserID
+func ParseUserID(s string) (UserID, error) {
+	n, err := strconv.ParseInt(s, 10, 64)
+	if err != nil {
+		return 0, err
+	}
+	return UserID(n), nil
+}
+
+////////////////////////////////////////////////////////////////////////////////
