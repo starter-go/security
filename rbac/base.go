@@ -32,3 +32,13 @@ type BaseDTO struct {
 	Creator UserID `json:"creator"`
 	Updater UserID `json:"updater"`
 }
+
+// BaseVO 是通用的基本 VO 结构
+type BaseVO struct {
+	Status     int         `json:"status"`
+	Message    string      `json:"message"`
+	Error      string      `json:"error"`
+	Time       time.Time   `json:"time"`
+	Timestamp  lang.Time   `json:"timestamp"`
+	Pagination *Pagination `json:"pagination"`
+}
