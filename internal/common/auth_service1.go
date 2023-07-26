@@ -8,8 +8,8 @@ import (
 	"github.com/starter-go/security/auth"
 )
 
-// AuthService ...
-type AuthService struct {
+// AuthService1 ...
+type AuthService1 struct {
 	//starter:component
 	_as func(auth.Service) //starter:as("#")
 
@@ -20,12 +20,12 @@ type AuthService struct {
 	授权组件list   []auth.Authorizer
 }
 
-func (inst *AuthService) _impl() auth.Service {
+func (inst *AuthService1) _impl() auth.Service {
 	return inst
 }
 
 // Login 登录
-func (inst *AuthService) Login(c context.Context, a1 auth.Authentication) error {
+func (inst *AuthService1) Login(c context.Context, a1 auth.Authentication) error {
 	user, err := inst.Authenticate(a1)
 	if err != nil {
 		return err
@@ -34,7 +34,7 @@ func (inst *AuthService) Login(c context.Context, a1 auth.Authentication) error 
 	return inst.Authorize(a2)
 }
 
-func (inst *AuthService) getRegistrationList() []*auth.Registration {
+func (inst *AuthService1) getRegistrationList() []*auth.Registration {
 
 	list := inst.组件注册信息list
 	if list != nil {
@@ -66,7 +66,7 @@ func (inst *AuthService) getRegistrationList() []*auth.Registration {
 	return list
 }
 
-func (inst *AuthService) getAuthenticatorList() []auth.Authenticator {
+func (inst *AuthService1) getAuthenticatorList() []auth.Authenticator {
 	list := inst.验证组件list
 	if list != nil {
 		return list
@@ -81,7 +81,7 @@ func (inst *AuthService) getAuthenticatorList() []auth.Authenticator {
 	return list
 }
 
-func (inst *AuthService) getAuthorizerList() []auth.Authorizer {
+func (inst *AuthService1) getAuthorizerList() []auth.Authorizer {
 	list := inst.授权组件list
 	if list != nil {
 		return list
@@ -97,7 +97,7 @@ func (inst *AuthService) getAuthorizerList() []auth.Authorizer {
 }
 
 // Authorize 授权
-func (inst *AuthService) Authorize(a auth.Authorization) error {
+func (inst *AuthService1) Authorize(a auth.Authorization) error {
 	list := inst.getAuthorizerList()
 	for _, item := range list {
 		if item.Support(a) {
@@ -108,11 +108,14 @@ func (inst *AuthService) Authorize(a auth.Authorization) error {
 }
 
 // Authenticate 验证
-func (inst *AuthService) Authenticate(a auth.Authentication) (auth.User, error) {
+func (inst *AuthService1) Authenticate(a auth.Authentication) (auth.User, error) {
 	list := inst.getAuthenticatorList()
 	for _, item := range list {
 		if item.Support(a) {
-			return item.Authenticate(a)
+			user, err := item.Authenticate(a)
+			if err == nil {
+				return user, nil
+			}
 		}
 	}
 	return nil, fmt.Errorf("bad auth")

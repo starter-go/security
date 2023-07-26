@@ -2,6 +2,7 @@ package roles
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/starter-go/security/rbac"
 )
@@ -26,4 +27,28 @@ func (inst *Service) Find(c context.Context, id rbac.RoleID) (*rbac.RoleDTO, err
 		return nil, err
 	}
 	return inst.Convertor.ConvertE2D(c, o1)
+}
+
+// List ...
+func (inst *Service) List(c context.Context, q *rbac.RoleQuery) ([]*rbac.RoleDTO, error) {
+	list, err := inst.Dao.List(nil, q)
+	if err != nil {
+		return nil, err
+	}
+	return inst.Convertor.ConvertListE2D(c, list)
+}
+
+// Insert ...
+func (inst *Service) Insert(c context.Context, o *rbac.RoleDTO) (*rbac.RoleDTO, error) {
+	return nil, fmt.Errorf("no impl")
+}
+
+// Update ...
+func (inst *Service) Update(c context.Context, id rbac.RoleID, o *rbac.RoleDTO) (*rbac.RoleDTO, error) {
+	return nil, fmt.Errorf("no impl")
+}
+
+// Delete ...
+func (inst *Service) Delete(c context.Context, id rbac.RoleID) error {
+	return inst.Dao.Delete(nil, id)
 }

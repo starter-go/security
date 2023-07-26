@@ -8,8 +8,11 @@ import (
 
 // User 表示经过验证的用户
 type User interface {
-	Name() rbac.UserName // 取用户名
-	ID() rbac.UserID     // 取用户ID
+	ID() rbac.UserID          // 用户ID
+	Name() rbac.UserName      // 用户名
+	Avatar() string           // 头像图片的 URL
+	Roles() rbac.RoleNameList // 角色
+	DisplayName() string      // 显示名称（昵称）
 }
 
 // Authorizers 表示一组授权组件

@@ -1,2 +1,33 @@
-[configen]
-    version=4
+{
+    "configen": {
+        "version": "4",
+        "sources": [
+            {
+                "id": "main",
+                "path": "internal",
+                "r": true
+            },
+            {
+                "id": "test",
+                "path": "src/test/code",
+                "r": true
+            }
+        ],
+        "destinations": [
+            {
+                "id": "main",
+                "path": "gen/gen4security",
+                "sources": [
+                    "main"
+                ]
+            },
+            {
+                "id": "test",
+                "path": "gen/gen4test",
+                "sources": [
+                    "test"
+                ]
+            }
+        ]
+    }
+}

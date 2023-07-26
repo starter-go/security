@@ -102,7 +102,7 @@ func (inst *JWTService) SetDTO(c context.Context, o *jwt.DTO) error {
 }
 
 // SetText ...
-func (inst *JWTService) SetText(c context.Context, t *jwt.Text) error {
+func (inst *JWTService) SetText(c context.Context, t jwt.Text) error {
 	err := fmt.Errorf("no jwt.adapter for the context")
 	list := inst.listAdapters()
 	for _, item := range list {

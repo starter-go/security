@@ -43,7 +43,12 @@ func (inst *TestCom) test() error {
 
 func (inst *TestCom) doLogin(c context.Context) error {
 
-	a1 := &rbac.AuthDTO{}
+	password := "test"
+	a1 := &rbac.AuthDTO{
+		Mechanism: "password",
+		Account:   "test",
+		Secret:    []byte(password),
+	}
 
 	a2, err := inst.AuthSer.Login(c, a1)
 	if err != nil {

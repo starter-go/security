@@ -3,6 +3,7 @@ package jwt
 import (
 	"context"
 
+	"github.com/starter-go/base/lang"
 	"github.com/starter-go/security/rbac"
 )
 
@@ -11,7 +12,10 @@ type Text string
 
 // DTO 是 JSON 结构形式的 JWT
 type DTO struct {
-	rbac.UserDTO
+	rbac.BaseDTO
+
+	ExpiredAt  lang.Time         `json:"expired_at"`
+	Session    rbac.SessionDTO   `json:"session"`
 	Properties map[string]string `json:"properties"`
 }
 
@@ -24,7 +28,7 @@ type Getter interface {
 // Setter 用来设置跟上下文绑定的JWT
 type Setter interface {
 	SetDTO(c context.Context, o *DTO) error
-	SetText(c context.Context, t *Text) error
+	SetText(c context.Context, t Text) error
 }
 
 // CODEC 是 JWT 的编解码器
@@ -58,4 +62,10 @@ type Service interface {
 	Getter
 	Setter
 	CODEC
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+func (t Text) String() string {
+	return string(t)
 }

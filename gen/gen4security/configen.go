@@ -6,6 +6,5 @@ import "github.com/starter-go/application"
 
 // ExportComSetForSecurity ...
 func ExportComSetForSecurity(cr application.ComponentRegistry) error {
-
-	return nil
+	return registerComponents(cr)
 }

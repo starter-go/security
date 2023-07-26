@@ -45,14 +45,29 @@ type RoleDTO struct {
 	Name RoleName `json:"name"`
 }
 
+// RoleQuery 查询参数
+type RoleQuery struct {
+	Pagination Pagination
+}
+
 // RoleService 是针对 RoleDTO 的服务
 type RoleService interface {
+	Insert(c context.Context, o *RoleDTO) (*RoleDTO, error)
+	Update(c context.Context, id RoleID, o *RoleDTO) (*RoleDTO, error)
+	Delete(c context.Context, id RoleID) error
+
 	Find(c context.Context, id RoleID) (*RoleDTO, error)
+	List(c context.Context, q *RoleQuery) ([]*RoleDTO, error)
 }
 
 // RoleDAO 是数据库访问对象
 type RoleDAO interface {
+	Insert(db *gorm.DB, o *RoleEntity) (*RoleEntity, error)
+	Update(db *gorm.DB, id RoleID, updater func(*RoleEntity)) (*RoleEntity, error)
+	Delete(db *gorm.DB, id RoleID) error
+
 	Find(db *gorm.DB, id RoleID) (*RoleEntity, error)
+	List(db *gorm.DB, q *RoleQuery) ([]*RoleEntity, error)
 }
 
 // RoleConvertor 负责 dto <==> entity 的转换
