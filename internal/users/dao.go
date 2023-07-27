@@ -61,7 +61,7 @@ func (inst *Dao) List(db *gorm.DB, q *rbac.UserQuery) ([]*rbac.UserEntity, error
 
 	db = inst.Agent.DB(db)
 	db.Model(inst.model()).Count(&count)
-	db = db.Offset(int(offset)).Limit(limit)
+	db = db.Offset(int(offset)).Limit(int(limit))
 	res := db.Find(&list)
 	if res.Error != nil {
 		return nil, res.Error
