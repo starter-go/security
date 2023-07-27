@@ -33,7 +33,7 @@ type RoleEntity struct {
 
 	BaseEntity
 
-	Name RoleName
+	Name RoleName `gorm:"unique"`
 }
 
 // RoleDTO 表示 Role 的 REST 网络对象

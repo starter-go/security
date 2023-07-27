@@ -128,6 +128,7 @@ func (inst* p5772338936_code_TestCom) inject(injext application.InjectionExt, in
 	
     com.AuthSer = inst.getAuthSer(ie)
     com.SessionSer = inst.getSessionSer(ie)
+    com.UserSer = inst.getUserSer(ie)
 
 
     return nil
@@ -141,6 +142,11 @@ func (inst*p5772338936_code_TestCom) getAuthSer(ie application.InjectionExt)p2de
 
 func (inst*p5772338936_code_TestCom) getSessionSer(ie application.InjectionExt)p2dece1e49.SessionService{
     return ie.GetComponent("#alias-2dece1e495fd61b93f78009d229f38cf-SessionService").(p2dece1e49.SessionService)
+}
+
+
+func (inst*p5772338936_code_TestCom) getUserSer(ie application.InjectionExt)p2dece1e49.UserService{
+    return ie.GetComponent("#alias-2dece1e495fd61b93f78009d229f38cf-UserService").(p2dece1e49.UserService)
 }
 
 

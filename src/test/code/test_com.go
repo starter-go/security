@@ -2,10 +2,12 @@ package code
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/starter-go/application"
 	"github.com/starter-go/base/lang"
 	"github.com/starter-go/security/rbac"
+	"github.com/starter-go/vlog"
 )
 
 // TestCom ...
@@ -15,6 +17,7 @@ type TestCom struct {
 
 	AuthSer    rbac.AuthService    //starter:inject("#")
 	SessionSer rbac.SessionService //starter:inject("#")
+	UserSer    rbac.UserService    //starter:inject("#")
 
 }
 
@@ -32,6 +35,8 @@ func (inst *TestCom) test() error {
 
 	steps = append(steps, inst.doLogin)
 	steps = append(steps, inst.doCurrentSession)
+	steps = append(steps, inst.doInsertUser)
+	steps = append(steps, inst.doListUsers)
 
 	for _, fn := range steps {
 		err := fn(c)
@@ -70,4 +75,30 @@ func (inst *TestCom) doCurrentSession(c context.Context) error {
 
 	ses.DeletedAt.Int() // todo ...
 	return nil
+}
+
+func (inst *TestCom) doInsertUser(c context.Context) error {
+
+	now := lang.Now()
+	userName := fmt.Sprintf("user_%d", now.Int())
+	u2, err := inst.UserSer.Insert(c, &rbac.UserDTO{
+		Name:     rbac.UserName(userName),
+		NickName: "",
+	})
+
+	if err == nil {
+		vlog.Debug("user.name = %s", u2.Name)
+	}
+
+	return err
+}
+
+func (inst *TestCom) doListUsers(c context.Context) error {
+	list, err := inst.UserSer.List(c, nil)
+	if err == nil {
+		for i, item := range list {
+			vlog.Debug("user[%d].name = %s", i, item.Name)
+		}
+	}
+	return err
 }

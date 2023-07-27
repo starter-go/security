@@ -23,6 +23,10 @@ func (inst *Convertor) ConvertE2D(c context.Context, src *rbac.PermissionEntity)
 	dst.ID = src.ID
 	rbac.CopyBaseFieldsFromEntityToDTO(&src.BaseEntity, &dst.BaseDTO)
 
+	dst.AcceptRoles = src.AcceptRoles
+	dst.Method = src.Method
+	dst.Path = src.Path
+
 	return dst, nil
 }
 
@@ -31,6 +35,10 @@ func (inst *Convertor) ConvertD2E(c context.Context, src *rbac.PermissionDTO) (*
 	dst := &rbac.PermissionEntity{}
 	dst.ID = src.ID
 	rbac.CopyBaseFieldsFromDtoToEntity(&src.BaseDTO, &dst.BaseEntity)
+
+	dst.AcceptRoles = src.AcceptRoles
+	dst.Method = src.Method
+	dst.Path = src.Path
 
 	return dst, nil
 }

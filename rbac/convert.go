@@ -40,9 +40,10 @@ func CopyBaseFieldsFromDtoToEntity(src *BaseDTO, dst *BaseEntity) {
 
 	dst.UUID = src.UUID
 
-	dst.CreatedAt = src.CreatedAt.Time()
-	dst.UpdatedAt = src.UpdatedAt.Time()
-	dst.DeletedAt = ConvertTimeToGorm(src.DeletedAt)
+	// 这3个字段由 gorm 自动设置
+	// dst.CreatedAt = src.CreatedAt.Time()
+	// dst.UpdatedAt = src.UpdatedAt.Time()
+	// dst.DeletedAt = ConvertTimeToGorm(src.DeletedAt)
 
 	dst.Owner = src.Owner
 	dst.Updater = src.Updater

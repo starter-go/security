@@ -20,7 +20,8 @@ type UserEntity struct {
 
 	BaseEntity
 
-	Name     UserName     // 用户名
+	Name UserName `gorm:"unique"` // 用户名
+
 	Nickname string       // 昵称
 	Avatar   string       // 头像 (HTTP-URL)
 	Phone    string       // 主要的手机号

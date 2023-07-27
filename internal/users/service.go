@@ -40,8 +40,16 @@ func (inst *Service) List(c context.Context, q *rbac.UserQuery) ([]*rbac.UserDTO
 }
 
 // Insert ...
-func (inst *Service) Insert(c context.Context, o *rbac.UserDTO) (*rbac.UserDTO, error) {
-	return nil, fmt.Errorf("no impl")
+func (inst *Service) Insert(c context.Context, o1 *rbac.UserDTO) (*rbac.UserDTO, error) {
+	o2, err := inst.Convertor.ConvertD2E(c, o1)
+	if err != nil {
+		return nil, err
+	}
+	o3, err := inst.Dao.Insert(nil, o2)
+	if err != nil {
+		return nil, err
+	}
+	return inst.Convertor.ConvertE2D(c, o3)
 }
 
 // Update ...

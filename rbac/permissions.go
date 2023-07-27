@@ -17,7 +17,7 @@ type PermissionEntity struct {
 
 	Method      string
 	Path        string
-	Resource    string // like 'method + ":" + path'
+	Resource    string `gorm:"unique"` // like 'method + ":" + path'
 	AcceptRoles RoleNameList
 }
 

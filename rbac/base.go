@@ -9,7 +9,7 @@ import (
 
 // BaseEntity 是基本的数据库实体
 type BaseEntity struct {
-	UUID lang.UUID
+	UUID lang.UUID `gorm:"unique"`
 
 	CreatedAt time.Time
 	UpdatedAt time.Time

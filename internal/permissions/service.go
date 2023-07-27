@@ -39,8 +39,16 @@ func (inst *Service) List(c context.Context, q *rbac.PermissionQuery) ([]*rbac.P
 }
 
 // Insert ...
-func (inst *Service) Insert(c context.Context, o *rbac.PermissionDTO) (*rbac.PermissionDTO, error) {
-	return nil, fmt.Errorf("no impl")
+func (inst *Service) Insert(c context.Context, o1 *rbac.PermissionDTO) (*rbac.PermissionDTO, error) {
+	o2, err := inst.Convertor.ConvertD2E(c, o1)
+	if err != nil {
+		return nil, err
+	}
+	o3, err := inst.Dao.Insert(nil, o2)
+	if err != nil {
+		return nil, err
+	}
+	return inst.Convertor.ConvertE2D(c, o3)
 }
 
 // Update ...

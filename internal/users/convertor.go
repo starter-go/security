@@ -21,6 +21,7 @@ func (inst *Convertor) _impl() rbac.UserConvertor {
 func (inst *Convertor) ConvertE2D(c context.Context, src *rbac.UserEntity) (*rbac.UserDTO, error) {
 	dst := &rbac.UserDTO{}
 	dst.ID = src.ID
+
 	rbac.CopyBaseFieldsFromEntityToDTO(&src.BaseEntity, &dst.BaseDTO)
 
 	dst.Avatar = src.Avatar
@@ -37,6 +38,7 @@ func (inst *Convertor) ConvertE2D(c context.Context, src *rbac.UserEntity) (*rba
 func (inst *Convertor) ConvertD2E(c context.Context, src *rbac.UserDTO) (*rbac.UserEntity, error) {
 	dst := &rbac.UserEntity{}
 	dst.ID = src.ID
+
 	rbac.CopyBaseFieldsFromDtoToEntity(&src.BaseDTO, &dst.BaseEntity)
 
 	dst.Avatar = src.Avatar
