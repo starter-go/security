@@ -3,6 +3,7 @@ package permissions
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/starter-go/security/rbac"
 )
@@ -44,6 +45,9 @@ func (inst *Service) Insert(c context.Context, o1 *rbac.PermissionDTO) (*rbac.Pe
 	if err != nil {
 		return nil, err
 	}
+
+	o2.Resource = inst.computeResourceValue(o2)
+
 	o3, err := inst.Dao.Insert(nil, o2)
 	if err != nil {
 		return nil, err
@@ -59,4 +63,10 @@ func (inst *Service) Update(c context.Context, id rbac.PermissionID, o *rbac.Per
 // Delete ...
 func (inst *Service) Delete(c context.Context, id rbac.PermissionID) error {
 	return inst.Dao.Delete(nil, id)
+}
+
+func (inst *Service) computeResourceValue(o *rbac.PermissionEntity) string {
+	path := strings.TrimSpace(o.Path)
+	method := strings.TrimSpace(o.Method)
+	return strings.ToUpper(method) + ":" + path
 }

@@ -15,9 +15,10 @@ type TestCom struct {
 
 	//starter:component
 
-	AuthSer    rbac.AuthService    //starter:inject("#")
-	SessionSer rbac.SessionService //starter:inject("#")
-	UserSer    rbac.UserService    //starter:inject("#")
+	AuthSer       rbac.AuthService       //starter:inject("#")
+	SessionSer    rbac.SessionService    //starter:inject("#")
+	UserSer       rbac.UserService       //starter:inject("#")
+	PermissionSer rbac.PermissionService //starter:inject("#")
 
 }
 
@@ -37,6 +38,7 @@ func (inst *TestCom) test() error {
 	steps = append(steps, inst.doCurrentSession)
 	steps = append(steps, inst.doInsertUser)
 	steps = append(steps, inst.doListUsers)
+	steps = append(steps, inst.doInsertPermission)
 
 	for _, fn := range steps {
 		err := fn(c)
@@ -100,5 +102,21 @@ func (inst *TestCom) doListUsers(c context.Context) error {
 			vlog.Debug("user[%d].name = %s", i, item.Name)
 		}
 	}
+	return err
+}
+
+func (inst *TestCom) doInsertPermission(c context.Context) error {
+
+	now := lang.Now()
+	path := fmt.Sprintf("/a/b/c/%d", now.Int())
+	u2, err := inst.PermissionSer.Insert(c, &rbac.PermissionDTO{
+		Method: "PUT",
+		Path:   path,
+	})
+
+	if err == nil {
+		vlog.Debug("permission.path = %s", u2.Path)
+	}
+
 	return err
 }
