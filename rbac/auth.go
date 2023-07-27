@@ -2,15 +2,17 @@ package rbac
 
 import (
 	"context"
+
+	"github.com/starter-go/base/lang"
 )
 
 // AuthDTO 用于登录认证
 type AuthDTO struct {
 	BaseDTO
 
-	Mechanism string
-	Account   string
-	Secret    []byte
+	Mechanism string      `json:"mechanism"`
+	Account   string      `json:"account"`
+	Secret    lang.Base64 `json:"secret"`
 }
 
 // AuthService 是针对 AuthDTO 的服务

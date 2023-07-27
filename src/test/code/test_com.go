@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/starter-go/application"
+	"github.com/starter-go/base/lang"
 	"github.com/starter-go/security/rbac"
 )
 
@@ -47,8 +48,9 @@ func (inst *TestCom) doLogin(c context.Context) error {
 	a1 := &rbac.AuthDTO{
 		Mechanism: "password",
 		Account:   "test",
-		Secret:    []byte(password),
+		//	Secret:    password,
 	}
+	a1.Secret = lang.Base64FromBytes([]byte(password))
 
 	a2, err := inst.AuthSer.Login(c, a1)
 	if err != nil {

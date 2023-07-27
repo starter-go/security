@@ -58,5 +58,5 @@ func (inst *authService2request) Account() string {
 }
 
 func (inst *authService2request) Secret() []byte {
-	return inst.data.Secret
+	return inst.data.Secret.Bytes()
 }
