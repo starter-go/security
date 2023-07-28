@@ -6,7 +6,6 @@ import (
 
 	"github.com/starter-go/application"
 	"github.com/starter-go/libgorm/modgorm"
-	modulegormmysql "github.com/starter-go/module-gorm-mysql"
 	"github.com/starter-go/security"
 	"github.com/starter-go/security/gen/gen4test"
 	"github.com/starter-go/starter"
@@ -33,7 +32,6 @@ func module() application.Module {
 
 	mb.Depend(security.Module())
 	mb.Depend(modgorm.Module())
-	mb.Depend(modulegormmysql.Module())
 
 	return mb.Create()
 }
