@@ -1,4 +1,4 @@
-package common
+package internal
 
 import (
 	"context"
@@ -87,7 +87,7 @@ func (inst *JWTService) listAdapters() []jwt.Adapter {
 }
 
 // SetDTO ...
-func (inst *JWTService) SetDTO(c context.Context, o *jwt.DTO) error {
+func (inst *JWTService) SetDTO(c context.Context, o *jwt.Token) error {
 	err := fmt.Errorf("no jwt.adapter for the context")
 	list := inst.listAdapters()
 	for _, item := range list {
@@ -117,7 +117,7 @@ func (inst *JWTService) SetText(c context.Context, t jwt.Text) error {
 }
 
 // GetDTO ...
-func (inst *JWTService) GetDTO(c context.Context) (*jwt.DTO, error) {
+func (inst *JWTService) GetDTO(c context.Context) (*jwt.Token, error) {
 	err := fmt.Errorf("no jwt.adapter for the context")
 	list := inst.listAdapters()
 	for _, item := range list {
@@ -149,7 +149,7 @@ func (inst *JWTService) GetText(c context.Context) (jwt.Text, error) {
 }
 
 // Encode ...
-func (inst *JWTService) Encode(o *jwt.DTO) (jwt.Text, error) {
+func (inst *JWTService) Encode(o *jwt.Token) (jwt.Text, error) {
 	err := fmt.Errorf("no jwt.CODEC")
 	list := inst.listCODECs()
 	for _, item := range list {
@@ -163,7 +163,7 @@ func (inst *JWTService) Encode(o *jwt.DTO) (jwt.Text, error) {
 }
 
 // Decode ...
-func (inst *JWTService) Decode(t jwt.Text) (*jwt.DTO, error) {
+func (inst *JWTService) Decode(t jwt.Text) (*jwt.Token, error) {
 	err := fmt.Errorf("no jwt.CODEC")
 	list := inst.listCODECs()
 	for _, item := range list {

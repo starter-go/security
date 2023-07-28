@@ -10,8 +10,8 @@ import (
 // Text 是文本形式的 JWT
 type Text string
 
-// DTO 是 JSON 结构形式的 JWT
-type DTO struct {
+// Token 是 JSON 结构形式的 JWT
+type Token struct {
 	rbac.BaseDTO
 
 	ExpiredAt  lang.Time         `json:"expired_at"`
@@ -21,20 +21,20 @@ type DTO struct {
 
 // Getter 用来获取跟上下文绑定的JWT
 type Getter interface {
-	GetDTO(c context.Context) (*DTO, error)
+	GetDTO(c context.Context) (*Token, error)
 	GetText(c context.Context) (Text, error)
 }
 
 // Setter 用来设置跟上下文绑定的JWT
 type Setter interface {
-	SetDTO(c context.Context, o *DTO) error
+	SetDTO(c context.Context, o *Token) error
 	SetText(c context.Context, t Text) error
 }
 
 // CODEC 是 JWT 的编解码器
 type CODEC interface {
-	Encode(o *DTO) (Text, error)
-	Decode(t Text) (*DTO, error)
+	Encode(o *Token) (Text, error)
+	Decode(t Text) (*Token, error)
 }
 
 // Adapter 用来适配各种不同的上下文

@@ -36,7 +36,7 @@ func (inst *MockTokenAdapter) Accept(c context.Context) bool {
 }
 
 // GetDTO ...
-func (inst *MockTokenAdapter) GetDTO(c context.Context) (*jwt.DTO, error) {
+func (inst *MockTokenAdapter) GetDTO(c context.Context) (*jwt.Token, error) {
 	t1, err := inst.GetText(c)
 	if err != nil {
 		return nil, err
@@ -50,7 +50,7 @@ func (inst *MockTokenAdapter) GetText(c context.Context) (jwt.Text, error) {
 }
 
 // SetDTO ...
-func (inst *MockTokenAdapter) SetDTO(c context.Context, o1 *jwt.DTO) error {
+func (inst *MockTokenAdapter) SetDTO(c context.Context, o1 *jwt.Token) error {
 	t2, err := inst.Service.Encode(o1)
 	if err != nil {
 		return err

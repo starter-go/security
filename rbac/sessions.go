@@ -13,6 +13,8 @@ type SessionDTO struct {
 	ExpiredAt  lang.Time `json:"expired_at"` // 会话的过期时间
 	User       UserDTO   `json:"user"`       // 用户信息
 	Authorized bool      `json:"authorized"` // 是否已授权
+
+	Properties map[string]string `json:"properties"`
 }
 
 // SessionService 是针对 SessionDTO 的服务

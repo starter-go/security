@@ -41,6 +41,8 @@ func (inst *TableGroup) Entities() []any {
 	list = append(list, &PermissionEntity{})
 	list = append(list, &RoleEntity{})
 	list = append(list, &UserEntity{})
+	list = append(list, &EmailAddressEntity{})
+	list = append(list, &PhoneNumberEntity{})
 	return list
 }
 
@@ -51,9 +53,11 @@ type names struct {
 	ns    string
 
 	// todo:list
-	perm libgorm.TableNameCache
-	role libgorm.TableNameCache
-	user libgorm.TableNameCache
+	perm  libgorm.TableNameCache
+	role  libgorm.TableNameCache
+	user  libgorm.TableNameCache
+	email libgorm.TableNameCache
+	phone libgorm.TableNameCache
 }
 
 var theTableNames names
@@ -71,6 +75,8 @@ func (inst *names) initAll(namer libgorm.TableNamer) {
 	inst.initItem("permissions", &inst.perm)
 	inst.initItem("roles", &inst.role)
 	inst.initItem("users", &inst.user)
+	inst.initItem("user_email_addresses", &inst.email)
+	inst.initItem("user_phone_numbers", &inst.phone)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -89,4 +95,14 @@ func (RoleEntity) TableName() string {
 // TableName ...
 func (UserEntity) TableName() string {
 	return theTableNames.user.Name()
+}
+
+// TableName ...
+func (EmailAddressEntity) TableName() string {
+	return theTableNames.email.Name()
+}
+
+// TableName ...
+func (PhoneNumberEntity) TableName() string {
+	return theTableNames.phone.Name()
 }
