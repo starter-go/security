@@ -25,13 +25,20 @@ func (inst *AuthService1) _impl() auth.Service {
 }
 
 // Login 登录
-func (inst *AuthService1) Login(c context.Context, a1 auth.Authentication) error {
-	user, err := inst.Authenticate(a1)
+func (inst *AuthService1) Login(c context.Context, a1 auth.Authentication) (*auth.Result, error) {
+	res, err := inst.Authenticate(a1)
 	if err != nil {
-		return err
+		return nil, err // 验证失败
 	}
-	a2 := auth.NewAuthorization(c, user)
-	return inst.Authorize(a2)
+	if !res.Success {
+		return res, nil // 需要进一步验证
+	}
+	a2 := auth.NewAuthorization(c, res.User)
+	err = inst.Authorize(a2)
+	if err != nil {
+		return nil, err // 授权失败
+	}
+	return res, nil
 }
 
 func (inst *AuthService1) getRegistrationList() []*auth.Registration {
@@ -108,13 +115,13 @@ func (inst *AuthService1) Authorize(a auth.Authorization) error {
 }
 
 // Authenticate 验证
-func (inst *AuthService1) Authenticate(a auth.Authentication) (auth.User, error) {
+func (inst *AuthService1) Authenticate(a auth.Authentication) (*auth.Result, error) {
 	list := inst.getAuthenticatorList()
 	for _, item := range list {
 		if item.Support(a) {
-			user, err := item.Authenticate(a)
+			res, err := item.Authenticate(a)
 			if err == nil {
-				return user, nil
+				return res, nil
 			}
 		}
 	}

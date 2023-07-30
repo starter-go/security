@@ -14,6 +14,7 @@ func (inst *MockAuth) _impl() (auth.Authenticator, auth.Registry) {
 	return inst, inst
 }
 
+// ListRegistrations ...
 func (inst *MockAuth) ListRegistrations() []*auth.Registration {
 	r1 := &auth.Registration{
 		Priority:      0,
@@ -23,7 +24,8 @@ func (inst *MockAuth) ListRegistrations() []*auth.Registration {
 	return []*auth.Registration{r1}
 }
 
-func (inst *MockAuth) Authenticate(a auth.Authentication) (auth.User, error) {
+// Authenticate ...
+func (inst *MockAuth) Authenticate(a auth.Authentication) (*auth.Result, error) {
 	ub := &auth.UserBuilder{
 		ID:          10000,
 		Name:        "mock",
@@ -32,9 +34,15 @@ func (inst *MockAuth) Authenticate(a auth.Authentication) (auth.User, error) {
 		Avatar:      "https://example.com/mock/mock.png",
 	}
 	user := ub.Create()
-	return user, nil
+	res := &auth.Result{
+		User:      user,
+		Success:   false,
+		Challenge: true,
+	}
+	return res, nil
 }
 
+// Support ...
 func (inst *MockAuth) Support(a auth.Authentication) bool {
 	return a.Mechanism() == "mock"
 }

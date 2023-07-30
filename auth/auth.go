@@ -15,6 +15,13 @@ type User interface {
 	DisplayName() string      // 显示名称（昵称）
 }
 
+// Result 验证结果
+type Result struct {
+	User      User
+	Success   bool
+	Challenge bool
+}
+
 // Authorizers 表示一组授权组件
 type Authorizers interface {
 	Authorize(a Authorization) error
@@ -22,7 +29,9 @@ type Authorizers interface {
 
 // Authenticators 表示一组身份验证算法
 type Authenticators interface {
-	Authenticate(a Authentication) (User, error)
+
+	// 验证用户身份
+	Authenticate(a Authentication) (*Result, error)
 }
 
 // Service ...
@@ -30,7 +39,7 @@ type Service interface {
 	Authenticators
 	Authorizers
 
-	Login(c context.Context, a Authentication) error
+	Login(c context.Context, a Authentication) (*Result, error)
 }
 
 // Registration ... 注册信息

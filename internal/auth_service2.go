@@ -22,9 +22,9 @@ func (inst *AuthService2) _impl() rbac.AuthService {
 // Login 登录
 func (inst *AuthService2) Login(c context.Context, a *rbac.AuthDTO) (*rbac.AuthDTO, error) {
 
-	req := inst.prepare(a)
+	req := inst.prepare(c, a)
 
-	err := inst.Servic1.Login(c, req)
+	res, err := inst.Servic1.Login(c, req)
 	if err != nil {
 		return nil, err
 	}
@@ -32,13 +32,21 @@ func (inst *AuthService2) Login(c context.Context, a *rbac.AuthDTO) (*rbac.AuthD
 	a2 := &rbac.AuthDTO{}
 	a2.Mechanism = a.Mechanism
 	a2.Account = a.Account
+	a2.Success = res.Success
+
+	if res.Challenge {
+		a2.Properties = make(map[string]string)
+		a2.Properties["challenge"] = "yes"
+	}
+
 	return a2, nil
 }
 
-func (inst *AuthService2) prepare(src *rbac.AuthDTO) auth.Authentication {
+func (inst *AuthService2) prepare(ctx context.Context, src *rbac.AuthDTO) auth.Authentication {
 	dst := &authService2request{}
 	if src != nil {
 		dst.data = *src
+		dst.context = ctx
 	}
 	return dst
 }
@@ -46,7 +54,12 @@ func (inst *AuthService2) prepare(src *rbac.AuthDTO) auth.Authentication {
 ////////////////////////////////////////////////////////////////////////////////
 
 type authService2request struct {
-	data rbac.AuthDTO
+	data    rbac.AuthDTO
+	context context.Context
+}
+
+func (inst *authService2request) Context() context.Context {
+	return inst.context
 }
 
 func (inst *authService2request) Mechanism() string {
