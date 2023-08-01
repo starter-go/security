@@ -32,6 +32,8 @@ func (inst*autoRegistrar) addAll() error {
     
     inst.register(&pf41d62225c_internal_AuthService1{})
     inst.register(&pf41d62225c_internal_AuthService2{})
+    inst.register(&pf41d62225c_internal_DefaultRandomService{})
+    inst.register(&pf41d62225c_internal_DefaultRandomSource{})
     inst.register(&pf41d62225c_internal_JWTService{})
     inst.register(&pf41d62225c_internal_TableReg{})
 

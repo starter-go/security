@@ -1,6 +1,7 @@
 package gen4test
 import (
     p91f218d46 "github.com/starter-go/security/jwt"
+    p9621e8b71 "github.com/starter-go/security/random"
     p2dece1e49 "github.com/starter-go/security/rbac"
     p577233893 "github.com/starter-go/security/src/test/code"
     p55f0853be "github.com/starter-go/vlog"
@@ -153,6 +154,56 @@ func (inst*p5772338936_code_TestCom) getUserSer(ie application.InjectionExt)p2de
 
 func (inst*p5772338936_code_TestCom) getPermissionSer(ie application.InjectionExt)p2dece1e49.PermissionService{
     return ie.GetComponent("#alias-2dece1e495fd61b93f78009d229f38cf-PermissionService").(p2dece1e49.PermissionService)
+}
+
+
+
+// type p577233893.TestRandom in package:github.com/starter-go/security/src/test/code
+//
+// id:com-5772338936071413-code-TestRandom
+// class:
+// alias:
+// scope:singleton
+//
+type p5772338936_code_TestRandom struct {
+}
+
+func (inst* p5772338936_code_TestRandom) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-5772338936071413-code-TestRandom"
+	r.Classes = ""
+	r.Aliases = ""
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* p5772338936_code_TestRandom) new() any {
+    return &p577233893.TestRandom{}
+}
+
+func (inst* p5772338936_code_TestRandom) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*p577233893.TestRandom)
+	nop(ie, com)
+
+	
+    com.Rand = inst.getRand(ie)
+    com.Logger = inst.getLogger(ie)
+
+
+    return nil
+}
+
+
+func (inst*p5772338936_code_TestRandom) getRand(ie application.InjectionExt)p9621e8b71.Service{
+    return ie.GetComponent("#alias-9621e8b71013b0fc25942a1749ed3652-Service").(p9621e8b71.Service)
+}
+
+
+func (inst*p5772338936_code_TestRandom) getLogger(ie application.InjectionExt)p55f0853be.Logger{
+    return ie.GetComponent("#alias-55f0853bedbc094981acd8da904ae269-Logger").(p55f0853be.Logger)
 }
 
 

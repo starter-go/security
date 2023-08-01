@@ -3,6 +3,7 @@ import (
     p9d209f7c2 "github.com/starter-go/security/auth"
     pf41d62225 "github.com/starter-go/security/internal"
     p91f218d46 "github.com/starter-go/security/jwt"
+    p9621e8b71 "github.com/starter-go/security/random"
      "github.com/starter-go/application"
 )
 
@@ -128,6 +129,94 @@ func (inst* pf41d62225c_internal_TableReg) new() any {
 func (inst* pf41d62225c_internal_TableReg) inject(injext application.InjectionExt, instance any) error {
 	ie := injext
 	com := instance.(*pf41d62225.TableReg)
+	nop(ie, com)
+
+	
+
+
+    return nil
+}
+
+
+
+// type pf41d62225.DefaultRandomService in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-DefaultRandomService
+// class:
+// alias:alias-9621e8b71013b0fc25942a1749ed3652-Service
+// scope:singleton
+//
+type pf41d62225c_internal_DefaultRandomService struct {
+}
+
+func (inst* pf41d62225c_internal_DefaultRandomService) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-DefaultRandomService"
+	r.Classes = ""
+	r.Aliases = "alias-9621e8b71013b0fc25942a1749ed3652-Service"
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_DefaultRandomService) new() any {
+    return &pf41d62225.DefaultRandomService{}
+}
+
+func (inst* pf41d62225c_internal_DefaultRandomService) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.DefaultRandomService)
+	nop(ie, com)
+
+	
+    com.Providers = inst.getProviders(ie)
+
+
+    return nil
+}
+
+
+func (inst*pf41d62225c_internal_DefaultRandomService) getProviders(ie application.InjectionExt)[]p9621e8b71.ProviderRegistry{
+    dst := make([]p9621e8b71.ProviderRegistry, 0)
+    src := ie.ListComponents(".class-9621e8b71013b0fc25942a1749ed3652-ProviderRegistry")
+    for _, item1 := range src {
+        item2 := item1.(p9621e8b71.ProviderRegistry)
+        dst = append(dst, item2)
+    }
+    return dst
+}
+
+
+
+// type pf41d62225.DefaultRandomSource in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-DefaultRandomSource
+// class:class-9621e8b71013b0fc25942a1749ed3652-ProviderRegistry
+// alias:
+// scope:singleton
+//
+type pf41d62225c_internal_DefaultRandomSource struct {
+}
+
+func (inst* pf41d62225c_internal_DefaultRandomSource) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-DefaultRandomSource"
+	r.Classes = "class-9621e8b71013b0fc25942a1749ed3652-ProviderRegistry"
+	r.Aliases = ""
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_DefaultRandomSource) new() any {
+    return &pf41d62225.DefaultRandomSource{}
+}
+
+func (inst* pf41d62225c_internal_DefaultRandomSource) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.DefaultRandomSource)
 	nop(ie, com)
 
 	
