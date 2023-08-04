@@ -22,14 +22,17 @@ func (inst *DefaultRandomSource) _impl() (random.Source, random.Provider, random
 	return inst, inst, inst, inst
 }
 
+// Reader ...
 func (inst *DefaultRandomSource) Reader() io.Reader {
 	return inst
 }
 
+// Source ...
 func (inst *DefaultRandomSource) Source() random.Source {
 	return inst
 }
 
+// Registration ...
 func (inst *DefaultRandomSource) Registration() *random.ProviderRegistration {
 	return &random.ProviderRegistration{
 		Name:     "default",

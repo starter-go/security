@@ -6,6 +6,14 @@ import (
 	"github.com/starter-go/base/lang"
 )
 
+// 定义几种常用的授权动作
+const (
+	ActionLogin          = "login"
+	ActionSignUp         = "sign-up"
+	ActionResetPassword  = "reset-password"
+	ActionChangePassword = "change-password"
+)
+
 // 定义几种常用的验证机制
 const (
 	MechanismPassword = "password"

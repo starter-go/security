@@ -1,10 +1,17 @@
 package auth
 
-import "context"
+import (
+	"context"
+
+	"github.com/starter-go/application/attributes"
+	"github.com/starter-go/application/parameters"
+)
 
 // Authentication 表示一个身份验证请求
 type Authentication interface {
 	Context() context.Context
+	Attributes() attributes.Table
+	Parameters() parameters.Table
 	Mechanism() string
 	Account() string
 	Secret() []byte

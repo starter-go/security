@@ -33,7 +33,15 @@ func (inst *AuthService1) Login(c context.Context, a1 auth.Authentication) (*aut
 	if !res.Success {
 		return res, nil // 需要进一步验证
 	}
-	a2 := auth.NewAuthorization(c, res.User)
+
+	a2b := &auth.AuthorizationBuilder{
+		Context:    c,
+		User:       res.User,
+		Action:     auth.ActionLogin,
+		Attributes: a1.Attributes(),
+	}
+	a2 := a2b.Create()
+
 	err = inst.Authorize(a2)
 	if err != nil {
 		return nil, err // 授权失败

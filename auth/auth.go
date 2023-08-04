@@ -6,6 +6,21 @@ import (
 	"github.com/starter-go/security/rbac"
 )
 
+// 定义几种常用的授权动作
+const (
+	ActionLogin          = rbac.ActionLogin
+	ActionSignUp         = rbac.ActionSignUp
+	ActionResetPassword  = rbac.ActionResetPassword
+	ActionChangePassword = rbac.ActionChangePassword
+)
+
+// 定义几种常用的验证机制
+const (
+	MechanismPassword = rbac.MechanismPassword
+	MechanismEmail    = rbac.MechanismEmail
+	MechanismPhone    = rbac.MechanismPhone
+)
+
 // User 表示经过验证的用户
 type User interface {
 	ID() rbac.UserID          // 用户ID
