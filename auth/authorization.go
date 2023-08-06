@@ -14,6 +14,7 @@ type Authorization interface {
 	Parameters() parameters.Table
 	User() User
 	Action() string
+	Mechanism() string
 }
 
 // Authorizer 表示一个授权组件
@@ -25,11 +26,12 @@ type Authorizer interface {
 ////////////////////////////////////////////////////////////////////////////////
 
 type innerAuthorization struct {
-	ctx    context.Context
-	user   User
-	action string
-	atts   attributes.Table
-	params parameters.Table
+	ctx       context.Context
+	user      User
+	action    string
+	mechanism string
+	atts      attributes.Table
+	params    parameters.Table
 }
 
 func (inst *innerAuthorization) Context() context.Context {
@@ -42,6 +44,10 @@ func (inst *innerAuthorization) User() User {
 
 func (inst *innerAuthorization) Action() string {
 	return inst.action
+}
+
+func (inst *innerAuthorization) Mechanism() string {
+	return inst.mechanism
 }
 
 func (inst *innerAuthorization) Attributes() attributes.Table {

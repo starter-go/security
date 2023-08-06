@@ -12,6 +12,7 @@ type Authentication interface {
 	Context() context.Context
 	Attributes() attributes.Table
 	Parameters() parameters.Table
+	Action() string
 	Mechanism() string
 	Account() string
 	Secret() []byte

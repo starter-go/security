@@ -25,6 +25,7 @@ const (
 type AuthDTO struct {
 	BaseDTO
 
+	Action    string      `json:"action"`
 	Mechanism string      `json:"mechanism"`
 	Account   string      `json:"account"`
 	Secret    lang.Base64 `json:"secret"`

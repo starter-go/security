@@ -62,12 +62,20 @@ type authService2request struct {
 	params  parameters.Table
 }
 
+func (inst *authService2request) _impl() auth.Authentication {
+	return inst
+}
+
 func (inst *authService2request) Context() context.Context {
 	return inst.context
 }
 
 func (inst *authService2request) Mechanism() string {
 	return inst.data.Mechanism
+}
+
+func (inst *authService2request) Action() string {
+	return inst.data.Action
 }
 
 func (inst *authService2request) Account() string {
