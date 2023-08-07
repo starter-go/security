@@ -12,6 +12,7 @@ const (
 	ActionSignUp         = rbac.ActionSignUp
 	ActionResetPassword  = rbac.ActionResetPassword
 	ActionChangePassword = rbac.ActionChangePassword
+	ActionSendCode       = rbac.ActionSendCode
 )
 
 // 定义几种常用的验证机制

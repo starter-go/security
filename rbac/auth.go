@@ -12,6 +12,7 @@ const (
 	ActionSignUp         = "sign-up"
 	ActionResetPassword  = "reset-password"
 	ActionChangePassword = "change-password"
+	ActionSendCode       = "send-code"
 )
 
 // 定义几种常用的验证机制
