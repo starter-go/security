@@ -4,6 +4,7 @@ import (
     pf41d62225 "github.com/starter-go/security/internal"
     p91f218d46 "github.com/starter-go/security/jwt"
     p9621e8b71 "github.com/starter-go/security/random"
+    p2dece1e49 "github.com/starter-go/security/rbac"
      "github.com/starter-go/application"
 )
 
@@ -270,6 +271,56 @@ func (inst*pf41d62225c_internal_JWTService) getRegistryList(ie application.Injec
     src := ie.ListComponents(".class-91f218d46ec21cd234778bbe54aecc66-Registry")
     for _, item1 := range src {
         item2 := item1.(p91f218d46.Registry)
+        dst = append(dst, item2)
+    }
+    return dst
+}
+
+
+
+// type pf41d62225.SessionServiceImpl in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-SessionServiceImpl
+// class:
+// alias:alias-2dece1e495fd61b93f78009d229f38cf-SessionService
+// scope:singleton
+//
+type pf41d62225c_internal_SessionServiceImpl struct {
+}
+
+func (inst* pf41d62225c_internal_SessionServiceImpl) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-SessionServiceImpl"
+	r.Classes = ""
+	r.Aliases = "alias-2dece1e495fd61b93f78009d229f38cf-SessionService"
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_SessionServiceImpl) new() any {
+    return &pf41d62225.SessionServiceImpl{}
+}
+
+func (inst* pf41d62225c_internal_SessionServiceImpl) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.SessionServiceImpl)
+	nop(ie, com)
+
+	
+    com.RegistryList = inst.getRegistryList(ie)
+
+
+    return nil
+}
+
+
+func (inst*pf41d62225c_internal_SessionServiceImpl) getRegistryList(ie application.InjectionExt)[]p2dece1e49.SessionRegistry{
+    dst := make([]p2dece1e49.SessionRegistry, 0)
+    src := ie.ListComponents(".class-2dece1e495fd61b93f78009d229f38cf-SessionRegistry")
+    for _, item1 := range src {
+        item2 := item1.(p2dece1e49.SessionRegistry)
         dst = append(dst, item2)
     }
     return dst

@@ -41,5 +41,5 @@ type AuthDTO struct {
 
 // AuthService 是针对 AuthDTO 的服务
 type AuthService interface {
-	Login(c context.Context, a *AuthDTO) (*AuthDTO, error)
+	Handle(c context.Context, a *AuthDTO) (*AuthDTO, error)
 }

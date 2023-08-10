@@ -25,21 +25,21 @@ func (inst *MockAuth) ListRegistrations() []*auth.Registration {
 }
 
 // Authenticate ...
-func (inst *MockAuth) Authenticate(a auth.Authentication) (*auth.Result, error) {
-	ub := &auth.UserBuilder{
-		ID:          10000,
-		Name:        "mock",
-		DisplayName: "Mock",
-		Roles:       "mock,user,admin,test",
-		Avatar:      "https://example.com/mock/mock.png",
-	}
-	user := ub.Create()
-	res := &auth.Result{
-		User:      user,
-		Success:   false,
-		Challenge: true,
-	}
-	return res, nil
+func (inst *MockAuth) Authenticate(a auth.Authentication) error {
+	// ub := &auth.UserBuilder{
+	// 	ID:          10000,
+	// 	Name:        "mock",
+	// 	DisplayName: "Mock",
+	// 	Roles:       "mock,user,admin,test",
+	// 	Avatar:      "https://example.com/mock/mock.png",
+	// }
+	// user := ub.Create()
+	// res := &auth.Result{
+	// 	User:      user,
+	// 	Success:   false,
+	// 	Challenge: true,
+	// }
+	return nil
 }
 
 // Support ...

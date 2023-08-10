@@ -21,3 +21,22 @@ type SessionDTO struct {
 type SessionService interface {
 	GetCurrent(c context.Context) (*SessionDTO, error)
 }
+
+// SessionProvider  会话的实现方案
+type SessionProvider interface {
+	Support(c context.Context) bool
+	Current(c context.Context) (*SessionDTO, error)
+}
+
+// SessionRegistration 会话方案的注册信息
+type SessionRegistration struct {
+	Name     string
+	Enabled  bool
+	Priority int
+	Provider SessionProvider
+}
+
+// SessionRegistry 会话方案的注册接口
+type SessionRegistry interface {
+	Registration() *SessionRegistration
+}
