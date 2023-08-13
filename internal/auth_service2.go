@@ -30,25 +30,17 @@ func (inst *AuthService2) Handle(c context.Context, a *rbac.AuthDTO) (*rbac.Auth
 		return nil, err
 	}
 
+	params := req.Parameters().Export(nil)
+
 	a2 := &rbac.AuthDTO{}
 	a2.Mechanism = a.Mechanism
 	a2.Account = a.Account
-
-	// a2.Success = res.Success
-	// if res.Challenge {
-	// 	a2.Properties = make(map[string]string)
-	// 	a2.Properties["challenge"] = "yes"
-	// }
+	a2.Properties = params
 
 	return a2, nil
 }
 
 func (inst *AuthService2) prepare(ctx context.Context, src *rbac.AuthDTO) auth.Authentication {
-	// dst := &authService2request{}
-	// if src != nil {
-	// 	dst.data = *src
-	// 	dst.context = ctx
-	// }
 
 	ab := auth.RequestBuilder{
 		Context:   ctx,
