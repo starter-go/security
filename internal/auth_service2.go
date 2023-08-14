@@ -35,7 +35,7 @@ func (inst *AuthService2) Handle(c context.Context, a *rbac.AuthDTO) (*rbac.Auth
 	a2 := &rbac.AuthDTO{}
 	a2.Mechanism = a.Mechanism
 	a2.Account = a.Account
-	a2.Properties = params
+	a2.Parameters = params
 
 	return a2, nil
 }
@@ -51,7 +51,7 @@ func (inst *AuthService2) prepare(ctx context.Context, src *rbac.AuthDTO) auth.A
 	}
 
 	params := parameters.NewTable(nil)
-	params.Import(src.Properties)
+	params.Import(src.Parameters)
 	ab.Params = params
 
 	return ab.Create()
