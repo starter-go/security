@@ -10,8 +10,8 @@ import (
 
 const (
 	theModuleName     = "github.com/starter-go/security"
-	theModuleVersion  = "v1.0.16"
-	theModuleRevision = 18
+	theModuleVersion  = "v1.0.17"
+	theModuleRevision = 19
 	theModuleResPath  = "src/main/resources"
 )
 
