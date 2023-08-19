@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/starter-go/base/lang"
 	"github.com/starter-go/base/util"
 	"github.com/starter-go/security/jwt"
 )
@@ -13,7 +14,8 @@ type JWTService struct {
 	//starter:component
 	_as func(jwt.Service) //starter:as("#")
 
-	RegistryList []jwt.Registry //starter:inject(".")
+	RegistryList       []jwt.Registry //starter:inject(".")
+	DefaultTokenMaxAge int            //starter:inject("${security.jwt.max-age}")
 
 	// cache
 	adapterList []jwt.Adapter
@@ -88,6 +90,7 @@ func (inst *JWTService) listAdapters() []jwt.Adapter {
 
 // SetDTO ...
 func (inst *JWTService) SetDTO(c context.Context, o *jwt.Token) error {
+	inst.prepareToken(o)
 	err := fmt.Errorf("no jwt.adapter for the context")
 	list := inst.listAdapters()
 	for _, item := range list {
@@ -99,6 +102,19 @@ func (inst *JWTService) SetDTO(c context.Context, o *jwt.Token) error {
 		}
 	}
 	return err
+}
+
+func (inst *JWTService) prepareToken(t *jwt.Token) {
+	if t.CreatedAt == 0 || t.ExpiredAt == 0 {
+		now := lang.Now()
+		if t.CreatedAt == 0 {
+			t.CreatedAt = now
+		}
+		if t.ExpiredAt == 0 {
+			maxage := lang.Time(inst.DefaultTokenMaxAge)
+			t.ExpiredAt = now + maxage
+		}
+	}
 }
 
 // SetText ...
@@ -151,6 +167,7 @@ func (inst *JWTService) GetText(c context.Context) (jwt.Text, error) {
 // Encode ...
 func (inst *JWTService) Encode(o *jwt.Token) (jwt.Text, error) {
 	err := fmt.Errorf("no jwt.CODEC")
+	inst.prepareToken(o)
 	list := inst.listCODECs()
 	for _, item := range list {
 		t, err2 := item.Encode(o)

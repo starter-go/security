@@ -260,6 +260,7 @@ func (inst* pf41d62225c_internal_JWTService) inject(injext application.Injection
 
 	
     com.RegistryList = inst.getRegistryList(ie)
+    com.DefaultTokenMaxAge = inst.getDefaultTokenMaxAge(ie)
 
 
     return nil
@@ -274,6 +275,11 @@ func (inst*pf41d62225c_internal_JWTService) getRegistryList(ie application.Injec
         dst = append(dst, item2)
     }
     return dst
+}
+
+
+func (inst*pf41d62225c_internal_JWTService) getDefaultTokenMaxAge(ie application.InjectionExt)int{
+    return ie.GetInt("${security.jwt.max-age}")
 }
 
 
