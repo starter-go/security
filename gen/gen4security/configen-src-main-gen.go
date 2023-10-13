@@ -1,10 +1,10 @@
 package gen4security
 import (
+    pd4e0ee677 "github.com/starter-go/security"
     p9d209f7c2 "github.com/starter-go/security/auth"
     pf41d62225 "github.com/starter-go/security/internal"
     p91f218d46 "github.com/starter-go/security/jwt"
     p9621e8b71 "github.com/starter-go/security/random"
-    p2dece1e49 "github.com/starter-go/security/rbac"
      "github.com/starter-go/application"
 )
 
@@ -98,44 +98,6 @@ func (inst* pf41d62225c_internal_AuthService2) inject(injext application.Injecti
 
 func (inst*pf41d62225c_internal_AuthService2) getServic1(ie application.InjectionExt)p9d209f7c2.Service{
     return ie.GetComponent("#alias-9d209f7c2504d33e6054a2c9998e9485-Service").(p9d209f7c2.Service)
-}
-
-
-
-// type pf41d62225.TableReg in package:github.com/starter-go/security/internal
-//
-// id:com-f41d62225c42aa4c-internal-TableReg
-// class:class-512a309140d0ad99eb1c95c8dc0d02f9-TableRegistry
-// alias:
-// scope:singleton
-//
-type pf41d62225c_internal_TableReg struct {
-}
-
-func (inst* pf41d62225c_internal_TableReg) register(cr application.ComponentRegistry) error {
-	r := cr.NewRegistration()
-	r.ID = "com-f41d62225c42aa4c-internal-TableReg"
-	r.Classes = "class-512a309140d0ad99eb1c95c8dc0d02f9-TableRegistry"
-	r.Aliases = ""
-	r.Scope = "singleton"
-	r.NewFunc = inst.new
-	r.InjectFunc = inst.inject
-	return r.Commit()
-}
-
-func (inst* pf41d62225c_internal_TableReg) new() any {
-    return &pf41d62225.TableReg{}
-}
-
-func (inst* pf41d62225c_internal_TableReg) inject(injext application.InjectionExt, instance any) error {
-	ie := injext
-	com := instance.(*pf41d62225.TableReg)
-	nop(ie, com)
-
-	
-
-
-    return nil
 }
 
 
@@ -288,7 +250,7 @@ func (inst*pf41d62225c_internal_JWTService) getDefaultTokenMaxAge(ie application
 //
 // id:com-f41d62225c42aa4c-internal-SessionServiceImpl
 // class:
-// alias:alias-2dece1e495fd61b93f78009d229f38cf-SessionService
+// alias:alias-d4e0ee677c339b7ffcf1d55767953499-SessionService
 // scope:singleton
 //
 type pf41d62225c_internal_SessionServiceImpl struct {
@@ -298,7 +260,7 @@ func (inst* pf41d62225c_internal_SessionServiceImpl) register(cr application.Com
 	r := cr.NewRegistration()
 	r.ID = "com-f41d62225c42aa4c-internal-SessionServiceImpl"
 	r.Classes = ""
-	r.Aliases = "alias-2dece1e495fd61b93f78009d229f38cf-SessionService"
+	r.Aliases = "alias-d4e0ee677c339b7ffcf1d55767953499-SessionService"
 	r.Scope = "singleton"
 	r.NewFunc = inst.new
 	r.InjectFunc = inst.inject
@@ -322,11 +284,11 @@ func (inst* pf41d62225c_internal_SessionServiceImpl) inject(injext application.I
 }
 
 
-func (inst*pf41d62225c_internal_SessionServiceImpl) getRegistryList(ie application.InjectionExt)[]p2dece1e49.SessionRegistry{
-    dst := make([]p2dece1e49.SessionRegistry, 0)
-    src := ie.ListComponents(".class-2dece1e495fd61b93f78009d229f38cf-SessionRegistry")
+func (inst*pf41d62225c_internal_SessionServiceImpl) getRegistryList(ie application.InjectionExt)[]pd4e0ee677.SessionRegistry{
+    dst := make([]pd4e0ee677.SessionRegistry, 0)
+    src := ie.ListComponents(".class-d4e0ee677c339b7ffcf1d55767953499-SessionRegistry")
     for _, item1 := range src {
-        item2 := item1.(p2dece1e49.SessionRegistry)
+        item2 := item1.(pd4e0ee677.SessionRegistry)
         dst = append(dst, item2)
     }
     return dst

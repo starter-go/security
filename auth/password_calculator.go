@@ -15,21 +15,34 @@ type PasswordCalculator struct {
 	target []byte
 }
 
-// Init ...
-func (inst *PasswordCalculator) Init(target, salt []byte) {
+// Reset ...
+func (inst *PasswordCalculator) Reset() *PasswordCalculator {
+	inst.salt = nil
+	inst.target = nil
+	return inst
+}
+
+// WithSalt ...
+func (inst *PasswordCalculator) WithSalt(salt []byte) *PasswordCalculator {
 	inst.salt = salt
+	return inst
+}
+
+// WithTarget ...
+func (inst *PasswordCalculator) WithTarget(target []byte) *PasswordCalculator {
 	inst.target = target
+	return inst
 }
 
 // Compute 计算密码的哈希值
 func (inst *PasswordCalculator) Compute(plain []byte) []byte {
 	const total = 5
 	current := plain
-	for step := 0; step < total; step++ {
-		if step == 1 {
-			current = inst.hashOnce(current, inst.salt)
+	for i := 0; i < total; i++ {
+		if i == 1 {
+			current = inst.step(current, inst.salt)
 		} else {
-			current = inst.hashOnce(current, nil)
+			current = inst.step(current, nil)
 		}
 	}
 	return current
@@ -55,8 +68,9 @@ func (inst *PasswordCalculator) Verify(plain []byte) error {
 	return fmt.Errorf("bad auth")
 }
 
-func (inst *PasswordCalculator) hashOnce(b1, b2 []byte) []byte {
-	buffer := bytes.NewBuffer(b1)
+func (inst *PasswordCalculator) step(b1, b2 []byte) []byte {
+	buffer := &bytes.Buffer{}
+	buffer.Write(b1)
 	buffer.Write(b2)
 	data := buffer.Bytes()
 	sum := sha256.Sum256(data)

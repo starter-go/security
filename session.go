@@ -1,31 +1,39 @@
-package rbac
+package security
 
 import (
 	"context"
 
-	"github.com/starter-go/base/lang"
+	"github.com/starter-go/security/rbac"
 )
 
-// SessionDTO 表示会话信息
-type SessionDTO struct {
-	BaseDTO
+// Session 代表当前会话
+type Session interface {
+	Get() *rbac.SessionDTO
 
-	ExpiredAt  lang.Time `json:"expired_at"` // 会话的过期时间
-	User       UserDTO   `json:"user"`       // 用户信息
-	Authorized bool      `json:"authorized"` // 是否已授权
+	Set(s *rbac.SessionDTO)
 
-	Properties map[string]string `json:"properties"`
+	UserID() rbac.UserID
+
+	UserName() rbac.UserName
+
+	Nickname() string
+
+	Avatar() string
+
+	Roles() []rbac.RoleName
+
+	Authenticated() bool
 }
 
 // SessionService 是针对 SessionDTO 的服务
 type SessionService interface {
-	GetCurrent(c context.Context) (*SessionDTO, error)
+	GetCurrent(c context.Context) (Session, error)
 }
 
 // SessionProvider  会话的实现方案
 type SessionProvider interface {
 	Support(c context.Context) bool
-	Current(c context.Context) (*SessionDTO, error)
+	Current(c context.Context) (Session, error)
 }
 
 // SessionRegistration 会话方案的注册信息

@@ -5,26 +5,26 @@ import (
 	"fmt"
 
 	"github.com/starter-go/base/util"
-	"github.com/starter-go/security/rbac"
+	"github.com/starter-go/security"
 )
 
 // SessionServiceImpl ...
 type SessionServiceImpl struct {
 
 	//starter:component
-	_as func(rbac.SessionService) //starter:as("#")
+	_as func(security.SessionService) //starter:as("#")
 
-	RegistryList []rbac.SessionRegistry //starter:inject(".")
+	RegistryList []security.SessionRegistry //starter:inject(".")
 
-	providers []*rbac.SessionRegistration
+	providers []*security.SessionRegistration
 }
 
-func (inst *SessionServiceImpl) _impl() rbac.SessionService {
+func (inst *SessionServiceImpl) _impl() security.SessionService {
 	return inst
 }
 
 // GetCurrent ...
-func (inst *SessionServiceImpl) GetCurrent(c context.Context) (*rbac.SessionDTO, error) {
+func (inst *SessionServiceImpl) GetCurrent(c context.Context) (security.Session, error) {
 	all := inst.getProviders()
 	for _, r := range all {
 		p := r.Provider
@@ -35,7 +35,7 @@ func (inst *SessionServiceImpl) GetCurrent(c context.Context) (*rbac.SessionDTO,
 	return nil, fmt.Errorf("no session provider for the context")
 }
 
-func (inst *SessionServiceImpl) getProviders() []*rbac.SessionRegistration {
+func (inst *SessionServiceImpl) getProviders() []*security.SessionRegistration {
 	list := inst.providers
 	if list == nil {
 		list = inst.loadProviders()
@@ -44,10 +44,10 @@ func (inst *SessionServiceImpl) getProviders() []*rbac.SessionRegistration {
 	return list
 }
 
-func (inst *SessionServiceImpl) loadProviders() []*rbac.SessionRegistration {
+func (inst *SessionServiceImpl) loadProviders() []*security.SessionRegistration {
 
 	src := inst.RegistryList
-	dst := make([]*rbac.SessionRegistration, 0)
+	dst := make([]*security.SessionRegistration, 0)
 
 	for _, r1 := range src {
 		r2 := r1.Registration()
@@ -65,7 +65,7 @@ func (inst *SessionServiceImpl) loadProviders() []*rbac.SessionRegistration {
 	return dst
 }
 
-func (inst *SessionServiceImpl) isRegistrationOK(r *rbac.SessionRegistration) bool {
+func (inst *SessionServiceImpl) isRegistrationOK(r *security.SessionRegistration) bool {
 
 	if r == nil {
 		return false

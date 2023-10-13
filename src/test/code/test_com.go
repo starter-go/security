@@ -6,6 +6,7 @@ import (
 
 	"github.com/starter-go/application"
 	"github.com/starter-go/base/lang"
+	"github.com/starter-go/security"
 	"github.com/starter-go/security/rbac"
 	"github.com/starter-go/vlog"
 )
@@ -15,8 +16,8 @@ type TestCom struct {
 
 	//starter:component
 
-	AuthSer    rbac.AuthService    //starter:inject("#")
-	SessionSer rbac.SessionService //starter:inject("#")
+	AuthSer    rbac.AuthService        //starter:inject("#")
+	SessionSer security.SessionService //starter:inject("#")
 
 	PermissionSer rbac.PermissionService //--starter:inject("#")
 	UserSer       rbac.UserService       //--starter:inject("#")
@@ -76,7 +77,7 @@ func (inst *TestCom) doCurrentSession(c context.Context) error {
 		return err
 	}
 
-	ses.DeletedAt.Int() // todo ...
+	ses.Authenticated()
 	return nil
 }
 

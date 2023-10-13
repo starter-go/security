@@ -2,8 +2,6 @@ package rbac
 
 import (
 	"context"
-
-	"gorm.io/gorm"
 )
 
 // RoleID 是 Role 的实体 ID
@@ -26,15 +24,6 @@ const (
 	RoleRoot   RoleName = "root"
 	RoleUser   RoleName = "user"
 )
-
-// RoleEntity 表示 Role 的数据库实体
-type RoleEntity struct {
-	ID RoleID
-
-	BaseEntity
-
-	Name RoleName `gorm:"unique"`
-}
 
 // RoleDTO 表示 Role 的 REST 网络对象
 type RoleDTO struct {
@@ -60,20 +49,8 @@ type RoleService interface {
 	List(c context.Context, q *RoleQuery) ([]*RoleDTO, error)
 }
 
-// RoleDAO 是数据库访问对象
-type RoleDAO interface {
-	Insert(db *gorm.DB, o *RoleEntity) (*RoleEntity, error)
-	Update(db *gorm.DB, id RoleID, updater func(*RoleEntity)) (*RoleEntity, error)
-	Delete(db *gorm.DB, id RoleID) error
+////////////////////////////////////////////////////////////////////////////////
 
-	Find(db *gorm.DB, id RoleID) (*RoleEntity, error)
-	List(db *gorm.DB, q *RoleQuery) ([]*RoleEntity, error)
-}
-
-// RoleConvertor 负责 dto <==> entity 的转换
-type RoleConvertor interface {
-	ConvertE2D(c context.Context, entity *RoleEntity) (*RoleDTO, error)
-	ConvertD2E(c context.Context, dto *RoleDTO) (*RoleEntity, error)
-
-	ConvertListE2D(c context.Context, entity []*RoleEntity) ([]*RoleDTO, error)
+func (name RoleName) String() string {
+	return string(name)
 }

@@ -5,9 +5,9 @@ import (
 	"os"
 
 	"github.com/starter-go/application"
-	"github.com/starter-go/libgorm/modgorm"
-	"github.com/starter-go/security"
+
 	"github.com/starter-go/security/gen/gen4test"
+	"github.com/starter-go/security/modules/security"
 	"github.com/starter-go/starter"
 )
 
@@ -31,7 +31,7 @@ func module() application.Module {
 	mb.Components(gen4test.ExportComSetForSecurityTest)
 
 	mb.Depend(security.Module())
-	mb.Depend(modgorm.Module())
+	// mb.Depend(modgorm.Module())
 
 	return mb.Create()
 }

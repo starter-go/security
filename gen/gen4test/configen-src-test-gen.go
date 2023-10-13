@@ -1,5 +1,6 @@
 package gen4test
 import (
+    pd4e0ee677 "github.com/starter-go/security"
     p91f218d46 "github.com/starter-go/security/jwt"
     p9621e8b71 "github.com/starter-go/security/random"
     p2dece1e49 "github.com/starter-go/security/rbac"
@@ -140,8 +141,8 @@ func (inst*p5772338936_code_TestCom) getAuthSer(ie application.InjectionExt)p2de
 }
 
 
-func (inst*p5772338936_code_TestCom) getSessionSer(ie application.InjectionExt)p2dece1e49.SessionService{
-    return ie.GetComponent("#alias-2dece1e495fd61b93f78009d229f38cf-SessionService").(p2dece1e49.SessionService)
+func (inst*p5772338936_code_TestCom) getSessionSer(ie application.InjectionExt)pd4e0ee677.SessionService{
+    return ie.GetComponent("#alias-d4e0ee677c339b7ffcf1d55767953499-SessionService").(pd4e0ee677.SessionService)
 }
 
 
