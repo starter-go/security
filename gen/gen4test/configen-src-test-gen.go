@@ -196,3 +196,53 @@ func (inst*p5772338936_code_TestRandom) getLogger(ie application.InjectionExt)p5
 }
 
 
+
+// type p577233893.TestUUID in package:github.com/starter-go/security/src/test/code
+//
+// id:com-5772338936071413-code-TestUUID
+// class:
+// alias:
+// scope:singleton
+//
+type p5772338936_code_TestUUID struct {
+}
+
+func (inst* p5772338936_code_TestUUID) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-5772338936071413-code-TestUUID"
+	r.Classes = ""
+	r.Aliases = ""
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* p5772338936_code_TestUUID) new() any {
+    return &p577233893.TestUUID{}
+}
+
+func (inst* p5772338936_code_TestUUID) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*p577233893.TestUUID)
+	nop(ie, com)
+
+	
+    com.Ser = inst.getSer(ie)
+    com.Logger = inst.getLogger(ie)
+
+
+    return nil
+}
+
+
+func (inst*p5772338936_code_TestUUID) getSer(ie application.InjectionExt)p9621e8b71.UUIDService{
+    return ie.GetComponent("#alias-9621e8b71013b0fc25942a1749ed3652-UUIDService").(p9621e8b71.UUIDService)
+}
+
+
+func (inst*p5772338936_code_TestUUID) getLogger(ie application.InjectionExt)p55f0853be.Logger{
+    return ie.GetComponent("#alias-55f0853bedbc094981acd8da904ae269-Logger").(p55f0853be.Logger)
+}
+
+

@@ -295,3 +295,47 @@ func (inst*pf41d62225c_internal_SessionServiceImpl) getRegistryList(ie applicati
 }
 
 
+
+// type pf41d62225.UUIDServiceImpl in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-UUIDServiceImpl
+// class:
+// alias:alias-9621e8b71013b0fc25942a1749ed3652-UUIDService
+// scope:singleton
+//
+type pf41d62225c_internal_UUIDServiceImpl struct {
+}
+
+func (inst* pf41d62225c_internal_UUIDServiceImpl) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-UUIDServiceImpl"
+	r.Classes = ""
+	r.Aliases = "alias-9621e8b71013b0fc25942a1749ed3652-UUIDService"
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_UUIDServiceImpl) new() any {
+    return &pf41d62225.UUIDServiceImpl{}
+}
+
+func (inst* pf41d62225c_internal_UUIDServiceImpl) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.UUIDServiceImpl)
+	nop(ie, com)
+
+	
+    com.Host = inst.getHost(ie)
+
+
+    return nil
+}
+
+
+func (inst*pf41d62225c_internal_UUIDServiceImpl) getHost(ie application.InjectionExt)string{
+    return ie.GetString("${security.uuid.service.hostname}")
+}
+
+
