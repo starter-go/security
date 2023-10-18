@@ -39,21 +39,21 @@ func (inst* pf41d62225c_internal_AuthService1) inject(injext application.Injecti
 	nop(ie, com)
 
 	
-    com.RegistryList = inst.getRegistryList(ie)
+    com.Authenticators = inst.getAuthenticators(ie)
+    com.Authorizers = inst.getAuthorizers(ie)
 
 
     return nil
 }
 
 
-func (inst*pf41d62225c_internal_AuthService1) getRegistryList(ie application.InjectionExt)[]p9d209f7c2.Registry{
-    dst := make([]p9d209f7c2.Registry, 0)
-    src := ie.ListComponents(".class-9d209f7c2504d33e6054a2c9998e9485-Registry")
-    for _, item1 := range src {
-        item2 := item1.(p9d209f7c2.Registry)
-        dst = append(dst, item2)
-    }
-    return dst
+func (inst*pf41d62225c_internal_AuthService1) getAuthenticators(ie application.InjectionExt)p9d209f7c2.AuthenticatorManager{
+    return ie.GetComponent("#alias-9d209f7c2504d33e6054a2c9998e9485-AuthenticatorManager").(p9d209f7c2.AuthenticatorManager)
+}
+
+
+func (inst*pf41d62225c_internal_AuthService1) getAuthorizers(ie application.InjectionExt)p9d209f7c2.AuthorizerManager{
+    return ie.GetComponent("#alias-9d209f7c2504d33e6054a2c9998e9485-AuthorizerManager").(p9d209f7c2.AuthorizerManager)
 }
 
 
@@ -98,6 +98,106 @@ func (inst* pf41d62225c_internal_AuthService2) inject(injext application.Injecti
 
 func (inst*pf41d62225c_internal_AuthService2) getServic1(ie application.InjectionExt)p9d209f7c2.Service{
     return ie.GetComponent("#alias-9d209f7c2504d33e6054a2c9998e9485-Service").(p9d209f7c2.Service)
+}
+
+
+
+// type pf41d62225.AuthenticatorManagerImpl in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-AuthenticatorManagerImpl
+// class:
+// alias:alias-9d209f7c2504d33e6054a2c9998e9485-AuthenticatorManager
+// scope:singleton
+//
+type pf41d62225c_internal_AuthenticatorManagerImpl struct {
+}
+
+func (inst* pf41d62225c_internal_AuthenticatorManagerImpl) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-AuthenticatorManagerImpl"
+	r.Classes = ""
+	r.Aliases = "alias-9d209f7c2504d33e6054a2c9998e9485-AuthenticatorManager"
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_AuthenticatorManagerImpl) new() any {
+    return &pf41d62225.AuthenticatorManagerImpl{}
+}
+
+func (inst* pf41d62225c_internal_AuthenticatorManagerImpl) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.AuthenticatorManagerImpl)
+	nop(ie, com)
+
+	
+    com.RegistryList = inst.getRegistryList(ie)
+
+
+    return nil
+}
+
+
+func (inst*pf41d62225c_internal_AuthenticatorManagerImpl) getRegistryList(ie application.InjectionExt)[]p9d209f7c2.Registry{
+    dst := make([]p9d209f7c2.Registry, 0)
+    src := ie.ListComponents(".class-9d209f7c2504d33e6054a2c9998e9485-Registry")
+    for _, item1 := range src {
+        item2 := item1.(p9d209f7c2.Registry)
+        dst = append(dst, item2)
+    }
+    return dst
+}
+
+
+
+// type pf41d62225.AuthorizerManagerImpl in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-AuthorizerManagerImpl
+// class:
+// alias:alias-9d209f7c2504d33e6054a2c9998e9485-AuthorizerManager
+// scope:singleton
+//
+type pf41d62225c_internal_AuthorizerManagerImpl struct {
+}
+
+func (inst* pf41d62225c_internal_AuthorizerManagerImpl) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-AuthorizerManagerImpl"
+	r.Classes = ""
+	r.Aliases = "alias-9d209f7c2504d33e6054a2c9998e9485-AuthorizerManager"
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_AuthorizerManagerImpl) new() any {
+    return &pf41d62225.AuthorizerManagerImpl{}
+}
+
+func (inst* pf41d62225c_internal_AuthorizerManagerImpl) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.AuthorizerManagerImpl)
+	nop(ie, com)
+
+	
+    com.RegistryList = inst.getRegistryList(ie)
+
+
+    return nil
+}
+
+
+func (inst*pf41d62225c_internal_AuthorizerManagerImpl) getRegistryList(ie application.InjectionExt)[]p9d209f7c2.Registry{
+    dst := make([]p9d209f7c2.Registry, 0)
+    src := ie.ListComponents(".class-9d209f7c2504d33e6054a2c9998e9485-Registry")
+    for _, item1 := range src {
+        item2 := item1.(p9d209f7c2.Registry)
+        dst = append(dst, item2)
+    }
+    return dst
 }
 
 

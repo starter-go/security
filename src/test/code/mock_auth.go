@@ -25,7 +25,7 @@ func (inst *MockAuth) ListRegistrations() []*auth.Registration {
 }
 
 // Authenticate ...
-func (inst *MockAuth) Authenticate(a auth.Authentication) error {
+func (inst *MockAuth) Authenticate(a auth.Authentication) ([]auth.Identity, error) {
 	// ub := &auth.UserBuilder{
 	// 	ID:          10000,
 	// 	Name:        "mock",
@@ -39,7 +39,9 @@ func (inst *MockAuth) Authenticate(a auth.Authentication) error {
 	// 	Success:   false,
 	// 	Challenge: true,
 	// }
-	return nil
+
+	ids := []auth.Identity{}
+	return ids, nil
 }
 
 // Support ...

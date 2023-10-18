@@ -52,7 +52,6 @@ func (inst *TestCom) test() error {
 }
 
 func (inst *TestCom) doLogin(c context.Context) error {
-
 	password := "test"
 	a1 := &rbac.AuthDTO{
 		Mechanism: "password",
@@ -60,14 +59,8 @@ func (inst *TestCom) doLogin(c context.Context) error {
 		//	Secret:    password,
 	}
 	a1.Secret = lang.Base64FromBytes([]byte(password))
-
-	a2, err := inst.AuthSer.Handle(c, a1)
-	if err != nil {
-		return err
-	}
-
-	a2.DeletedAt.Int() // todo ...
-	return nil
+	a1array := []*rbac.AuthDTO{a1}
+	return inst.AuthSer.Handle(c, a1array)
 }
 
 func (inst *TestCom) doCurrentSession(c context.Context) error {

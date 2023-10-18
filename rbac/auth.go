@@ -26,7 +26,7 @@ const (
 type AuthDTO struct {
 	BaseDTO
 
-	Action    string      `json:"action"`
+	Action    string      `json:"action"` // 如果为空，表示这条信息仅用于认证
 	Mechanism string      `json:"mechanism"`
 	Account   string      `json:"account"`
 	Secret    lang.Base64 `json:"secret"`
@@ -41,5 +41,5 @@ type AuthDTO struct {
 
 // AuthService 是针对 AuthDTO 的服务
 type AuthService interface {
-	Handle(c context.Context, a *AuthDTO) (*AuthDTO, error)
+	Handle(c context.Context, a []*AuthDTO) error
 }
