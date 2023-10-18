@@ -32,6 +32,18 @@ func (inst *AuthenticatorManagerImpl) FindFor(a auth.Authentication) (auth.Authe
 	return nil, fmt.Errorf("no Authenticator for Authentication, mechanism:%s", a.Mechanism())
 }
 
+// ListFor ...
+func (inst *AuthenticatorManagerImpl) ListFor(a auth.Authentication) []auth.Authenticator {
+	src := inst.getItems()
+	dst := make([]auth.Authenticator, 0)
+	for _, item := range src {
+		if item.Mechanism.Support(a) {
+			dst = append(dst, item.Authenticator)
+		}
+	}
+	return dst
+}
+
 func (inst *AuthenticatorManagerImpl) getItems() []*auth.Registration {
 	list := inst.cache
 	if list == nil {
@@ -52,6 +64,7 @@ func (inst *AuthenticatorManagerImpl) loadItems() []*auth.Registration {
 			}
 		}
 	}
+	(&authRegistrationSorter{}).sort(dst)
 	return dst
 }
 

@@ -27,6 +27,7 @@ type Authorizer interface {
 // AuthorizerManager ...
 type AuthorizerManager interface {
 	FindFor(a Authorization) (Authorizer, error)
+	ListFor(a Authorization) []Authorizer
 }
 
 ////////////////////////////////////////////////////////////////////////////////

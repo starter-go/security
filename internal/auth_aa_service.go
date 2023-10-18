@@ -1,6 +1,8 @@
 package internal
 
 import (
+	"fmt"
+
 	"github.com/starter-go/security/auth"
 )
 
@@ -19,11 +21,14 @@ func (inst *AuthService1) _impl() auth.Service {
 
 // Authenticate 验证
 func (inst *AuthService1) Authenticate(a auth.Authentication) ([]auth.Identity, error) {
-	handler, err := inst.Authenticators.FindFor(a)
-	if err != nil {
-		return nil, err
+	handlers := inst.Authenticators.ListFor(a)
+	for _, h := range handlers {
+		ids, err := h.Authenticate(a)
+		if err == nil {
+			return ids, nil
+		}
 	}
-	return handler.Authenticate(a)
+	return nil, fmt.Errorf("bad auth")
 }
 
 // Authorize 授权
@@ -56,7 +61,7 @@ func (inst *AuthService1) Execute(reqlist ...auth.Request) error {
 	return inst.authorizeAll(alist2, ids)
 }
 
-// 批量验证
+// 多重验证
 func (inst *AuthService1) authenticateAll(todolist []auth.Authentication) ([]auth.Identity, error) {
 	result := make([]auth.Identity, 0)
 	for _, a1 := range todolist {

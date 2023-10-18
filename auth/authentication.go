@@ -28,6 +28,7 @@ type Authenticator interface {
 // AuthenticatorManager ...
 type AuthenticatorManager interface {
 	FindFor(a Authentication) (Authenticator, error)
+	ListFor(a Authentication) []Authenticator
 }
 
 ////////////////////////////////////////////////////////////////////////////////

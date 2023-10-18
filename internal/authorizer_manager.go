@@ -32,6 +32,18 @@ func (inst *AuthorizerManagerImpl) FindFor(a auth.Authorization) (auth.Authorize
 	return nil, fmt.Errorf("no Authorizer for Authorization, action:%s", a.Action())
 }
 
+// ListFor ...
+func (inst *AuthorizerManagerImpl) ListFor(a auth.Authorization) []auth.Authorizer {
+	src := inst.getItems()
+	dst := make([]auth.Authorizer, 0)
+	for _, item := range src {
+		if item.Mechanism.Support(a) {
+			dst = append(dst, item.Authorizer)
+		}
+	}
+	return dst
+}
+
 func (inst *AuthorizerManagerImpl) getItems() []*auth.Registration {
 	list := inst.cache
 	if list == nil {
@@ -52,6 +64,7 @@ func (inst *AuthorizerManagerImpl) loadItems() []*auth.Registration {
 			}
 		}
 	}
+	(&authRegistrationSorter{}).sort(dst)
 	return dst
 }
 
