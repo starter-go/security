@@ -6,27 +6,3 @@ type Identity interface {
 	Name() string
 	Mechanism() string
 }
-
-////////////////////////////////////////////////////////////////////////////////
-// 扩展
-
-// PhoneUserIdentity ...
-type PhoneUserIdentity interface {
-	Identity
-
-	PhoneNumber() string
-}
-
-// EmailUserIdentity ...
-type EmailUserIdentity interface {
-	Identity
-
-	EmailAddress() string
-}
-
-// AppUserIdentity ...
-type AppUserIdentity interface {
-	Identity
-
-	UserName() string
-}

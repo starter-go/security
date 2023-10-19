@@ -7,13 +7,24 @@ import (
 // PhoneNumberID ...
 type PhoneNumberID int64
 
+// PhoneNumber 表示电话号码
+type PhoneNumber string
+
+// SimplePhoneNumber 表示简短的电话号码
+type SimplePhoneNumber PhoneNumber
+
+// FullPhoneNumber 表示完整的电话号码
+type FullPhoneNumber PhoneNumber
+
 // PhoneNumberDTO ...
 type PhoneNumberDTO struct {
 	ID PhoneNumberID `json:"id"`
 
 	BaseDTO
 
-	SimpleNunber string `json:"simple_number"`
+	RegionCode2  RegionPhoneCode   `json:"region"`
+	SimpleNumber SimplePhoneNumber `json:"simple_number"`
+	FullNumber   FullPhoneNumber   `json:"full_number"`
 }
 
 // PhoneNumberQuery 查询参数
@@ -29,4 +40,18 @@ type PhoneNumberService interface {
 
 	Find(c context.Context, id PhoneNumberID) (*PhoneNumberDTO, error)
 	List(c context.Context, q *PhoneNumberQuery) ([]*PhoneNumberDTO, error)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+func (num PhoneNumber) String() string {
+	return string(num)
+}
+
+func (num SimplePhoneNumber) String() string {
+	return string(num)
+}
+
+func (num FullPhoneNumber) String() string {
+	return string(num)
 }

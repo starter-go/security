@@ -7,13 +7,16 @@ import (
 // EmailAddressID ...
 type EmailAddressID int64
 
+// EmailAddress 表示 'user@domain' 形式的邮件地址
+type EmailAddress string
+
 // EmailAddressDTO ...
 type EmailAddressDTO struct {
 	ID EmailAddressID `json:"id"`
 
 	BaseDTO
 
-	Address string `json:"address"`
+	Address EmailAddress `json:"address"`
 }
 
 // EmailAddressQuery 查询参数
@@ -29,4 +32,10 @@ type EmailAddressService interface {
 
 	Find(c context.Context, id EmailAddressID) (*EmailAddressDTO, error)
 	List(c context.Context, q *EmailAddressQuery) ([]*EmailAddressDTO, error)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+func (addr EmailAddress) String() string {
+	return string(addr)
 }
