@@ -78,11 +78,12 @@ func (inst *subject) GetSession(create bool) Session {
 		if ss == nil {
 			panic("use session without init subject")
 		}
-		s, err := ss.GetCurrent(ctx)
+		session, err := ss.GetCurrent(ctx)
 		if err != nil {
 			panic(err)
 		}
-		inst.session = s
+		s = session
+		inst.session = session
 	}
 	return s
 }
