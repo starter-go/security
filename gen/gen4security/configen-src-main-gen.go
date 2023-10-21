@@ -290,6 +290,44 @@ func (inst* pf41d62225c_internal_DefaultRandomSource) inject(injext application.
 
 
 
+// type pf41d62225.JWTCODEC in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-JWTCODEC
+// class:class-91f218d46ec21cd234778bbe54aecc66-Registry
+// alias:
+// scope:singleton
+//
+type pf41d62225c_internal_JWTCODEC struct {
+}
+
+func (inst* pf41d62225c_internal_JWTCODEC) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-JWTCODEC"
+	r.Classes = "class-91f218d46ec21cd234778bbe54aecc66-Registry"
+	r.Aliases = ""
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_JWTCODEC) new() any {
+    return &pf41d62225.JWTCODEC{}
+}
+
+func (inst* pf41d62225c_internal_JWTCODEC) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.JWTCODEC)
+	nop(ie, com)
+
+	
+
+
+    return nil
+}
+
+
+
 // type pf41d62225.JWTService in package:github.com/starter-go/security/internal
 //
 // id:com-f41d62225c42aa4c-internal-JWTService

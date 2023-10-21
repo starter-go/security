@@ -36,6 +36,7 @@ func (inst*autoRegistrar) addAll() error {
     inst.register(&pf41d62225c_internal_AuthorizerManagerImpl{})
     inst.register(&pf41d62225c_internal_DefaultRandomService{})
     inst.register(&pf41d62225c_internal_DefaultRandomSource{})
+    inst.register(&pf41d62225c_internal_JWTCODEC{})
     inst.register(&pf41d62225c_internal_JWTService{})
     inst.register(&pf41d62225c_internal_SessionServiceImpl{})
     inst.register(&pf41d62225c_internal_UUIDServiceImpl{})

@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	github.com/golang-jwt/jwt/v5 v5.0.0 // indirect
 	github.com/starter-go/afs v0.9.2 // indirect
 	github.com/starter-go/configen v0.9.3 // indirect
 )
