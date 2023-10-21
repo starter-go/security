@@ -89,14 +89,19 @@ func (inst *subject) GetSession(create bool) Session {
 }
 
 func (inst *subject) HasRole(role rbac.RoleName) bool {
+	str1 := role.String()
+	str1 = strings.TrimSpace(str1)
+	if str1 == "" {
+		return false // 排除空项
+	}
+	str1 = strings.ToLower(str1)
 	session := inst.GetSession(true)
-	roles := session.Roles()
+	roles := session.Roles().List()
 	for _, have := range roles {
-		str := strings.TrimSpace(have.String())
-		if str == "" {
-			continue
-		}
-		if have == role {
+		str2 := have.String()
+		str2 = strings.TrimSpace(str2)
+		str2 = strings.ToLower(str2)
+		if str1 == str2 {
 			return true
 		}
 	}

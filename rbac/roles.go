@@ -2,6 +2,8 @@ package rbac
 
 import (
 	"context"
+	"sort"
+	"strings"
 )
 
 // RoleID 是 Role 的实体 ID
@@ -54,3 +56,57 @@ type RoleService interface {
 func (name RoleName) String() string {
 	return string(name)
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+// List 拆分成单项列表
+func (list RoleNameList) List() []RoleName {
+	const sep = ","
+	src := strings.Split(string(list), sep)
+	dst := make([]RoleName, 0)
+	for _, item := range src {
+		item = strings.TrimSpace(item)
+		dst = append(dst, RoleName(item))
+	}
+	return dst
+}
+
+// Normalize 标准化
+func (list RoleNameList) Normalize() RoleNameList {
+	dst := make([]RoleName, 0)
+	src := strings.Split(string(list), ",")
+	strlist := make([]string, 0)
+	for _, item := range src {
+		item = strings.TrimSpace(item)
+		if item == "" {
+			continue // 排除空项
+		}
+		item = strings.ToLower(item)
+		strlist = append(strlist, item)
+	}
+	sort.Strings(strlist)
+	prev := ""
+	for _, next := range strlist {
+		if next == prev {
+			continue // 排除重复项
+		}
+		prev = next
+		dst = append(dst, RoleName(next))
+	}
+	return NewRoleNameList(dst...)
+}
+
+// NewRoleNameList 新建角色列表
+func NewRoleNameList(names ...RoleName) RoleNameList {
+	b := strings.Builder{}
+	for i, name := range names {
+		if i > 0 {
+			b.WriteString(",")
+		}
+		b.WriteString(name.String())
+	}
+	str := b.String()
+	return RoleNameList(str)
+}
+
+////////////////////////////////////////////////////////////////////////////////

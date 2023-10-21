@@ -20,7 +20,7 @@ type Session interface {
 
 	Avatar() string
 
-	Roles() []rbac.RoleName
+	Roles() rbac.RoleNameList
 
 	Authenticated() bool
 }
