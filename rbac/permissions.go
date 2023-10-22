@@ -31,4 +31,12 @@ type PermissionService interface {
 
 	Find(c context.Context, id PermissionID) (*PermissionDTO, error)
 	List(c context.Context, q *PermissionQuery) ([]*PermissionDTO, error)
+
+	GetCache() PermissionCache
+}
+
+// PermissionCache 是一个带缓存的 Permission 查询接口
+type PermissionCache interface {
+	Clear()
+	Find(c context.Context, want *PermissionDTO) (*PermissionDTO, error)
 }
