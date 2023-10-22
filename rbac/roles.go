@@ -17,14 +17,14 @@ type RoleNameList string
 
 // 定义一些常用的角色
 const (
-	RoleAdmin  RoleName = "admin"
-	RoleAnonym RoleName = "anonym"
-	RoleAny    RoleName = "any"
-	RoleFriend RoleName = "friend"
-	RoleGuest  RoleName = "guest"
-	RoleOwner  RoleName = "owner"
-	RoleRoot   RoleName = "root"
-	RoleUser   RoleName = "user"
+	RoleAdmin  RoleName = "admin"  // 管理员
+	RoleAnonym RoleName = "anonym" // 匿名者
+	RoleAny    RoleName = "any"    // 任何人
+	RoleFriend RoleName = "friend" // 盆友
+	RoleGuest  RoleName = "guest"  // 访客
+	RoleOwner  RoleName = "owner"  // 资源持有者
+	RoleRoot   RoleName = "root"   // 超级管理员
+	RoleUser   RoleName = "user"   // 普通用户
 )
 
 // RoleDTO 表示 Role 的 REST 网络对象

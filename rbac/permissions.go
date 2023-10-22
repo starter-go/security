@@ -31,6 +31,7 @@ type PermissionService interface {
 
 	Find(c context.Context, id PermissionID) (*PermissionDTO, error)
 	List(c context.Context, q *PermissionQuery) ([]*PermissionDTO, error)
+	ListAll(c context.Context) ([]*PermissionDTO, error)
 
 	GetCache() PermissionCache
 }
