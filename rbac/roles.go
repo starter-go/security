@@ -33,7 +33,8 @@ type RoleDTO struct {
 
 	BaseDTO
 
-	Name RoleName `json:"name"`
+	Name        RoleName `json:"name"`
+	Description string   `json:"description"`
 }
 
 // RoleQuery 查询参数
