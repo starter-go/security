@@ -23,6 +23,7 @@ type UserDTO struct {
 	Phone    string       `json:"phone"`
 	Email    string       `json:"email"`
 	Roles    RoleNameList `json:"roles"`
+	Enabled  bool         `json:"enabled"`
 }
 
 // UserQuery 是 User 的查询参数

@@ -16,6 +16,7 @@ type PermissionDTO struct {
 	Method      string       `json:"method"`
 	Path        string       `json:"path"`
 	AcceptRoles RoleNameList `json:"accept_roles"`
+	Enabled     bool         `json:"enabled"`
 }
 
 // PermissionQuery 查询参数
