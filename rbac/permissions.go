@@ -22,6 +22,8 @@ type PermissionDTO struct {
 // PermissionQuery 查询参数
 type PermissionQuery struct {
 	Pagination Pagination
+	Conditions map[string]string
+	All        bool // 查询全部条目
 }
 
 // PermissionService 是针对 PermissionDTO 的服务

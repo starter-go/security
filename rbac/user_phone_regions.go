@@ -32,6 +32,8 @@ type RegionDTO struct {
 // RegionQuery 查询参数
 type RegionQuery struct {
 	Pagination Pagination
+	Conditions map[string]string
+	All        bool // 查询全部条目
 }
 
 // RegionService ...

@@ -40,6 +40,8 @@ type RoleDTO struct {
 // RoleQuery 查询参数
 type RoleQuery struct {
 	Pagination Pagination
+	Conditions map[string]string
+	All        bool // 查询全部条目
 }
 
 // RoleService 是针对 RoleDTO 的服务

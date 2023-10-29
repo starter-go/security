@@ -30,6 +30,8 @@ type PhoneNumberDTO struct {
 // PhoneNumberQuery 查询参数
 type PhoneNumberQuery struct {
 	Pagination Pagination
+	Conditions map[string]string
+	All        bool // 查询全部条目
 }
 
 // PhoneNumberService ...
