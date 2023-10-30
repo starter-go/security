@@ -1,12 +1,15 @@
 package rbac
 
-import "context"
+import (
+	"context"
+	"strings"
+)
 
 // RegionID ...
 type RegionID int
 
 // RegionPhoneCode 是数字形式的国际电话区号，
-// 例如：中国(+86)， 法国(+33)， 俄国(+7)， 美国(+1)， 英国(+44)
+// 例如：中国(86)， 法国(33)， 俄国(7)， 美国(1)， 英国(44)
 type RegionPhoneCode string
 
 // RegionCode2 是 ISO 3166-1 标准的二字节地区码
@@ -55,10 +58,45 @@ func (code RegionPhoneCode) String() string {
 	return string(code)
 }
 
+// Normalize 标准化代码
+func (code RegionPhoneCode) Normalize() RegionPhoneCode {
+	chs := []rune(code.String())
+	b := strings.Builder{}
+	for _, ch := range chs {
+		if '0' <= ch && ch <= '9' {
+			b.WriteRune(ch)
+		}
+	}
+	str := b.String()
+	return RegionPhoneCode(str)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 func (code RegionCode2) String() string {
 	return string(code)
 }
 
+// Normalize 标准化代码
+func (code RegionCode2) Normalize() RegionCode2 {
+	str := code.String()
+	str = strings.TrimSpace(str)
+	str = strings.ToUpper(str)
+	return RegionCode2(str)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 func (code RegionCode3) String() string {
 	return string(code)
 }
+
+// Normalize 标准化代码
+func (code RegionCode3) Normalize() RegionCode3 {
+	str := code.String()
+	str = strings.TrimSpace(str)
+	str = strings.ToUpper(str)
+	return RegionCode3(str)
+}
+
+////////////////////////////////////////////////////////////////////////////////
