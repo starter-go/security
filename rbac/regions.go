@@ -26,6 +26,7 @@ type RegionDTO struct {
 	FlagURL     string          `json:"flag_url"`    // 国旗（或区旗）图标的URL
 	DisplayName string          `json:"label"`       // 显示名称，通常是本地化的名称
 	SimpleName  string          `json:"simple_name"` // 区域简称，例如：chn(中国), fra(France), usa(United States)
+	FullName    string          `json:"full_name"`   // 完整的名称，例如：中华人民共和国(PRC)
 	Code2       RegionCode2     `json:"code_xx"`     // 二字符区域码
 	Code3       RegionCode3     `json:"code_xxx"`    // 三字符区域码
 	PhoneCode   RegionPhoneCode `json:"phone_code"`  // 电话区域码
