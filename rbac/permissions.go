@@ -21,8 +21,8 @@ type PermissionDTO struct {
 
 // PermissionQuery 查询参数
 type PermissionQuery struct {
+	Conditions Conditions
 	Pagination Pagination
-	Conditions map[string]string
 	All        bool // 查询全部条目
 }
 

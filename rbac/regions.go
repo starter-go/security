@@ -23,16 +23,18 @@ type RegionDTO struct {
 
 	BaseDTO
 
-	SimpleName string          // 区域简称，例如：chn(中国), fra(France), usa(United States)
-	Code2      RegionCode2     // 二字符区域码
-	Code3      RegionCode3     // 三字符区域码
-	PhoneCode  RegionPhoneCode // 电话区域码
+	FlagURL     string          `json:"flag_url"`    // 国旗（或区旗）图标的URL
+	DisplayName string          `json:"label"`       // 显示名称，通常是本地化的名称
+	SimpleName  string          `json:"simple_name"` // 区域简称，例如：chn(中国), fra(France), usa(United States)
+	Code2       RegionCode2     `json:"code_xx"`     // 二字符区域码
+	Code3       RegionCode3     `json:"code_xxx"`    // 三字符区域码
+	PhoneCode   RegionPhoneCode `json:"phone_code"`  // 电话区域码
 }
 
 // RegionQuery 查询参数
 type RegionQuery struct {
+	Conditions Conditions
 	Pagination Pagination
-	Conditions map[string]string
 	All        bool // 查询全部条目
 }
 

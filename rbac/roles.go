@@ -39,8 +39,8 @@ type RoleDTO struct {
 
 // RoleQuery 查询参数
 type RoleQuery struct {
+	Conditions Conditions
 	Pagination Pagination
-	Conditions map[string]string
 	All        bool // 查询全部条目
 }
 

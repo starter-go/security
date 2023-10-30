@@ -28,8 +28,8 @@ type UserDTO struct {
 
 // UserQuery 是 User 的查询参数
 type UserQuery struct {
+	Conditions Conditions
 	Pagination Pagination
-	Conditions map[string]string
 	All        bool // 查询全部条目
 }
 
