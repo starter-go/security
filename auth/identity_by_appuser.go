@@ -20,10 +20,11 @@ type UserIdentity interface {
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewUserIdentity ...
-func NewUserIdentity(mechanism string, info *rbac.UserDTO) UserIdentity {
+func NewUserIdentity(by Authentication, info *rbac.UserDTO) UserIdentity {
 	id := &innerUserIdentity{}
 	id.userinfo = *info
-	id.mechanism = mechanism
+	id.mechanism = by.Mechanism()
+	id.by = by
 	return id
 }
 
@@ -33,6 +34,7 @@ func NewUserIdentity(mechanism string, info *rbac.UserDTO) UserIdentity {
 type innerUserIdentity struct {
 	mechanism string
 	userinfo  rbac.UserDTO
+	by        Authentication
 }
 
 func (inst *innerUserIdentity) _impl() UserIdentity {
@@ -47,6 +49,11 @@ func (inst *innerUserIdentity) Class() string {
 // Name ...
 func (inst *innerUserIdentity) Name() string {
 	return inst.userinfo.Name.String()
+}
+
+// Name ...
+func (inst *innerUserIdentity) By() Authentication {
+	return inst.by
 }
 
 func (inst *innerUserIdentity) Mechanism() string {

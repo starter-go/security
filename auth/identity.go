@@ -5,4 +5,5 @@ type Identity interface {
 	Class() string
 	Name() string
 	Mechanism() string
+	By() Authentication
 }

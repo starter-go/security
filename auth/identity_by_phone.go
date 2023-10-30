@@ -12,10 +12,11 @@ type PhoneIdentity interface {
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewPhoneIdentity ...
-func NewPhoneIdentity(mechanism string, info *rbac.PhoneNumberDTO) PhoneIdentity {
+func NewPhoneIdentity(by Authentication, info *rbac.PhoneNumberDTO) PhoneIdentity {
 	id := &innerPhoneIdentity{}
 	id.info = *info
-	id.mechanism = mechanism
+	id.mechanism = by.Mechanism()
+	id.by = by
 	return id
 }
 
@@ -24,6 +25,7 @@ func NewPhoneIdentity(mechanism string, info *rbac.PhoneNumberDTO) PhoneIdentity
 type innerPhoneIdentity struct {
 	mechanism string
 	info      rbac.PhoneNumberDTO
+	by        Authentication
 }
 
 func (inst *innerPhoneIdentity) _impl() PhoneIdentity {
@@ -32,6 +34,10 @@ func (inst *innerPhoneIdentity) _impl() PhoneIdentity {
 
 func (inst *innerPhoneIdentity) Mechanism() string {
 	return inst.mechanism
+}
+
+func (inst *innerPhoneIdentity) By() Authentication {
+	return inst.by
 }
 
 func (inst *innerPhoneIdentity) Class() string {

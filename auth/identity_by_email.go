@@ -12,10 +12,11 @@ type EmailIdentity interface {
 ////////////////////////////////////////////////////////////////////////////////
 
 // NewEmailIdentity ...
-func NewEmailIdentity(mechanism string, info *rbac.EmailAddressDTO) EmailIdentity {
+func NewEmailIdentity(by Authentication, info *rbac.EmailAddressDTO) EmailIdentity {
 	id := &innerEmailIdentity{}
 	id.info = *info
-	id.mechanism = mechanism
+	id.mechanism = by.Mechanism()
+	id.by = by
 	return id
 }
 
@@ -24,10 +25,15 @@ func NewEmailIdentity(mechanism string, info *rbac.EmailAddressDTO) EmailIdentit
 type innerEmailIdentity struct {
 	info      rbac.EmailAddressDTO
 	mechanism string
+	by        Authentication
 }
 
 func (inst *innerEmailIdentity) _impl() EmailIdentity {
 	return inst
+}
+
+func (inst *innerEmailIdentity) By() Authentication {
+	return inst.by
 }
 
 func (inst *innerEmailIdentity) Class() string {
