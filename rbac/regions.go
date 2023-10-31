@@ -60,14 +60,8 @@ func (code RegionPhoneCode) String() string {
 
 // Normalize 标准化代码
 func (code RegionPhoneCode) Normalize() RegionPhoneCode {
-	chs := []rune(code.String())
-	b := strings.Builder{}
-	for _, ch := range chs {
-		if '0' <= ch && ch <= '9' {
-			b.WriteRune(ch)
-		}
-	}
-	str := b.String()
+	str := code.String()
+	str = normalizePureNumber(str)
 	return RegionPhoneCode(str)
 }
 
