@@ -36,6 +36,7 @@ type AuthenticatorManager interface {
 // AuthenticationBuilder 用于创建 Authentication 实例
 type AuthenticationBuilder struct {
 	Context    context.Context
+	Action     string
 	Attributes attributes.Table
 	Parameters parameters.Table
 	Account    string
@@ -48,6 +49,7 @@ func (inst *AuthenticationBuilder) Create() Authentication {
 
 	a := &innerAuthentication{
 		ctx:       inst.Context,
+		action:    inst.Action,
 		account:   inst.Account,
 		mechanism: inst.Mechanism,
 		secret:    inst.Secret,
@@ -74,6 +76,7 @@ func (inst *AuthenticationBuilder) Create() Authentication {
 
 type innerAuthentication struct {
 	ctx       context.Context
+	action    string
 	account   string
 	mechanism string
 	secret    lang.Base64
@@ -87,6 +90,10 @@ func (inst *innerAuthentication) _impl() Authentication {
 
 func (inst *innerAuthentication) Context() context.Context {
 	return inst.ctx
+}
+
+func (inst *innerAuthentication) Action() string {
+	return inst.action
 }
 
 func (inst *innerAuthentication) Attributes() attributes.Table {

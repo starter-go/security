@@ -60,7 +60,7 @@ func (inst *TestCom) doLogin(c context.Context) error {
 	}
 	a1.Secret = lang.Base64FromBytes([]byte(password))
 	a1array := []*rbac.AuthDTO{a1}
-	return inst.AuthSer.Handle(c, a1array)
+	return inst.AuthSer.Handle(c, rbac.ActionLogin, a1array)
 }
 
 func (inst *TestCom) doCurrentSession(c context.Context) error {

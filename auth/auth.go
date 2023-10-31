@@ -29,6 +29,7 @@ type Request interface {
 	Context() context.Context
 	Attributes() attributes.Table
 	Parameters() parameters.Table
+	Action() string
 }
 
 // Mechanism  表示一个验证/授权机制组件

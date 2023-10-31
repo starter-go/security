@@ -23,12 +23,12 @@ func (inst *AuthService2) _impl() rbac.AuthService {
 }
 
 // Handle 处理验证、授权请求
-func (inst *AuthService2) Handle(c context.Context, alist []*rbac.AuthDTO) error {
-	reqlist := inst.prepare(c, alist)
+func (inst *AuthService2) Handle(c context.Context, action string, alist []*rbac.AuthDTO) error {
+	reqlist := inst.prepare(c, action, alist)
 	return inst.Servic1.Execute(reqlist...)
 }
 
-func (inst *AuthService2) prepare(ctx context.Context, src []*rbac.AuthDTO) []auth.Request {
+func (inst *AuthService2) prepare(ctx context.Context, action string, src []*rbac.AuthDTO) []auth.Request {
 
 	mode := safe.Fast()
 	c := &authService2context{}
@@ -41,15 +41,14 @@ func (inst *AuthService2) prepare(ctx context.Context, src []*rbac.AuthDTO) []au
 		inst.copyParams(item.Parameters, c.params)
 		if item.Account != "" {
 			// as authentication
-			req := inst.prepareAuthentication(c, item)
-			result = append(result, req)
-		}
-		if item.Action != "" {
-			// as authorization
-			req := inst.prepareAuthorization(c, item)
+			req := inst.prepareAuthentication(c, action, item)
 			result = append(result, req)
 		}
 	}
+
+	// make authorization
+	req := inst.prepareAuthorization(c, action)
+	result = append(result, req)
 
 	return result
 }
@@ -60,7 +59,7 @@ func (inst *AuthService2) copyParams(src map[string]string, dst parameters.Table
 	}
 }
 
-func (inst *AuthService2) prepareAuthentication(c *authService2context, src *rbac.AuthDTO) auth.Authentication {
+func (inst *AuthService2) prepareAuthentication(c *authService2context, action string, src *rbac.AuthDTO) auth.Authentication {
 	ab := auth.AuthenticationBuilder{
 		Attributes: c.att,
 		Context:    c.ctx,
@@ -68,16 +67,17 @@ func (inst *AuthService2) prepareAuthentication(c *authService2context, src *rba
 		Mechanism:  src.Mechanism,
 		Account:    src.Account,
 		Secret:     src.Secret,
+		Action:     action,
 	}
 	return ab.Create()
 }
 
-func (inst *AuthService2) prepareAuthorization(c *authService2context, src *rbac.AuthDTO) auth.Authorization {
+func (inst *AuthService2) prepareAuthorization(c *authService2context, action string) auth.Authorization {
 	ab := auth.AuthorizationBuilder{
 		Attributes: c.att,
 		Context:    c.ctx,
 		Parameters: c.params,
-		Action:     src.Action,
+		Action:     action,
 		Identities: nil,
 	}
 	return ab.Create()

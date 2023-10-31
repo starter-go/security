@@ -12,8 +12,6 @@ import (
 type Authorization interface {
 	Request
 
-	Action() string
-
 	Identities() []Identity
 }
 
