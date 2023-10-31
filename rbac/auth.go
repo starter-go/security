@@ -19,7 +19,8 @@ const (
 const (
 	MechanismPassword = "password"
 	MechanismEmail    = "email"
-	MechanismPhone    = "phone"
+	MechanismPhone    = "sms"
+	MechanismSMS      = "sms"
 )
 
 // AuthDTO 用于身份认证

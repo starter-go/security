@@ -21,7 +21,8 @@ const (
 const (
 	MechanismPassword = rbac.MechanismPassword
 	MechanismEmail    = rbac.MechanismEmail
-	MechanismPhone    = rbac.MechanismPhone
+	MechanismPhone    = rbac.MechanismSMS
+	MechanismSMS      = rbac.MechanismSMS
 )
 
 // Request 包含 Authentication 和 Authorization 的公共方法
