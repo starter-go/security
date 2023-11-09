@@ -125,8 +125,9 @@ func (inst *JWTService) prepareToken(token *jwt.Token) {
 	computer.ageMin = lang.Seconds(inst.TokenMaxageMin)
 	computer.ageDefault = lang.Seconds(inst.TokenMaxageDefault)
 
-	a, b, c := computer.compute(token.CreatedAt, 0, token.ExpiredAt)
+	a, b, c := computer.compute(token.CreatedAt, token.MaxAge, token.ExpiredAt)
 	token.CreatedAt = a
+	token.MaxAge = b
 	token.ExpiredAt = c
 
 	// session

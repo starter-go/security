@@ -14,6 +14,7 @@ type Text string
 type Token struct {
 	rbac.BaseDTO
 
+	MaxAge     lang.Milliseconds `json:"max_age"`
 	ExpiredAt  lang.Time         `json:"expired_at"`
 	Session    rbac.SessionDTO   `json:"session"`
 	Properties map[string]string `json:"properties"`
