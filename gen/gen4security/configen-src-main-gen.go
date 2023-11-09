@@ -360,7 +360,12 @@ func (inst* pf41d62225c_internal_JWTService) inject(injext application.Injection
 
 	
     com.RegistryList = inst.getRegistryList(ie)
-    com.DefaultTokenMaxAge = inst.getDefaultTokenMaxAge(ie)
+    com.TokenMaxageDefault = inst.getTokenMaxageDefault(ie)
+    com.TokenMaxageMin = inst.getTokenMaxageMin(ie)
+    com.TokenMaxageMax = inst.getTokenMaxageMax(ie)
+    com.SessionMaxageDefault = inst.getSessionMaxageDefault(ie)
+    com.SessionMaxageMin = inst.getSessionMaxageMin(ie)
+    com.SessionMaxageMax = inst.getSessionMaxageMax(ie)
 
 
     return nil
@@ -378,8 +383,33 @@ func (inst*pf41d62225c_internal_JWTService) getRegistryList(ie application.Injec
 }
 
 
-func (inst*pf41d62225c_internal_JWTService) getDefaultTokenMaxAge(ie application.InjectionExt)int{
-    return ie.GetInt("${security.jwt.max-age}")
+func (inst*pf41d62225c_internal_JWTService) getTokenMaxageDefault(ie application.InjectionExt)int{
+    return ie.GetInt("${security.jwt.default-age-sec}")
+}
+
+
+func (inst*pf41d62225c_internal_JWTService) getTokenMaxageMin(ie application.InjectionExt)int{
+    return ie.GetInt("${security.jwt.min-age-sec}")
+}
+
+
+func (inst*pf41d62225c_internal_JWTService) getTokenMaxageMax(ie application.InjectionExt)int{
+    return ie.GetInt("${security.jwt.max-age-sec}")
+}
+
+
+func (inst*pf41d62225c_internal_JWTService) getSessionMaxageDefault(ie application.InjectionExt)int{
+    return ie.GetInt("${security.session.default-age-sec}")
+}
+
+
+func (inst*pf41d62225c_internal_JWTService) getSessionMaxageMin(ie application.InjectionExt)int{
+    return ie.GetInt("${security.session.min-age-sec}")
+}
+
+
+func (inst*pf41d62225c_internal_JWTService) getSessionMaxageMax(ie application.InjectionExt)int{
+    return ie.GetInt("${security.session.max-age-sec}")
 }
 
 

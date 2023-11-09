@@ -14,8 +14,15 @@ type JWTService struct {
 	//starter:component
 	_as func(jwt.Service) //starter:as("#")
 
-	RegistryList       []jwt.Registry //starter:inject(".")
-	DefaultTokenMaxAge int            //starter:inject("${security.jwt.max-age}")
+	RegistryList []jwt.Registry //starter:inject(".")
+
+	TokenMaxageDefault int //starter:inject("${security.jwt.default-age-sec}")
+	TokenMaxageMin     int //starter:inject("${security.jwt.min-age-sec}")
+	TokenMaxageMax     int //starter:inject("${security.jwt.max-age-sec}")
+
+	SessionMaxageDefault int //starter:inject("${security.session.default-age-sec}")
+	SessionMaxageMin     int //starter:inject("${security.session.min-age-sec}")
+	SessionMaxageMax     int //starter:inject("${security.session.max-age-sec}")
 
 	// cache
 	adapterList []jwt.Adapter
@@ -104,17 +111,33 @@ func (inst *JWTService) SetDTO(c context.Context, o *jwt.Token) error {
 	return err
 }
 
-func (inst *JWTService) prepareToken(t *jwt.Token) {
-	if t.CreatedAt == 0 || t.ExpiredAt == 0 {
-		now := lang.Now()
-		if t.CreatedAt == 0 {
-			t.CreatedAt = now
-		}
-		if t.ExpiredAt == 0 {
-			maxage := lang.Time(inst.DefaultTokenMaxAge)
-			t.ExpiredAt = now + maxage
-		}
+func (inst *JWTService) prepareToken(token *jwt.Token) {
+
+	if token == nil {
+		return
 	}
+
+	computer := &maxAgeComputer{}
+	session := &token.Session
+
+	// token
+	computer.ageMax = lang.Seconds(inst.TokenMaxageMax)
+	computer.ageMin = lang.Seconds(inst.TokenMaxageMin)
+	computer.ageDefault = lang.Seconds(inst.TokenMaxageDefault)
+
+	a, b, c := computer.compute(token.CreatedAt, 0, token.ExpiredAt)
+	token.CreatedAt = a
+	token.ExpiredAt = c
+
+	// session
+	computer.ageMax = lang.Seconds(inst.SessionMaxageMax)
+	computer.ageMin = lang.Seconds(inst.SessionMaxageMin)
+	computer.ageDefault = lang.Seconds(inst.SessionMaxageDefault)
+
+	a, b, c = computer.compute(session.CreatedAt, session.MaxAge, session.ExpiredAt)
+	session.CreatedAt = a
+	session.MaxAge = b
+	session.ExpiredAt = c
 }
 
 // SetText ...
