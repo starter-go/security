@@ -2,6 +2,7 @@ package gen4test
 import (
     pd4e0ee677 "github.com/starter-go/security"
     p91f218d46 "github.com/starter-go/security/jwt"
+    p5d8e1a661 "github.com/starter-go/security/keys"
     p9621e8b71 "github.com/starter-go/security/random"
     p2dece1e49 "github.com/starter-go/security/rbac"
     p577233893 "github.com/starter-go/security/src/test/code"
@@ -92,6 +93,62 @@ func (inst*p5772338936_code_MockTokenAdapter) getService(ie application.Injectio
 
 
 func (inst*p5772338936_code_MockTokenAdapter) getLogger(ie application.InjectionExt)p55f0853be.Logger{
+    return ie.GetComponent("#alias-55f0853bedbc094981acd8da904ae269-Logger").(p55f0853be.Logger)
+}
+
+
+
+// type p577233893.TestAES in package:github.com/starter-go/security/src/test/code
+//
+// id:com-5772338936071413-code-TestAES
+// class:
+// alias:
+// scope:singleton
+//
+type p5772338936_code_TestAES struct {
+}
+
+func (inst* p5772338936_code_TestAES) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-5772338936071413-code-TestAES"
+	r.Classes = ""
+	r.Aliases = ""
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* p5772338936_code_TestAES) new() any {
+    return &p577233893.TestAES{}
+}
+
+func (inst* p5772338936_code_TestAES) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*p577233893.TestAES)
+	nop(ie, com)
+
+	
+    com.KeysMan = inst.getKeysMan(ie)
+    com.KeysSer = inst.getKeysSer(ie)
+    com.Logger = inst.getLogger(ie)
+
+
+    return nil
+}
+
+
+func (inst*p5772338936_code_TestAES) getKeysMan(ie application.InjectionExt)p5d8e1a661.Manager{
+    return ie.GetComponent("#alias-5d8e1a661f387d56d217edd5cab8802a-Manager").(p5d8e1a661.Manager)
+}
+
+
+func (inst*p5772338936_code_TestAES) getKeysSer(ie application.InjectionExt)p5d8e1a661.Service{
+    return ie.GetComponent("#alias-5d8e1a661f387d56d217edd5cab8802a-Service").(p5d8e1a661.Service)
+}
+
+
+func (inst*p5772338936_code_TestAES) getLogger(ie application.InjectionExt)p55f0853be.Logger{
     return ie.GetComponent("#alias-55f0853bedbc094981acd8da904ae269-Logger").(p55f0853be.Logger)
 }
 
@@ -192,6 +249,56 @@ func (inst*p5772338936_code_TestRandom) getRand(ie application.InjectionExt)p962
 
 
 func (inst*p5772338936_code_TestRandom) getLogger(ie application.InjectionExt)p55f0853be.Logger{
+    return ie.GetComponent("#alias-55f0853bedbc094981acd8da904ae269-Logger").(p55f0853be.Logger)
+}
+
+
+
+// type p577233893.TestRSA in package:github.com/starter-go/security/src/test/code
+//
+// id:com-5772338936071413-code-TestRSA
+// class:
+// alias:
+// scope:singleton
+//
+type p5772338936_code_TestRSA struct {
+}
+
+func (inst* p5772338936_code_TestRSA) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-5772338936071413-code-TestRSA"
+	r.Classes = ""
+	r.Aliases = ""
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* p5772338936_code_TestRSA) new() any {
+    return &p577233893.TestRSA{}
+}
+
+func (inst* p5772338936_code_TestRSA) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*p577233893.TestRSA)
+	nop(ie, com)
+
+	
+    com.KeysMan = inst.getKeysMan(ie)
+    com.Logger = inst.getLogger(ie)
+
+
+    return nil
+}
+
+
+func (inst*p5772338936_code_TestRSA) getKeysMan(ie application.InjectionExt)p5d8e1a661.Manager{
+    return ie.GetComponent("#alias-5d8e1a661f387d56d217edd5cab8802a-Manager").(p5d8e1a661.Manager)
+}
+
+
+func (inst*p5772338936_code_TestRSA) getLogger(ie application.InjectionExt)p55f0853be.Logger{
     return ie.GetComponent("#alias-55f0853bedbc094981acd8da904ae269-Logger").(p55f0853be.Logger)
 }
 
