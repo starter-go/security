@@ -53,14 +53,14 @@ type CryptOptions struct {
 
 // Encrypter 提供加密计算
 type Encrypter interface {
-	New(options *CryptOptions) Encrypter
+	// New(options *CryptOptions) Encrypter
 
 	Encrypt(data []byte, options *CryptOptions) ([]byte, *CryptOptions, error)
 }
 
 // Decrypter 提供解密计算
 type Decrypter interface {
-	New(options *CryptOptions) Decrypter
+	// New(options *CryptOptions) Decrypter
 
 	Decrypt(data []byte, options *CryptOptions) ([]byte, *CryptOptions, error)
 }
