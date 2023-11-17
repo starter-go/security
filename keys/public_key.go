@@ -10,6 +10,8 @@ type PublicKeyData struct {
 
 // PublicKey 代表公钥
 type PublicKey interface {
+	NewEncrypter(options *CryptOptions) Encrypter
+
 	Export(want *PublicKeyData) (*PublicKeyData, error)
 }
 

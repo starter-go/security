@@ -286,6 +286,7 @@ func (inst* p5772338936_code_TestRSA) inject(injext application.InjectionExt, in
 
 	
     com.KeysMan = inst.getKeysMan(ie)
+    com.KeysSer = inst.getKeysSer(ie)
     com.Logger = inst.getLogger(ie)
 
 
@@ -295,6 +296,11 @@ func (inst* p5772338936_code_TestRSA) inject(injext application.InjectionExt, in
 
 func (inst*p5772338936_code_TestRSA) getKeysMan(ie application.InjectionExt)p5d8e1a661.Manager{
     return ie.GetComponent("#alias-5d8e1a661f387d56d217edd5cab8802a-Manager").(p5d8e1a661.Manager)
+}
+
+
+func (inst*p5772338936_code_TestRSA) getKeysSer(ie application.InjectionExt)p5d8e1a661.Service{
+    return ie.GetComponent("#alias-5d8e1a661f387d56d217edd5cab8802a-Service").(p5d8e1a661.Service)
 }
 
 

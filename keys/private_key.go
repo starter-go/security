@@ -12,6 +12,8 @@ type PrivateKeyData struct {
 type PrivateKey interface {
 	Pair() KeyPair
 
+	NewDecrypter(options *CryptOptions) Decrypter
+
 	Export(want *PrivateKeyData) (*PrivateKeyData, error)
 }
 
