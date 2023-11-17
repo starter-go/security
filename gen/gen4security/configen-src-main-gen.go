@@ -711,3 +711,53 @@ func (inst*paa12a345bd_rsa_Provider) getPriority(ie application.InjectionExt)int
 }
 
 
+
+// type paa12a345b.SignWithRsaProvider in package:github.com/starter-go/security/internal/crypts/rsa
+//
+// id:com-aa12a345bda7a8c2-rsa-SignWithRsaProvider
+// class:class-5d8e1a661f387d56d217edd5cab8802a-Registry
+// alias:
+// scope:singleton
+//
+type paa12a345bd_rsa_SignWithRsaProvider struct {
+}
+
+func (inst* paa12a345bd_rsa_SignWithRsaProvider) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-aa12a345bda7a8c2-rsa-SignWithRsaProvider"
+	r.Classes = "class-5d8e1a661f387d56d217edd5cab8802a-Registry"
+	r.Aliases = ""
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* paa12a345bd_rsa_SignWithRsaProvider) new() any {
+    return &paa12a345b.SignWithRsaProvider{}
+}
+
+func (inst* paa12a345bd_rsa_SignWithRsaProvider) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*paa12a345b.SignWithRsaProvider)
+	nop(ie, com)
+
+	
+    com.Enabled = inst.getEnabled(ie)
+    com.Priority = inst.getPriority(ie)
+
+
+    return nil
+}
+
+
+func (inst*paa12a345bd_rsa_SignWithRsaProvider) getEnabled(ie application.InjectionExt)bool{
+    return ie.GetBool("${security.algorithms.rsa.enabled}")
+}
+
+
+func (inst*paa12a345bd_rsa_SignWithRsaProvider) getPriority(ie application.InjectionExt)int{
+    return ie.GetInt("${security.algorithms.rsa.priority}")
+}
+
+

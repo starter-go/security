@@ -12,3 +12,25 @@ type Provider interface {
 	PackageName() string
 	Description() string
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+// KeyAlgorithmName 表示密钥算法的名称
+// (例如：'RSA' | 'AES' | 'ECDSA')
+type KeyAlgorithmName string
+
+func (name KeyAlgorithmName) String() string {
+	return string(name)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+// SignatureAlgorithmName 表示签名算法的名称
+// (例如：'SHA384withECDSA' | 'SHA256withRSA/PSS')
+type SignatureAlgorithmName string
+
+func (name SignatureAlgorithmName) String() string {
+	return string(name)
+}
+
+////////////////////////////////////////////////////////////////////////////////

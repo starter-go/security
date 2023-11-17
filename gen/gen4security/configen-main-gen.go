@@ -34,6 +34,7 @@ func (inst*autoRegistrar) addAll() error {
     inst.register(&p3aad4dd5c4_crypts_ManagerImpl{})
     inst.register(&p3aad4dd5c4_crypts_ServiceImpl{})
     inst.register(&paa12a345bd_rsa_Provider{})
+    inst.register(&paa12a345bd_rsa_SignWithRsaProvider{})
     inst.register(&pf41d62225c_internal_AuthService1{})
     inst.register(&pf41d62225c_internal_AuthService2{})
     inst.register(&pf41d62225c_internal_AuthenticatorManagerImpl{})

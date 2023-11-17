@@ -14,6 +14,8 @@ type PrivateKey interface {
 
 	NewDecrypter(options *CryptOptions) Decrypter
 
+	NewSigner(options *SignatureOptions) Signer
+
 	Export(want *PrivateKeyData) (*PrivateKeyData, error)
 }
 

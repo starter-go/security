@@ -1,16 +1,27 @@
 package keys
 
+import "crypto"
+
+////////////////////////////////////////////////////////////////////////////////
+
 // PaddingMode 表示填充模式
 type PaddingMode string
 
+func (m PaddingMode) String() string {
+	return string(m)
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 // 定义填充模式
 const (
-	NoPadding       PaddingMode = "NoPadding"
-	PKCS5Padding    PaddingMode = "PKCS5Padding"
-	PKCS7Padding    PaddingMode = "PKCS7Padding" // the default value
-	PKCS1Padding    PaddingMode = "PKCS1Padding"
-	PKCS1v15Padding PaddingMode = "PKCS1v15Padding"
-	OAEP            PaddingMode = "OAEPadding" // optimal asymmetric encryption padding
+	NoPadding       PaddingMode = "No"
+	PKCS5Padding    PaddingMode = "PKCS5"
+	PKCS7Padding    PaddingMode = "PKCS7" // the default value
+	PKCS1Padding    PaddingMode = "PKCS1"
+	PKCS1v15Padding PaddingMode = "PKCS1v15"
+	OAEP            PaddingMode = "OAEP" // optimal asymmetric encryption padding
+	PSS             PaddingMode = "PSS"  // Probabilistic Signature Scheme
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -33,7 +44,7 @@ const (
 type CryptOptions struct {
 	Block   BlockMode
 	Padding PaddingMode
-	Hash    string // hash 算法名称
+	Hash    crypto.Hash // hash 算法 id
 	Label   []byte
 	IV      []byte // 初始化向量
 }

@@ -49,3 +49,16 @@ func (inst *ServiceImpl) GetSecretKeyAlgorithm(algorithm string, selector func(r
 	}
 	return ska, nil
 }
+
+// GetSignatureAlgorithm ...
+func (inst *ServiceImpl) GetSignatureAlgorithm(algorithm string, selector func(reg *keys.Registration) bool) (keys.SignatureAlgorithm, error) {
+	alg, err := inst.Manager.Get(algorithm, selector)
+	if err != nil {
+		return nil, err
+	}
+	sa, ok := alg.(keys.SignatureAlgorithm)
+	if !ok {
+		return nil, fmt.Errorf("cannot cast algorithm[%s] as keys.SecretKeyAlgorithm", algorithm)
+	}
+	return sa, nil
+}

@@ -16,6 +16,7 @@ type KeyPairParams struct {
 // KeyPair ...
 type KeyPair interface {
 	PublicKey() PublicKey
+
 	PrivateKey() PrivateKey
 
 	Export(want *KeyPairData) (*KeyPairData, error)

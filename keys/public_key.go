@@ -12,6 +12,8 @@ type PublicKeyData struct {
 type PublicKey interface {
 	NewEncrypter(options *CryptOptions) Encrypter
 
+	NewVerifier(options *SignatureOptions) Verifier
+
 	Export(want *PublicKeyData) (*PublicKeyData, error)
 }
 
