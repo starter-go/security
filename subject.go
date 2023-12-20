@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/starter-go/base/context2"
-	"github.com/starter-go/security/rbac"
+	"github.com/starter-go/rbac"
 )
 
 const theSubjectBindingKey = "rbac.Subject#binding"

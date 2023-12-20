@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/starter-go/base/lang"
-	"github.com/starter-go/security/rbac"
+	"github.com/starter-go/rbac"
 )
 
 // Text 是文本形式的 JWT

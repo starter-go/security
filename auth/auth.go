@@ -5,7 +5,7 @@ import (
 
 	"github.com/starter-go/application/attributes"
 	"github.com/starter-go/application/parameters"
-	"github.com/starter-go/security/rbac"
+	"github.com/starter-go/rbac"
 )
 
 // 定义几种常用的授权动作

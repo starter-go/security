@@ -3,7 +3,7 @@ package security
 import (
 	"context"
 
-	"github.com/starter-go/security/rbac"
+	"github.com/starter-go/rbac"
 )
 
 // Session 代表当前会话

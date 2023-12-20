@@ -1,6 +1,6 @@
 package auth
 
-import "github.com/starter-go/security/rbac"
+import "github.com/starter-go/rbac"
 
 // EmailIdentity 表示基于 email address 的身份信息
 type EmailIdentity interface {

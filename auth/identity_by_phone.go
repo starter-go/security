@@ -1,6 +1,6 @@
 package auth
 
-import "github.com/starter-go/security/rbac"
+import "github.com/starter-go/rbac"
 
 // PhoneIdentity 表示基于 phone number 的身份信息
 type PhoneIdentity interface {

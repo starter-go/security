@@ -6,8 +6,8 @@ import (
 	"github.com/starter-go/application/attributes"
 	"github.com/starter-go/application/parameters"
 	"github.com/starter-go/base/safe"
+	"github.com/starter-go/rbac"
 	"github.com/starter-go/security/auth"
-	"github.com/starter-go/security/rbac"
 )
 
 // AuthService2 是面向 rabc 的 auth 服务

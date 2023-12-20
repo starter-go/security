@@ -1,6 +1,6 @@
 package auth
 
-import "github.com/starter-go/security/rbac"
+import "github.com/starter-go/rbac"
 
 // UserIdentity ...
 type UserIdentity interface {

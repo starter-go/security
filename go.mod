@@ -14,3 +14,5 @@ require (
 	github.com/starter-go/afs v0.9.4 // indirect
 	github.com/starter-go/configen v0.9.5 // indirect
 )
+
+require github.com/starter-go/rbac v0.0.1 // direct

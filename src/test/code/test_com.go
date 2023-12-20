@@ -6,8 +6,8 @@ import (
 
 	"github.com/starter-go/application"
 	"github.com/starter-go/base/lang"
+	"github.com/starter-go/rbac"
 	"github.com/starter-go/security"
-	"github.com/starter-go/security/rbac"
 	"github.com/starter-go/vlog"
 )
 
