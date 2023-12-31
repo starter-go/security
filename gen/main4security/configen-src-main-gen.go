@@ -1,4 +1,4 @@
-package gen4security
+package main4security
 import (
     pd4e0ee677 "github.com/starter-go/security"
     p9d209f7c2 "github.com/starter-go/security/auth"
@@ -66,7 +66,7 @@ func (inst*pf41d62225c_internal_AuthService1) getAuthorizers(ie application.Inje
 //
 // id:com-f41d62225c42aa4c-internal-AuthService2
 // class:
-// alias:alias-2dece1e495fd61b93f78009d229f38cf-AuthService
+// alias:alias-24287f4589fe5add27fb48a88d706565-AuthService
 // scope:singleton
 //
 type pf41d62225c_internal_AuthService2 struct {
@@ -76,7 +76,7 @@ func (inst* pf41d62225c_internal_AuthService2) register(cr application.Component
 	r := cr.NewRegistration()
 	r.ID = "com-f41d62225c42aa4c-internal-AuthService2"
 	r.Classes = ""
-	r.Aliases = "alias-2dece1e495fd61b93f78009d229f38cf-AuthService"
+	r.Aliases = "alias-24287f4589fe5add27fb48a88d706565-AuthService"
 	r.Scope = "singleton"
 	r.NewFunc = inst.new
 	r.InjectFunc = inst.inject

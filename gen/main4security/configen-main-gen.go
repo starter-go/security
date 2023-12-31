@@ -1,4 +1,4 @@
-package gen4security
+package main4security
 
 import "github.com/starter-go/application"
 

@@ -4,31 +4,49 @@ import (
 	"embed"
 
 	"github.com/starter-go/application"
-	"github.com/starter-go/starter"
 )
 
 const (
 	theModuleName     = "github.com/starter-go/security"
 	theModuleVersion  = "v1.0.44"
 	theModuleRevision = 46
-	theModuleResPath  = "src/main/resources"
+)
+
+////////////////////////////////////////////////////////////////////////////////
+
+const (
+	theMainModuleResPath = "src/main/resources"
+	theTestModuleResPath = "src/test/resources"
 )
 
 //go:embed "src/main/resources"
-var theModuleResFS embed.FS
+var theMainModuleResFS embed.FS
 
-// ModuleT 导出模块[github.com/starter-go/security]
-func ModuleT() *application.ModuleBuilder {
+//go:embed "src/test/resources"
+var theTestModuleResFS embed.FS
 
-	mb := &application.ModuleBuilder{}
+////////////////////////////////////////////////////////////////////////////////
+
+// NewMainModule 导出模块[github.com/starter-go/security]
+func NewMainModule() *application.ModuleBuilder {
+
+	mb := new(application.ModuleBuilder)
 	mb.Name(theModuleName)
 	mb.Version(theModuleVersion)
 	mb.Revision(theModuleRevision)
-	mb.EmbedResources(theModuleResFS, theModuleResPath)
+	mb.EmbedResources(theMainModuleResFS, theMainModuleResPath)
 
-	// mb.Components(gen4security.ExportComSetForSecurity)
+	return mb
+}
 
-	mb.Depend(starter.Module())
+// NewTestModule 导出模块[github.com/starter-go/security#test]
+func NewTestModule() *application.ModuleBuilder {
+
+	mb := new(application.ModuleBuilder)
+	mb.Name(theModuleName + "#test")
+	mb.Version(theModuleVersion)
+	mb.Revision(theModuleRevision)
+	mb.EmbedResources(theTestModuleResFS, theTestModuleResPath)
 
 	return mb
 }
