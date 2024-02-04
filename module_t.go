@@ -8,8 +8,8 @@ import (
 
 const (
 	theModuleName     = "github.com/starter-go/security"
-	theModuleVersion  = "v1.0.45"
-	theModuleRevision = 47
+	theModuleVersion  = "v1.0.46"
+	theModuleRevision = 48
 )
 
 ////////////////////////////////////////////////////////////////////////////////

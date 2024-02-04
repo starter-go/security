@@ -40,6 +40,8 @@ github.com/starter-go/libgorm v0.9.8 h1:4ec+PLn9we4TQdYUgFPZO4XDQRFJwdE1gucnemaA
 github.com/starter-go/libgorm v0.9.8/go.mod h1:wiWQaZtVdxhRWDGhQqaEworqiLdzDgmPYzRFzFyx/Tk=
 github.com/starter-go/rbac v0.0.1 h1:lreMbRRyrJV2xPeotS9cetiS7vC2CttodzfLtZY1+0o=
 github.com/starter-go/rbac v0.0.1/go.mod h1:N93w2twpuiCD1yDDBeVyRm2a+Voz0OIpIpxpuox7fUY=
+github.com/starter-go/rbac v0.0.2 h1:6pVHv0yOveEJ6d/I8fS+5Jsd2OzpILaZQ0OrOWUBQeA=
+github.com/starter-go/rbac v0.0.2/go.mod h1:N93w2twpuiCD1yDDBeVyRm2a+Voz0OIpIpxpuox7fUY=
 github.com/starter-go/starter v1.0.2 h1:G42EqApRfhMuTtzTqsVShTD3xTYSStSyluNqRcjVw5M=
 github.com/starter-go/starter v1.0.2/go.mod h1:Z5M9AAlH6lbsHy0rflmSV6yOxKeVVQjULnzHw3R3/n4=
 github.com/starter-go/starter v1.0.3 h1:12X37D4n8boyXCi6+OYKvJyIuoKuDXF6jtO9tzt6IVs=
