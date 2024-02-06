@@ -1,5 +1,7 @@
 package keys
 
+import "crypto"
+
 // PublicKeyData 代表公钥的 DTO
 type PublicKeyData struct {
 	Algorithm   string
@@ -13,6 +15,8 @@ type PublicKey interface {
 	NewEncrypter(options *CryptOptions) Encrypter
 
 	NewVerifier(options *SignatureOptions) Verifier
+
+	Native() crypto.PublicKey
 
 	Export(want *PublicKeyData) (*PublicKeyData, error)
 }

@@ -1,5 +1,7 @@
 package keys
 
+import "crypto"
+
 // PrivateKeyData 代表私钥 DTO
 type PrivateKeyData struct {
 	Algorithm   string
@@ -15,6 +17,12 @@ type PrivateKey interface {
 	NewDecrypter(options *CryptOptions) Decrypter
 
 	NewSigner(options *SignatureOptions) Signer
+
+	NativeSigner() crypto.Signer
+
+	NativeDecrypter() crypto.Decrypter
+
+	Native() crypto.PrivateKey
 
 	Export(want *PrivateKeyData) (*PrivateKeyData, error)
 }

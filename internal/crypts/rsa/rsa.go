@@ -1,6 +1,7 @@
 package rsa
 
 import (
+	"crypto"
 	"crypto/rand"
 	crypotrand "crypto/rand"
 	"crypto/rsa"
@@ -245,6 +246,18 @@ func (inst *keyPrivate) _impl() keys.PrivateKey {
 	return inst
 }
 
+func (inst *keyPrivate) Native() crypto.PrivateKey {
+	return inst.raw
+}
+
+func (inst *keyPrivate) NativeDecrypter() crypto.Decrypter {
+	return &inst.raw
+}
+
+func (inst *keyPrivate) NativeSigner() crypto.Signer {
+	return &inst.raw
+}
+
 func (inst *keyPrivate) Pair() keys.KeyPair {
 	return &keyPair{
 		context: inst.context,
@@ -282,6 +295,10 @@ type keyPublic struct {
 
 func (inst *keyPublic) _impl() keys.PublicKey {
 	return inst
+}
+
+func (inst *keyPublic) Native() crypto.PublicKey {
+	return inst.raw
 }
 
 func (inst *keyPublic) Export(want *keys.PublicKeyData) (*keys.PublicKeyData, error) {
