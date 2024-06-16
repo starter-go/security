@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/starter-go/security/auth"
+	"github.com/starter-go/vlog"
 )
 
 // AuthService1 ... 是面向 a&a 的 auth 服务
@@ -13,6 +14,8 @@ type AuthService1 struct {
 
 	Authenticators auth.AuthenticatorManager //starter:inject("#")
 	Authorizers    auth.AuthorizerManager    //starter:inject("#")
+
+	LogBadAuthError bool //starter:inject("${security.log-bad-auth-error}")
 }
 
 func (inst *AuthService1) _impl() auth.Service {
@@ -24,6 +27,9 @@ func (inst *AuthService1) Authenticate(a auth.Authentication) ([]auth.Identity, 
 	handlers := inst.Authenticators.ListFor(a)
 	for _, h := range handlers {
 		ids, err := h.Authenticate(a)
+		if err != nil && inst.LogBadAuthError {
+			vlog.Warn("bad Authenticate error: %s", err.Error())
+		}
 		if err == nil {
 			return ids, nil
 		}

@@ -32,9 +32,7 @@ func (inst*autoRegistrar) addAll() error {
     
     inst.register(&p5772338936_code_MockAuth{})
     inst.register(&p5772338936_code_MockTokenAdapter{})
-    inst.register(&p5772338936_code_TestAES{})
     inst.register(&p5772338936_code_TestCom{})
-    inst.register(&p5772338936_code_TestRSA{})
     inst.register(&p5772338936_code_TestRandom{})
     inst.register(&p5772338936_code_TestUUID{})
 

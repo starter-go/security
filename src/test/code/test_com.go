@@ -8,7 +8,7 @@ import (
 	"github.com/starter-go/base/lang"
 	"github.com/starter-go/rbac"
 	"github.com/starter-go/security"
-	"github.com/starter-go/security/keys"
+
 	"github.com/starter-go/vlog"
 )
 
@@ -19,7 +19,6 @@ type TestCom struct {
 
 	AuthSer    rbac.AuthService        //starter:inject("#")
 	SessionSer security.SessionService //starter:inject("#")
-	KeysMan    keys.Manager            //starter:inject("#")
 
 	PermissionSer rbac.PermissionService //--starter:inject("#")
 	UserSer       rbac.UserService       //--starter:inject("#")
