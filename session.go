@@ -3,11 +3,14 @@ package security
 import (
 	"context"
 
+	"github.com/starter-go/application/properties"
 	"github.com/starter-go/rbac"
 )
 
 // Session 代表当前会话
 type Session interface {
+	GetProperties() properties.Table
+
 	Get() *rbac.SessionDTO
 
 	Set(s *rbac.SessionDTO)
@@ -47,4 +50,32 @@ type SessionRegistration struct {
 // SessionRegistry 会话方案的注册接口
 type SessionRegistry interface {
 	Registration() *SessionRegistration
+}
+
+// SessionGetter ...
+type SessionGetter interface {
+	Get(ctx *Context) (Session, error)
+}
+
+// SessionLoader ...
+type SessionLoader interface {
+	Load(ctx *Context) (Session, error)
+}
+
+// SessionSaver ...
+type SessionSaver interface {
+	Save(ctx *Context, se Session) error
+}
+
+// SessionSetter ...
+type SessionSetter interface {
+	Set(ctx *Context, se Session) error
+}
+
+// SessionManager ...
+type SessionManager interface {
+	SessionGetter
+	SessionSetter
+	SessionLoader
+	SessionSaver
 }
