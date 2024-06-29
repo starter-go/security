@@ -15,4 +15,4 @@ require (
 	github.com/starter-go/configen v0.9.5 // indirect
 )
 
-require github.com/starter-go/rbac v0.0.2 // direct
+require github.com/starter-go/rbac v0.0.3 // direct

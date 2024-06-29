@@ -470,6 +470,50 @@ func (inst*pf41d62225c_internal_SessionServiceImpl) getRegistryList(ie applicati
 
 
 
+// type pf41d62225.SubjectServiceImpl in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-SubjectServiceImpl
+// class:
+// alias:alias-24287f4589fe5add27fb48a88d706565-SubjectService
+// scope:singleton
+//
+type pf41d62225c_internal_SubjectServiceImpl struct {
+}
+
+func (inst* pf41d62225c_internal_SubjectServiceImpl) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-SubjectServiceImpl"
+	r.Classes = ""
+	r.Aliases = "alias-24287f4589fe5add27fb48a88d706565-SubjectService"
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_SubjectServiceImpl) new() any {
+    return &pf41d62225.SubjectServiceImpl{}
+}
+
+func (inst* pf41d62225c_internal_SubjectServiceImpl) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.SubjectServiceImpl)
+	nop(ie, com)
+
+	
+    com.JWTService = inst.getJWTService(ie)
+
+
+    return nil
+}
+
+
+func (inst*pf41d62225c_internal_SubjectServiceImpl) getJWTService(ie application.InjectionExt)p91f218d46.Service{
+    return ie.GetComponent("#alias-91f218d46ec21cd234778bbe54aecc66-Service").(p91f218d46.Service)
+}
+
+
+
 // type pf41d62225.UUIDServiceImpl in package:github.com/starter-go/security/internal
 //
 // id:com-f41d62225c42aa4c-internal-UUIDServiceImpl

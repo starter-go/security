@@ -39,6 +39,7 @@ func (inst*autoRegistrar) addAll() error {
     inst.register(&pf41d62225c_internal_JWTCODEC{})
     inst.register(&pf41d62225c_internal_JWTService{})
     inst.register(&pf41d62225c_internal_SessionServiceImpl{})
+    inst.register(&pf41d62225c_internal_SubjectServiceImpl{})
     inst.register(&pf41d62225c_internal_UUIDServiceImpl{})
 
 
