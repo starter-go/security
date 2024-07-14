@@ -99,20 +99,10 @@ func (inst *JWTService) listAdapters() []jwt.Adapter {
 func (inst *JWTService) SetDTO(c context.Context, o *jwt.Token) error {
 	inst.prepareToken(o)
 	text, err := inst.Encode(o)
-	if err == nil {
-		return nil
+	if err != nil {
+		return err
 	}
-	err = fmt.Errorf("no jwt.adapter for the context")
-	list := inst.listAdapters()
-	for _, ada := range list {
-		if ada.Accept(c) {
-			err = ada.SetText(c, text)
-			if err == nil {
-				return nil
-			}
-		}
-	}
-	return err
+	return inst.SetText(c, text)
 }
 
 func (inst *JWTService) prepareToken(token *jwt.Token) {
@@ -175,18 +165,11 @@ func (inst *JWTService) SetText(c context.Context, t jwt.Text) error {
 
 // GetDTO ...
 func (inst *JWTService) GetDTO(c context.Context) (*jwt.Token, error) {
-	err := fmt.Errorf("no jwt.adapter for the context")
-	list := inst.listAdapters()
-	for _, item := range list {
-		if item.Accept(c) {
-			text, err2 := item.GetText(c)
-			if err2 == nil {
-				return inst.Decode(text)
-			}
-			err = err2
-		}
+	text, err := inst.GetText(c)
+	if err != nil {
+		return nil, err
 	}
-	return nil, err
+	return inst.Decode(text)
 }
 
 // GetText ...

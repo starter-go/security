@@ -60,6 +60,6 @@ func (inst *MockTokenAdapter) SetDTO(c context.Context, o1 *jwt.Token) error {
 
 // SetText ...
 func (inst *MockTokenAdapter) SetText(c context.Context, t1 jwt.Text) error {
-	inst.Logger.Info("set-jwt: %s", t1.String())
+	inst.Logger.Info("MockTokenAdapter::set-jwt: %s", t1.String())
 	return nil
 }
