@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/starter-go/application/properties"
+	"github.com/starter-go/base/lang"
 	"github.com/starter-go/rbac"
 )
 
@@ -11,11 +12,15 @@ import (
 type Session interface {
 	GetProperties() properties.Table
 
+	SetProperty(name, value string)
+
 	Get() *rbac.SessionDTO
 
 	Set(s *rbac.SessionDTO)
 
 	UserID() rbac.UserID
+
+	UUID() lang.UUID
 
 	UserName() rbac.UserName
 
@@ -25,7 +30,12 @@ type Session interface {
 
 	Roles() rbac.RoleNameList
 
+	HasRole(role rbac.RoleName) bool
+
 	Authenticated() bool
+
+	// 提交已修改的内容
+	Commit() error
 }
 
 // SessionService 是针对 SessionDTO 的服务

@@ -98,11 +98,15 @@ func (inst *JWTService) listAdapters() []jwt.Adapter {
 // SetDTO ...
 func (inst *JWTService) SetDTO(c context.Context, o *jwt.Token) error {
 	inst.prepareToken(o)
-	err := fmt.Errorf("no jwt.adapter for the context")
+	text, err := inst.Encode(o)
+	if err == nil {
+		return nil
+	}
+	err = fmt.Errorf("no jwt.adapter for the context")
 	list := inst.listAdapters()
-	for _, item := range list {
-		if item.Accept(c) {
-			err = item.SetDTO(c, o)
+	for _, ada := range list {
+		if ada.Accept(c) {
+			err = ada.SetText(c, text)
 			if err == nil {
 				return nil
 			}
@@ -117,28 +121,41 @@ func (inst *JWTService) prepareToken(token *jwt.Token) {
 		return
 	}
 
-	computer := &maxAgeComputer{}
-	session := &token.Session
+	// computer := &maxAgeComputer{}
+	// session := &token.Session
 
-	// token
-	computer.ageMax = lang.Seconds(inst.TokenMaxageMax)
-	computer.ageMin = lang.Seconds(inst.TokenMaxageMin)
-	computer.ageDefault = lang.Seconds(inst.TokenMaxageDefault)
+	// // token
+	// computer.ageMax = lang.Seconds(inst.TokenMaxageMax)
+	// computer.ageMin = lang.Seconds(inst.TokenMaxageMin)
+	// computer.ageDefault = lang.Seconds(inst.TokenMaxageDefault)
 
-	a, b, c := computer.compute(token.CreatedAt, token.MaxAge, token.ExpiredAt)
-	token.CreatedAt = a
-	token.MaxAge = b
-	token.ExpiredAt = c
+	// a, b, c := computer.compute(token.CreatedAt, token.MaxAge, token.ExpiredAt)
+	// token.CreatedAt = a
+	// token.MaxAge = b
+	// token.ExpiredAt = c
 
-	// session
-	computer.ageMax = lang.Seconds(inst.SessionMaxageMax)
-	computer.ageMin = lang.Seconds(inst.SessionMaxageMin)
-	computer.ageDefault = lang.Seconds(inst.SessionMaxageDefault)
+	// // session
+	// computer.ageMax = lang.Seconds(inst.SessionMaxageMax)
+	// computer.ageMin = lang.Seconds(inst.SessionMaxageMin)
+	// computer.ageDefault = lang.Seconds(inst.SessionMaxageDefault)
 
-	a, b, c = computer.compute(session.CreatedAt, session.MaxAge, session.ExpiredAt)
-	session.CreatedAt = a
-	session.MaxAge = b
-	session.ExpiredAt = c
+	// a, b, c = computer.compute(session.CreatedAt, session.MaxAge, session.ExpiredAt)
+	// session.CreatedAt = a
+	// session.MaxAge = b
+	// session.ExpiredAt = c
+
+	maxage1 := inst.TokenMaxageDefault
+	maxage2 := lang.Milliseconds(maxage1 * 1000)
+
+	t1 := token.StartedAt
+	t2 := token.ExpiredAt
+	if t1 == 0 && t2 == 0 {
+		now := lang.Now()
+		t1 = now
+		t2 = now.Add(maxage2.Duration())
+	}
+	token.StartedAt = t1
+	token.ExpiredAt = t2
 }
 
 // SetText ...
@@ -162,9 +179,9 @@ func (inst *JWTService) GetDTO(c context.Context) (*jwt.Token, error) {
 	list := inst.listAdapters()
 	for _, item := range list {
 		if item.Accept(c) {
-			o, err2 := item.GetDTO(c)
+			text, err2 := item.GetText(c)
 			if err2 == nil {
-				return o, nil
+				return inst.Decode(text)
 			}
 			err = err2
 		}

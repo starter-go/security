@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/starter-go/application"
 	"github.com/starter-go/base/lang"
 	"github.com/starter-go/rbac"
 	"github.com/starter-go/security"
+	"github.com/starter-go/units"
 
 	"github.com/starter-go/vlog"
 )
@@ -25,11 +25,19 @@ type TestCom struct {
 
 }
 
-// Life ...
-func (inst *TestCom) Life() *application.Life {
-	return &application.Life{
-		OnLoop: inst.test,
+func (inst *TestCom) _impl() units.Units {
+	return inst
+}
+
+// Units ...
+func (inst *TestCom) Units(list []*units.Registration) []*units.Registration {
+	r1 := &units.Registration{
+		Name:    "test-com",
+		Test:    inst.test,
+		Enabled: true,
 	}
+	list = append(list, r1)
+	return list
 }
 
 func (inst *TestCom) test() error {

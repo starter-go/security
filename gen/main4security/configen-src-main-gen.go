@@ -1,5 +1,7 @@
 package main4security
 import (
+    p21f95db42 "github.com/starter-go/keyvalues"
+    p24287f458 "github.com/starter-go/rbac"
     pd4e0ee677 "github.com/starter-go/security"
     p9d209f7c2 "github.com/starter-go/security/auth"
     pf41d62225 "github.com/starter-go/security/internal"
@@ -420,6 +422,156 @@ func (inst*pf41d62225c_internal_JWTService) getSessionMaxageMax(ie application.I
 
 
 
+// type pf41d62225.RbacSessionServiceImpl in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-RbacSessionServiceImpl
+// class:
+// alias:alias-24287f4589fe5add27fb48a88d706565-SessionService
+// scope:singleton
+//
+type pf41d62225c_internal_RbacSessionServiceImpl struct {
+}
+
+func (inst* pf41d62225c_internal_RbacSessionServiceImpl) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-RbacSessionServiceImpl"
+	r.Classes = ""
+	r.Aliases = "alias-24287f4589fe5add27fb48a88d706565-SessionService"
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_RbacSessionServiceImpl) new() any {
+    return &pf41d62225.RbacSessionServiceImpl{}
+}
+
+func (inst* pf41d62225c_internal_RbacSessionServiceImpl) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.RbacSessionServiceImpl)
+	nop(ie, com)
+
+	
+    com.KVS = inst.getKVS(ie)
+    com.UUIDGen = inst.getUUIDGen(ie)
+    com.MaxAge = inst.getMaxAge(ie)
+
+
+    return nil
+}
+
+
+func (inst*pf41d62225c_internal_RbacSessionServiceImpl) getKVS(ie application.InjectionExt)p21f95db42.Service{
+    return ie.GetComponent("#alias-21f95db421796c61fc702c5dfd6515de-Service").(p21f95db42.Service)
+}
+
+
+func (inst*pf41d62225c_internal_RbacSessionServiceImpl) getUUIDGen(ie application.InjectionExt)p9621e8b71.UUIDService{
+    return ie.GetComponent("#alias-9621e8b71013b0fc25942a1749ed3652-UUIDService").(p9621e8b71.UUIDService)
+}
+
+
+func (inst*pf41d62225c_internal_RbacSessionServiceImpl) getMaxAge(ie application.InjectionExt)int64{
+    return ie.GetInt64("${security.session.default-age-sec}")
+}
+
+
+
+// type pf41d62225.RbacSubjectServiceImpl in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-RbacSubjectServiceImpl
+// class:
+// alias:alias-24287f4589fe5add27fb48a88d706565-SubjectService
+// scope:singleton
+//
+type pf41d62225c_internal_RbacSubjectServiceImpl struct {
+}
+
+func (inst* pf41d62225c_internal_RbacSubjectServiceImpl) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-RbacSubjectServiceImpl"
+	r.Classes = ""
+	r.Aliases = "alias-24287f4589fe5add27fb48a88d706565-SubjectService"
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_RbacSubjectServiceImpl) new() any {
+    return &pf41d62225.RbacSubjectServiceImpl{}
+}
+
+func (inst* pf41d62225c_internal_RbacSubjectServiceImpl) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.RbacSubjectServiceImpl)
+	nop(ie, com)
+
+	
+    com.Tokens = inst.getTokens(ie)
+    com.Sessions = inst.getSessions(ie)
+
+
+    return nil
+}
+
+
+func (inst*pf41d62225c_internal_RbacSubjectServiceImpl) getTokens(ie application.InjectionExt)p24287f458.TokenService{
+    return ie.GetComponent("#alias-24287f4589fe5add27fb48a88d706565-TokenService").(p24287f458.TokenService)
+}
+
+
+func (inst*pf41d62225c_internal_RbacSubjectServiceImpl) getSessions(ie application.InjectionExt)p24287f458.SessionService{
+    return ie.GetComponent("#alias-24287f4589fe5add27fb48a88d706565-SessionService").(p24287f458.SessionService)
+}
+
+
+
+// type pf41d62225.RbacTokenServiceImpl in package:github.com/starter-go/security/internal
+//
+// id:com-f41d62225c42aa4c-internal-RbacTokenServiceImpl
+// class:
+// alias:alias-24287f4589fe5add27fb48a88d706565-TokenService
+// scope:singleton
+//
+type pf41d62225c_internal_RbacTokenServiceImpl struct {
+}
+
+func (inst* pf41d62225c_internal_RbacTokenServiceImpl) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-f41d62225c42aa4c-internal-RbacTokenServiceImpl"
+	r.Classes = ""
+	r.Aliases = "alias-24287f4589fe5add27fb48a88d706565-TokenService"
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* pf41d62225c_internal_RbacTokenServiceImpl) new() any {
+    return &pf41d62225.RbacTokenServiceImpl{}
+}
+
+func (inst* pf41d62225c_internal_RbacTokenServiceImpl) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*pf41d62225.RbacTokenServiceImpl)
+	nop(ie, com)
+
+	
+    com.JWTService = inst.getJWTService(ie)
+
+
+    return nil
+}
+
+
+func (inst*pf41d62225c_internal_RbacTokenServiceImpl) getJWTService(ie application.InjectionExt)p91f218d46.Service{
+    return ie.GetComponent("#alias-91f218d46ec21cd234778bbe54aecc66-Service").(p91f218d46.Service)
+}
+
+
+
 // type pf41d62225.SessionServiceImpl in package:github.com/starter-go/security/internal
 //
 // id:com-f41d62225c42aa4c-internal-SessionServiceImpl
@@ -470,46 +622,52 @@ func (inst*pf41d62225c_internal_SessionServiceImpl) getRegistryList(ie applicati
 
 
 
-// type pf41d62225.SubjectServiceImpl in package:github.com/starter-go/security/internal
+// type pf41d62225.DefaultSubjectLoader in package:github.com/starter-go/security/internal
 //
-// id:com-f41d62225c42aa4c-internal-SubjectServiceImpl
+// id:com-f41d62225c42aa4c-internal-DefaultSubjectLoader
 // class:
-// alias:alias-24287f4589fe5add27fb48a88d706565-SubjectService
+// alias:alias-aff1180b734cd089659a2dcc3be458d7-Loader
 // scope:singleton
 //
-type pf41d62225c_internal_SubjectServiceImpl struct {
+type pf41d62225c_internal_DefaultSubjectLoader struct {
 }
 
-func (inst* pf41d62225c_internal_SubjectServiceImpl) register(cr application.ComponentRegistry) error {
+func (inst* pf41d62225c_internal_DefaultSubjectLoader) register(cr application.ComponentRegistry) error {
 	r := cr.NewRegistration()
-	r.ID = "com-f41d62225c42aa4c-internal-SubjectServiceImpl"
+	r.ID = "com-f41d62225c42aa4c-internal-DefaultSubjectLoader"
 	r.Classes = ""
-	r.Aliases = "alias-24287f4589fe5add27fb48a88d706565-SubjectService"
+	r.Aliases = "alias-aff1180b734cd089659a2dcc3be458d7-Loader"
 	r.Scope = "singleton"
 	r.NewFunc = inst.new
 	r.InjectFunc = inst.inject
 	return r.Commit()
 }
 
-func (inst* pf41d62225c_internal_SubjectServiceImpl) new() any {
-    return &pf41d62225.SubjectServiceImpl{}
+func (inst* pf41d62225c_internal_DefaultSubjectLoader) new() any {
+    return &pf41d62225.DefaultSubjectLoader{}
 }
 
-func (inst* pf41d62225c_internal_SubjectServiceImpl) inject(injext application.InjectionExt, instance any) error {
+func (inst* pf41d62225c_internal_DefaultSubjectLoader) inject(injext application.InjectionExt, instance any) error {
 	ie := injext
-	com := instance.(*pf41d62225.SubjectServiceImpl)
+	com := instance.(*pf41d62225.DefaultSubjectLoader)
 	nop(ie, com)
 
 	
-    com.JWTService = inst.getJWTService(ie)
+    com.Sessions = inst.getSessions(ie)
+    com.Tokens = inst.getTokens(ie)
 
 
     return nil
 }
 
 
-func (inst*pf41d62225c_internal_SubjectServiceImpl) getJWTService(ie application.InjectionExt)p91f218d46.Service{
-    return ie.GetComponent("#alias-91f218d46ec21cd234778bbe54aecc66-Service").(p91f218d46.Service)
+func (inst*pf41d62225c_internal_DefaultSubjectLoader) getSessions(ie application.InjectionExt)p24287f458.SessionService{
+    return ie.GetComponent("#alias-24287f4589fe5add27fb48a88d706565-SessionService").(p24287f458.SessionService)
+}
+
+
+func (inst*pf41d62225c_internal_DefaultSubjectLoader) getTokens(ie application.InjectionExt)p24287f458.TokenService{
+    return ie.GetComponent("#alias-24287f4589fe5add27fb48a88d706565-TokenService").(p24287f458.TokenService)
 }
 
 

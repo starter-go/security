@@ -117,7 +117,7 @@ func (inst *JWTCODEC) Decode(t1 jwt.Text) (*jwt.Token, error) {
 
 func (inst *JWTCODEC) verify(o *jwt.Token) error {
 	now := lang.Now()
-	t1 := o.CreatedAt
+	t1 := o.StartedAt
 	t2 := o.ExpiredAt
 	if t1 <= now && now <= t2 {
 		return nil

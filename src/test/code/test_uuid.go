@@ -1,8 +1,8 @@
 package code
 
 import (
-	"github.com/starter-go/application"
 	"github.com/starter-go/security/random"
+	"github.com/starter-go/units"
 	"github.com/starter-go/vlog"
 )
 
@@ -16,11 +16,19 @@ type TestUUID struct {
 
 }
 
-// Life ...
-func (inst *TestUUID) Life() *application.Life {
-	return &application.Life{
-		OnLoop: inst.run,
+func (inst *TestUUID) _impl() units.Units {
+	return inst
+}
+
+// Units ...
+func (inst *TestUUID) Units(list []*units.Registration) []*units.Registration {
+	r1 := &units.Registration{
+		Name:    "test-uuid",
+		Test:    inst.run,
+		Enabled: true,
 	}
+	list = append(list, r1)
+	return list
 }
 
 func (inst *TestUUID) run() error {

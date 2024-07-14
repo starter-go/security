@@ -34,6 +34,7 @@ func (inst*autoRegistrar) addAll() error {
     inst.register(&p5772338936_code_MockTokenAdapter{})
     inst.register(&p5772338936_code_TestCom{})
     inst.register(&p5772338936_code_TestRandom{})
+    inst.register(&p5772338936_code_TestSubjects{})
     inst.register(&p5772338936_code_TestUUID{})
 
 

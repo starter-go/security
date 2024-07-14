@@ -1,23 +1,15 @@
 package code
 
-import (
-	"testing"
+// func TestRandomCom(t *testing.T) {
 
-	"github.com/starter-go/security/internal"
-	"github.com/starter-go/security/random"
-	"github.com/starter-go/vlog"
-)
+// 	provider := &internal.DefaultRandomSource{}
+// 	ser := &internal.DefaultRandomService{
+// 		Providers: []random.ProviderRegistry{provider},
+// 	}
 
-func TestRandomCom(t *testing.T) {
+// 	tr := &TestRandom{}
+// 	tr.Logger = vlog.GetLogger()
+// 	tr.Rand = ser
 
-	provider := &internal.DefaultRandomSource{}
-	ser := &internal.DefaultRandomService{
-		Providers: []random.ProviderRegistry{provider},
-	}
-
-	tr := &TestRandom{}
-	tr.Logger = vlog.GetLogger()
-	tr.Rand = ser
-
-	tr.run()
-}
+// 	tr.run()
+// }

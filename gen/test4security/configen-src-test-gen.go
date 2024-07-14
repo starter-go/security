@@ -5,6 +5,7 @@ import (
     p91f218d46 "github.com/starter-go/security/jwt"
     p9621e8b71 "github.com/starter-go/security/random"
     p577233893 "github.com/starter-go/security/src/test/code"
+    paff1180b7 "github.com/starter-go/security/subjects"
     p55f0853be "github.com/starter-go/vlog"
      "github.com/starter-go/application"
 )
@@ -193,6 +194,56 @@ func (inst*p5772338936_code_TestRandom) getRand(ie application.InjectionExt)p962
 
 func (inst*p5772338936_code_TestRandom) getLogger(ie application.InjectionExt)p55f0853be.Logger{
     return ie.GetComponent("#alias-55f0853bedbc094981acd8da904ae269-Logger").(p55f0853be.Logger)
+}
+
+
+
+// type p577233893.TestSubjects in package:github.com/starter-go/security/src/test/code
+//
+// id:com-5772338936071413-code-TestSubjects
+// class:
+// alias:
+// scope:singleton
+//
+type p5772338936_code_TestSubjects struct {
+}
+
+func (inst* p5772338936_code_TestSubjects) register(cr application.ComponentRegistry) error {
+	r := cr.NewRegistration()
+	r.ID = "com-5772338936071413-code-TestSubjects"
+	r.Classes = ""
+	r.Aliases = ""
+	r.Scope = "singleton"
+	r.NewFunc = inst.new
+	r.InjectFunc = inst.inject
+	return r.Commit()
+}
+
+func (inst* p5772338936_code_TestSubjects) new() any {
+    return &p577233893.TestSubjects{}
+}
+
+func (inst* p5772338936_code_TestSubjects) inject(injext application.InjectionExt, instance any) error {
+	ie := injext
+	com := instance.(*p577233893.TestSubjects)
+	nop(ie, com)
+
+	
+    com.Loader = inst.getLoader(ie)
+    com.SessionService = inst.getSessionService(ie)
+
+
+    return nil
+}
+
+
+func (inst*p5772338936_code_TestSubjects) getLoader(ie application.InjectionExt)paff1180b7.Loader{
+    return ie.GetComponent("#alias-aff1180b734cd089659a2dcc3be458d7-Loader").(paff1180b7.Loader)
+}
+
+
+func (inst*p5772338936_code_TestSubjects) getSessionService(ie application.InjectionExt)p24287f458.SessionService{
+    return ie.GetComponent("#alias-24287f4589fe5add27fb48a88d706565-SessionService").(p24287f458.SessionService)
 }
 
 

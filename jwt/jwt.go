@@ -3,7 +3,6 @@ package jwt
 import (
 	"context"
 
-	"github.com/starter-go/base/lang"
 	"github.com/starter-go/rbac"
 )
 
@@ -12,30 +11,37 @@ type Text string
 
 // Token 是 JSON 结构形式的 JWT
 type Token struct {
-	rbac.BaseDTO
 
-	MaxAge     lang.Milliseconds `json:"max_age"`
-	ExpiredAt  lang.Time         `json:"expired_at"`
-	Session    rbac.SessionDTO   `json:"session"`
-	Properties map[string]string `json:"properties"`
+	// 当前用户信息
+	rbac.CurrentUser
+
+	Session rbac.SessionID `json:"session"` // 会话的 UUID
 }
 
 // Getter 用来获取跟上下文绑定的JWT
 type Getter interface {
-	GetDTO(c context.Context) (*Token, error)
 	GetText(c context.Context) (Text, error)
 }
 
 // Setter 用来设置跟上下文绑定的JWT
 type Setter interface {
-	SetDTO(c context.Context, o *Token) error
 	SetText(c context.Context, t Text) error
+}
+
+// Encoder 是 JWT 的编码器
+type Encoder interface {
+	Encode(o *Token) (Text, error)
+}
+
+// Decoder 是 JWT 的解码器
+type Decoder interface {
+	Decode(t Text) (*Token, error)
 }
 
 // CODEC 是 JWT 的编解码器
 type CODEC interface {
-	Encode(o *Token) (Text, error)
-	Decode(t Text) (*Token, error)
+	Encoder
+	Decoder
 }
 
 // Adapter 用来适配各种不同的上下文
@@ -63,6 +69,9 @@ type Service interface {
 	Getter
 	Setter
 	CODEC
+
+	GetDTO(c context.Context) (*Token, error)
+	SetDTO(c context.Context, o *Token) error
 }
 
 ////////////////////////////////////////////////////////////////////////////////
