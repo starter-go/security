@@ -31,18 +31,6 @@ type subjectCore struct {
 
 func (inst *subjectCore) _impl() subjects.Subject { return inst }
 
-func (inst *subjectCore) workaroundSetProperty(dst *rbac.CurrentUser, name, value string) {
-	if dst == nil {
-		return
-	}
-	table := dst.Properties
-	if table == nil {
-		table = make(map[string]string)
-		dst.Properties = table
-	}
-	table[name] = value
-}
-
 func (inst *subjectCore) init() {
 	inst.tokenFacade = &subjectTokenFacade{core: inst}
 	inst.sessionFacade = &subjectSessionFacade{core: inst}
@@ -155,8 +143,7 @@ func (inst *subjectSessionFacade) GetProperties() properties.Table {
 
 func (inst *subjectSessionFacade) SetProperty(name, value string) {
 	data := inst.core.sessionData
-	dst := &data.CurrentUser
-	inst.core.workaroundSetProperty(dst, name, value)
+	data.SetProperty(name, value)
 	inst.dirty = true
 }
 
@@ -176,6 +163,11 @@ func (inst *subjectSessionFacade) Set(s *rbac.SessionDTO) {
 func (inst *subjectSessionFacade) UserID() rbac.UserID {
 	data := inst.core.sessionData
 	return data.User
+}
+
+func (inst *subjectSessionFacade) SessionID() rbac.SessionID {
+	data := inst.core.sessionData
+	return data.ID
 }
 
 func (inst *subjectSessionFacade) UUID() lang.UUID {
@@ -220,6 +212,27 @@ func (inst *subjectSessionFacade) Authenticated() bool {
 	return data.Authenticated
 }
 
+func (inst *subjectSessionFacade) Create() error {
+
+	// if !inst.dirty {
+	// 	return nil
+	// }
+
+	ctx := inst.core.ctx
+	ser := inst.core.sessionService
+	item := inst.core.sessionData
+	// id := item.ID
+
+	item2, err := ser.Insert(ctx, item)
+	if err != nil {
+		return err
+	}
+
+	inst.core.sessionData = item2
+	inst.dirty = false
+	return nil
+}
+
 func (inst *subjectSessionFacade) Commit() error {
 
 	if !inst.dirty {
@@ -262,8 +275,7 @@ func (inst *subjectTokenFacade) GetProperties() properties.Table {
 
 func (inst *subjectTokenFacade) SetProperty(name, value string) {
 	data := inst.core.tokenData
-	dst := &data.CurrentUser
-	inst.core.workaroundSetProperty(dst, name, value)
+	data.SetProperty(name, value)
 	inst.dirty = true
 }
 

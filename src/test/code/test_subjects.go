@@ -39,13 +39,13 @@ func (inst *TestSubjects) run() error {
 	ctx := inst.prepareContext()
 	loader := inst.Loader
 
-	ses1 := new(rbac.SessionDTO)
-	ses2, err := inst.SessionService.Insert(ctx, ses1)
-	if err != nil {
-		return err
-	}
+	// ses1 := new(rbac.SessionDTO)
+	// ses2, err := inst.SessionService.Insert(ctx, ses1)
+	// if err != nil {
+	// 	return err
+	// }
 
-	err = subjects.Setup(ctx, loader)
+	err := subjects.Setup(ctx, loader)
 	if err != nil {
 		return err
 	}
@@ -56,11 +56,15 @@ func (inst *TestSubjects) run() error {
 	}
 
 	token := sub.GetToken()
-	token.SetSessionID(ses2.ID)
 
 	session := sub.GetSession()
+	session.Create()
+
+	// token.SetSessionID(ses2.ID)
+
 	token.SetProperty("t.f1", "a")
 	session.SetProperty("s.f1", "b")
+	token.SetSessionID(session.SessionID())
 
 	err = session.Commit()
 	if err != nil {

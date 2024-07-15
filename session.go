@@ -10,6 +10,12 @@ import (
 
 // Session 代表当前会话
 type Session interface {
+	SessionID() rbac.SessionID
+
+	UserID() rbac.UserID
+
+	UUID() lang.UUID
+
 	GetProperties() properties.Table
 
 	SetProperty(name, value string)
@@ -17,10 +23,6 @@ type Session interface {
 	Get() *rbac.SessionDTO
 
 	Set(s *rbac.SessionDTO)
-
-	UserID() rbac.UserID
-
-	UUID() lang.UUID
 
 	UserName() rbac.UserName
 
@@ -33,6 +35,8 @@ type Session interface {
 	HasRole(role rbac.RoleName) bool
 
 	Authenticated() bool
+
+	Create() error
 
 	// 提交已修改的内容
 	Commit() error

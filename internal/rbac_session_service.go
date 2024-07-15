@@ -10,7 +10,6 @@ import (
 	"github.com/starter-go/keyvalues"
 	"github.com/starter-go/rbac"
 	"github.com/starter-go/security/random"
-	"github.com/starter-go/vlog"
 )
 
 // RbacSessionServiceImpl ...
@@ -142,10 +141,10 @@ func (inst *RbacSessionServiceImpl) Update(c context.Context, id rbac.SessionID,
 
 	// update
 	now := lang.Now()
-	dst.Authenticated = src.Authenticated
+	*dst = *src
 	dst.UpdatedAt = now
 
-	vlog.Warn("todo: RbacSessionServiceImpl.Update() ... more fileds ")
+	// vlog.Warn("todo: RbacSessionServiceImpl.Update() ... more fileds ")
 
 	// save
 	opt := inst.makeOptions(dst, now)
