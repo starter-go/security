@@ -22,6 +22,7 @@ type TestCom struct {
 
 	PermissionSer rbac.PermissionService //--starter:inject("#")
 	UserSer       rbac.UserService       //--starter:inject("#")
+	AvatarSer     rbac.AvatarService     //--starter:inject("#")
 
 }
 
