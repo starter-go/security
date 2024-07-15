@@ -7,6 +7,10 @@ import (
 
 // Token ... 表示一个安全令牌
 type Token interface {
+	Get() *rbac.TokenDTO
+
+	Set(t *rbac.TokenDTO)
+
 	GetProperties() properties.Table
 
 	SetProperty(name, value string)

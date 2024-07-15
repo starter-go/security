@@ -263,6 +263,18 @@ type subjectTokenFacade struct {
 
 func (inst *subjectTokenFacade) _impl() security.Token { return inst }
 
+func (inst *subjectTokenFacade) Get() *rbac.TokenDTO {
+	data := inst.core.tokenData
+	return data
+}
+
+func (inst *subjectTokenFacade) Set(t *rbac.TokenDTO) {
+	if t == nil {
+		return
+	}
+	inst.core.tokenData = t
+}
+
 func (inst *subjectTokenFacade) GetProperties() properties.Table {
 	data := inst.core.tokenData
 	src := data.Properties
