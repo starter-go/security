@@ -42,6 +42,7 @@ type AuthenticationBuilder struct {
 	Account    string
 	Mechanism  string
 	Secret     lang.Base64
+	Step       string
 }
 
 // Create 创建 Authentication 实例
@@ -55,6 +56,7 @@ func (inst *AuthenticationBuilder) Create() Authentication {
 		secret:    inst.Secret,
 		atts:      inst.Attributes,
 		params:    inst.Parameters,
+		step:      inst.Step,
 	}
 
 	if a.ctx == nil {
@@ -79,6 +81,7 @@ type innerAuthentication struct {
 	action    string
 	account   string
 	mechanism string
+	step      string
 	secret    lang.Base64
 	atts      attributes.Table
 	params    parameters.Table
@@ -94,6 +97,10 @@ func (inst *innerAuthentication) Context() context.Context {
 
 func (inst *innerAuthentication) Action() string {
 	return inst.action
+}
+
+func (inst *innerAuthentication) Step() string {
+	return inst.step
 }
 
 func (inst *innerAuthentication) Attributes() attributes.Table {

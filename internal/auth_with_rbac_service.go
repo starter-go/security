@@ -35,6 +35,7 @@ func (inst *AuthService2) prepare(ctx context.Context, action string, src []*rba
 	c.ctx = ctx
 	c.att = attributes.NewTable(mode)
 	result := make([]auth.Request, 0)
+	step := ""
 
 	for _, item := range src {
 		c.params = parameters.NewTable(mode)
@@ -44,10 +45,13 @@ func (inst *AuthService2) prepare(ctx context.Context, action string, src []*rba
 			req := inst.prepareAuthentication(c, action, item)
 			result = append(result, req)
 		}
+		if item.Step != "" {
+			step = item.Step
+		}
 	}
 
 	// make authorization
-	req := inst.prepareAuthorization(c, action)
+	req := inst.prepareAuthorization(c, action, step)
 	result = append(result, req)
 
 	return result
@@ -68,16 +72,18 @@ func (inst *AuthService2) prepareAuthentication(c *authService2context, action s
 		Account:    src.Account,
 		Secret:     src.Secret,
 		Action:     action,
+		Step:       src.Step,
 	}
 	return ab.Create()
 }
 
-func (inst *AuthService2) prepareAuthorization(c *authService2context, action string) auth.Authorization {
+func (inst *AuthService2) prepareAuthorization(c *authService2context, action string, step string) auth.Authorization {
 	ab := auth.AuthorizationBuilder{
 		Attributes: c.att,
 		Context:    c.ctx,
 		Parameters: c.params,
 		Action:     action,
+		Step:       step,
 		Identities: nil,
 	}
 	return ab.Create()

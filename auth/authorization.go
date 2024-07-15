@@ -35,6 +35,7 @@ type authorization struct {
 	attrs   attributes.Table
 	params  parameters.Table
 	action  string
+	step    string
 	ids     []Identity
 }
 
@@ -58,6 +59,10 @@ func (inst *authorization) Action() string {
 	return inst.action
 }
 
+func (inst *authorization) Step() string {
+	return inst.step
+}
+
 func (inst *authorization) Identities() []Identity {
 	return inst.ids
 }
@@ -70,6 +75,7 @@ type AuthorizationBuilder struct {
 	Attributes attributes.Table
 	Parameters parameters.Table
 	Action     string
+	Step       string
 	Identities []Identity
 }
 
@@ -80,6 +86,7 @@ func (inst *AuthorizationBuilder) Create() Authorization {
 	atts := inst.Attributes
 	params := inst.Parameters
 	action := inst.Action
+	step := inst.Step
 	ids := inst.Identities
 
 	if ctx == nil {
@@ -98,12 +105,17 @@ func (inst *AuthorizationBuilder) Create() Authorization {
 		ids = make([]Identity, 0)
 	}
 
+	if step == "" {
+		step = "[default]"
+	}
+
 	return &authorization{
 		context: ctx,
 		attrs:   atts,
 		params:  params,
 		action:  action,
 		ids:     ids,
+		step:    step,
 	}
 }
 
