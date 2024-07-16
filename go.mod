@@ -7,7 +7,7 @@ require (
 	github.com/starter-go/application v0.9.26
 	github.com/starter-go/base v0.9.11
 	github.com/starter-go/keyvalues v0.0.1 // direct
-	github.com/starter-go/rbac v0.0.9 // direct
+	github.com/starter-go/rbac v0.0.10 // direct
 	github.com/starter-go/starter v1.0.10
 	github.com/starter-go/vlog v0.9.8 // direct
 )

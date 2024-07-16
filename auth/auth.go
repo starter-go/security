@@ -31,7 +31,6 @@ type Request interface {
 	Attributes() attributes.Table
 	Parameters() parameters.Table
 	Feedback() Feedback
-
 	Action() string
 	Step() string
 }
