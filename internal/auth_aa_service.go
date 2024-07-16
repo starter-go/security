@@ -99,5 +99,6 @@ func (inst *AuthService1) makeAuthorizationWithIDs(ids []auth.Identity, raw auth
 	ab.Parameters = raw.Parameters()
 	ab.Context = raw.Context()
 	ab.Identities = ids
+	ab.Step = raw.Step()
 	return ab.Create()
 }
