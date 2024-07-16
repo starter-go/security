@@ -34,6 +34,7 @@ type authorization struct {
 	context context.Context
 	attrs   attributes.Table
 	params  parameters.Table
+	fb      Feedback
 	action  string
 	step    string
 	ids     []Identity
@@ -67,6 +68,10 @@ func (inst *authorization) Identities() []Identity {
 	return inst.ids
 }
 
+func (inst *authorization) Feedback() Feedback {
+	return inst.fb
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // AuthorizationBuilder  用来创建 Authorization
@@ -77,6 +82,7 @@ type AuthorizationBuilder struct {
 	Action     string
 	Step       string
 	Identities []Identity
+	Feedback   Feedback
 }
 
 // Create ...
@@ -88,6 +94,7 @@ func (inst *AuthorizationBuilder) Create() Authorization {
 	action := inst.Action
 	step := inst.Step
 	ids := inst.Identities
+	fb := inst.Feedback
 
 	if ctx == nil {
 		ctx = context.Background()
@@ -109,6 +116,10 @@ func (inst *AuthorizationBuilder) Create() Authorization {
 		step = "[default]"
 	}
 
+	if fb == nil {
+		fb = NewFeedback()
+	}
+
 	return &authorization{
 		context: ctx,
 		attrs:   atts,
@@ -116,6 +127,7 @@ func (inst *AuthorizationBuilder) Create() Authorization {
 		action:  action,
 		ids:     ids,
 		step:    step,
+		fb:      fb,
 	}
 }
 

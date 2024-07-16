@@ -70,7 +70,14 @@ func (inst *TestCom) doLogin(c context.Context) error {
 	}
 	a1.Secret = lang.Base64FromBytes([]byte(password))
 	a1array := []*rbac.AuthDTO{a1}
-	return inst.AuthSer.Handle(c, rbac.ActionLogin, a1array)
+	alist2, err := inst.AuthSer.Handle(c, rbac.ActionLogin, a1array)
+	if err != nil {
+		return err
+	}
+	for _, res := range alist2 {
+		vlog.Debug("res.uuid=%s", res.UUID)
+	}
+	return nil
 }
 
 func (inst *TestCom) doCurrentSession(c context.Context) error {

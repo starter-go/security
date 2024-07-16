@@ -60,6 +60,8 @@ github.com/starter-go/rbac v0.0.7 h1:Y/J961C/3Tfcu3lnH9pd2ZhlOWGdjidLZxYxC6S7BuM
 github.com/starter-go/rbac v0.0.7/go.mod h1:N93w2twpuiCD1yDDBeVyRm2a+Voz0OIpIpxpuox7fUY=
 github.com/starter-go/rbac v0.0.8 h1:jgisFOVqy9Zgb1tLtA2gY2T7nPybUo1ofB5PWfZq/z4=
 github.com/starter-go/rbac v0.0.8/go.mod h1:N93w2twpuiCD1yDDBeVyRm2a+Voz0OIpIpxpuox7fUY=
+github.com/starter-go/rbac v0.0.9 h1:PD2KMb5DfqsJgmtnCjwa3O8UUcgJAnIO7ZMfnptrOlU=
+github.com/starter-go/rbac v0.0.9/go.mod h1:N93w2twpuiCD1yDDBeVyRm2a+Voz0OIpIpxpuox7fUY=
 github.com/starter-go/starter v1.0.2 h1:G42EqApRfhMuTtzTqsVShTD3xTYSStSyluNqRcjVw5M=
 github.com/starter-go/starter v1.0.2/go.mod h1:Z5M9AAlH6lbsHy0rflmSV6yOxKeVVQjULnzHw3R3/n4=
 github.com/starter-go/starter v1.0.3 h1:12X37D4n8boyXCi6+OYKvJyIuoKuDXF6jtO9tzt6IVs=

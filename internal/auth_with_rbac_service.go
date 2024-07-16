@@ -23,12 +23,28 @@ func (inst *AuthService2) _impl() rbac.AuthService {
 }
 
 // Handle 处理验证、授权请求
-func (inst *AuthService2) Handle(c context.Context, action string, alist []*rbac.AuthDTO) error {
-	reqlist := inst.prepare(c, action, alist)
-	return inst.Servic1.Execute(reqlist...)
+func (inst *AuthService2) Handle(c context.Context, action string, alist []*rbac.AuthDTO) ([]*rbac.AuthDTO, error) {
+	fb := auth.NewFeedback()
+	reqlist := inst.prepare(c, action, alist, fb)
+	err := inst.Servic1.Execute(reqlist...)
+	if err != nil {
+		return nil, err
+	}
+	return inst.makeFeedbackResult(fb)
 }
 
-func (inst *AuthService2) prepare(ctx context.Context, action string, src []*rbac.AuthDTO) []auth.Request {
+func (inst *AuthService2) makeFeedbackResult(fb auth.Feedback) ([]*rbac.AuthDTO, error) {
+
+	src := fb.Parameters().Export(nil)
+	item := &rbac.AuthDTO{}
+	item.Parameters = src
+
+	list := make([]*rbac.AuthDTO, 0)
+	list = append(list, item)
+	return list, nil
+}
+
+func (inst *AuthService2) prepare(ctx context.Context, action string, src []*rbac.AuthDTO, fb auth.Feedback) []auth.Request {
 
 	mode := safe.Fast()
 	c := &authService2context{}
@@ -42,7 +58,7 @@ func (inst *AuthService2) prepare(ctx context.Context, action string, src []*rba
 		inst.copyParams(item.Parameters, c.params)
 		if item.Account != "" {
 			// as authentication
-			req := inst.prepareAuthentication(c, action, item)
+			req := inst.prepareAuthentication(c, action, item, fb)
 			result = append(result, req)
 		}
 		if item.Step != "" {
@@ -51,7 +67,7 @@ func (inst *AuthService2) prepare(ctx context.Context, action string, src []*rba
 	}
 
 	// make authorization
-	req := inst.prepareAuthorization(c, action, step)
+	req := inst.prepareAuthorization(c, action, step, fb)
 	result = append(result, req)
 
 	return result
@@ -63,7 +79,7 @@ func (inst *AuthService2) copyParams(src map[string]string, dst parameters.Table
 	}
 }
 
-func (inst *AuthService2) prepareAuthentication(c *authService2context, action string, src *rbac.AuthDTO) auth.Authentication {
+func (inst *AuthService2) prepareAuthentication(c *authService2context, action string, src *rbac.AuthDTO, fb auth.Feedback) auth.Authentication {
 	ab := auth.AuthenticationBuilder{
 		Attributes: c.att,
 		Context:    c.ctx,
@@ -73,11 +89,12 @@ func (inst *AuthService2) prepareAuthentication(c *authService2context, action s
 		Secret:     src.Secret,
 		Action:     action,
 		Step:       src.Step,
+		Feedback:   fb,
 	}
 	return ab.Create()
 }
 
-func (inst *AuthService2) prepareAuthorization(c *authService2context, action string, step string) auth.Authorization {
+func (inst *AuthService2) prepareAuthorization(c *authService2context, action string, step string, fb auth.Feedback) auth.Authorization {
 	ab := auth.AuthorizationBuilder{
 		Attributes: c.att,
 		Context:    c.ctx,
@@ -85,6 +102,7 @@ func (inst *AuthService2) prepareAuthorization(c *authService2context, action st
 		Action:     action,
 		Step:       step,
 		Identities: nil,
+		Feedback:   fb,
 	}
 	return ab.Create()
 }

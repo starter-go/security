@@ -30,6 +30,7 @@ type Request interface {
 	Context() context.Context
 	Attributes() attributes.Table
 	Parameters() parameters.Table
+	Feedback() Feedback
 
 	Action() string
 	Step() string
