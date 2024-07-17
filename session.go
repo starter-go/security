@@ -30,6 +30,8 @@ type Session interface {
 
 	Avatar() string
 
+	Language() string
+
 	Roles() rbac.RoleNameList
 
 	HasRole(role rbac.RoleName) bool

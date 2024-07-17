@@ -182,6 +182,11 @@ func (inst *subjectSessionFacade) UserName() rbac.UserName {
 	return rbac.UserName(str)
 }
 
+func (inst *subjectSessionFacade) Language() string {
+	data := inst.core.sessionData
+	return data.Language
+}
+
 func (inst *subjectSessionFacade) Nickname() string {
 	data := inst.core.sessionData
 	return data.Nickname
