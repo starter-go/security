@@ -278,6 +278,7 @@ func (inst *subjectTokenFacade) Set(t *rbac.TokenDTO) {
 		return
 	}
 	inst.core.tokenData = t
+	inst.dirty = true
 }
 
 func (inst *subjectTokenFacade) GetProperties() properties.Table {
