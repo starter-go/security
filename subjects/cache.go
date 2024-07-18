@@ -24,7 +24,7 @@ func getCache(c context.Context, create bool) (*cache, error) {
 	o1 := values.GetValue(key)
 	if o1 == nil {
 		if create {
-			o2 := new(cache)
+			o2 := &cache{c: c}
 			values.SetValue(key, o2)
 			return o2, nil
 		}
