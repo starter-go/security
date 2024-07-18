@@ -231,6 +231,7 @@ func (inst* p5772338936_code_TestSubjects) inject(injext application.InjectionEx
 	
     com.Loader = inst.getLoader(ie)
     com.SessionService = inst.getSessionService(ie)
+    com.SubjectService = inst.getSubjectService(ie)
 
 
     return nil
@@ -244,6 +245,11 @@ func (inst*p5772338936_code_TestSubjects) getLoader(ie application.InjectionExt)
 
 func (inst*p5772338936_code_TestSubjects) getSessionService(ie application.InjectionExt)p24287f458.SessionService{
     return ie.GetComponent("#alias-24287f4589fe5add27fb48a88d706565-SessionService").(p24287f458.SessionService)
+}
+
+
+func (inst*p5772338936_code_TestSubjects) getSubjectService(ie application.InjectionExt)p24287f458.SubjectService{
+    return ie.GetComponent("#alias-24287f4589fe5add27fb48a88d706565-SubjectService").(p24287f458.SubjectService)
 }
 
 

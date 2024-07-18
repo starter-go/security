@@ -2,6 +2,7 @@ package code
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/starter-go/base/context2"
 	"github.com/starter-go/rbac"
@@ -16,6 +17,7 @@ type TestSubjects struct {
 
 	Loader         subjects.Loader     //starter:inject("#")
 	SessionService rbac.SessionService //starter:inject("#")
+	SubjectService rbac.SubjectService //starter:inject("#")
 
 }
 
@@ -75,6 +77,18 @@ func (inst *TestSubjects) run() error {
 	if err != nil {
 		return err
 	}
+
+	return inst.doTestRbacSubjectService(ctx)
+}
+
+func (inst *TestSubjects) doTestRbacSubjectService(c context.Context) error {
+
+	item, err := inst.SubjectService.GetCurrent(c)
+	if err != nil {
+		return err
+	}
+
+	json.Marshal(item)
 
 	return nil
 }

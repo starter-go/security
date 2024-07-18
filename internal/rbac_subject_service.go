@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/starter-go/rbac"
+	"github.com/starter-go/security/subjects"
 )
 
 // RbacSubjectServiceImpl ...
@@ -21,6 +22,28 @@ func (inst *RbacSubjectServiceImpl) _impl() rbac.SubjectService { return inst }
 
 // GetCurrent ...
 func (inst *RbacSubjectServiceImpl) GetCurrent(c context.Context) (*rbac.SubjectDTO, error) {
+
+	dst := &rbac.SubjectDTO{}
+	sub, err := subjects.Current(c)
+	if err != nil {
+		dst.Token = &rbac.TokenDTO{}
+		dst.Session = &rbac.SessionDTO{}
+		return dst, nil
+	}
+
+	ses := sub.GetSession()
+	tok := sub.GetToken()
+
+	dst.Token = tok.Get()
+	dst.Session = ses.Get()
+
+	dst.Authenticated = dst.Session.Authenticated
+	dst.CurrentUser = dst.Session.CurrentUser
+	return dst, nil
+}
+
+func (inst *RbacSubjectServiceImpl) __older_GetCurrent(c context.Context) (*rbac.SubjectDTO, error) {
+
 	sub := &rbac.SubjectDTO{}
 	token1, err := inst.Tokens.GetCurrent(c)
 	if err == nil {
