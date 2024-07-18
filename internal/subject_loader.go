@@ -2,6 +2,7 @@ package internal
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/starter-go/rbac"
 	"github.com/starter-go/security/subjects"
@@ -25,6 +26,11 @@ func (inst *DefaultSubjectLoader) _impl() subjects.Loader {
 
 // Load ...
 func (inst *DefaultSubjectLoader) Load(c context.Context) (subjects.Subject, error) {
+
+	if c == nil {
+		return nil, fmt.Errorf("context is nil")
+	}
+
 	sub := &subjectCore{
 		ctx:            c,
 		sessionService: inst.Sessions,
