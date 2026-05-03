@@ -12,15 +12,19 @@ func runTestWithCaseName(cname string, t *testing.T) {
 	props := map[string]string{
 		"debug.enabled":        "1",
 		"debug.log-properties": "1",
+
+		"test.case.cname": cname,
 	}
 
-	units.Run(&units.Config{
-		Cases:      cname,
-		Module:     security.ModuleForTest(),
-		Properties: props,
-		T:          t,
-		UsePanic:   false,
-	})
+	ctx := units.NewContext()
+	m := security.ModuleForTest()
+
+	ctx.T = t
+	ctx.Module = m
+	ctx.Properties = props
+	ctx.UsePanic = true
+
+	units.Run(ctx)
 
 }
 

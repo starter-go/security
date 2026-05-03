@@ -16,15 +16,15 @@ type TestUUID struct {
 
 }
 
-func (inst *TestUUID) _impl() units.Units {
+func (inst *TestUUID) _impl() units.Unit {
 	return inst
 }
 
 // Units ...
-func (inst *TestUUID) Units(list []*units.Registration) []*units.Registration {
+func (inst *TestUUID) ListRegistrations(list []*units.Registration) []*units.Registration {
 	r1 := &units.Registration{
 		Name:    "test-uuid",
-		Test:    inst.run,
+		Do:      inst.run,
 		Enabled: true,
 	}
 	list = append(list, r1)

@@ -16,15 +16,15 @@ type TestRandom struct {
 
 }
 
-func (inst *TestRandom) _impl() units.Units {
+func (inst *TestRandom) _impl() units.Unit {
 	return inst
 }
 
 // Units ...
-func (inst *TestRandom) Units(list []*units.Registration) []*units.Registration {
+func (inst *TestRandom) ListRegistrations(list []*units.Registration) []*units.Registration {
 	r1 := &units.Registration{
 		Name:    "test-random",
-		Test:    inst.run,
+		Do:      inst.run,
 		Enabled: true,
 	}
 	list = append(list, r1)

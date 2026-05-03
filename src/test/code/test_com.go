@@ -26,15 +26,15 @@ type TestCom struct {
 
 }
 
-func (inst *TestCom) _impl() units.Units {
+func (inst *TestCom) _impl() units.Unit {
 	return inst
 }
 
 // Units ...
-func (inst *TestCom) Units(list []*units.Registration) []*units.Registration {
+func (inst *TestCom) ListRegistrations(list []*units.Registration) []*units.Registration {
 	r1 := &units.Registration{
 		Name:    "test-com",
-		Test:    inst.test,
+		Do:      inst.test,
 		Enabled: true,
 	}
 	list = append(list, r1)
