@@ -1,6 +1,9 @@
 package code
 
 import (
+	"context"
+
+	"github.com/starter-go/base/lang"
 	"github.com/starter-go/security/random"
 	"github.com/starter-go/units"
 	"github.com/starter-go/vlog"
@@ -31,7 +34,7 @@ func (inst *TestRandom) ListRegistrations(list []*units.Registration) []*units.R
 	return list
 }
 
-func (inst *TestRandom) run() error {
+func (inst *TestRandom) run(cc context.Context) error {
 
 	r := inst.Rand
 	l := inst.Logger
@@ -41,7 +44,9 @@ func (inst *TestRandom) run() error {
 	str := r.NextString(20)
 	data := r.NextBytes(20)
 
-	l.Warn("n=%d \nn64=%d \nstr=%s \ndata=%s", n, n64, str, data)
+	hex := lang.HexFromBytes(data)
+
+	l.Warn("n=%d \nn64=%d \nstr=%s \ndata=%s", n, n64, str, hex)
 
 	return nil
 }

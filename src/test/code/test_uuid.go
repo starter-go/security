@@ -1,6 +1,8 @@
 package code
 
 import (
+	"context"
+
 	"github.com/starter-go/security/random"
 	"github.com/starter-go/units"
 	"github.com/starter-go/vlog"
@@ -31,7 +33,7 @@ func (inst *TestUUID) ListRegistrations(list []*units.Registration) []*units.Reg
 	return list
 }
 
-func (inst *TestUUID) run() error {
+func (inst *TestUUID) run(cc context.Context) error {
 
 	u1 := inst.Ser.Build().Generate()
 	u2 := inst.Ser.Build().Generate()

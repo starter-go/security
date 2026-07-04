@@ -41,7 +41,7 @@ func (inst *TestCom) ListRegistrations(list []*units.Registration) []*units.Regi
 	return list
 }
 
-func (inst *TestCom) test() error {
+func (inst *TestCom) test(cc context.Context) error {
 
 	c := context.Background()
 	steps := make([]func(context.Context) error, 0)

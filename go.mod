@@ -15,7 +15,7 @@ require (
 require (
 	github.com/starter-go/afs v0.9.13 // indirect
 	github.com/starter-go/configen v0.9.5 // indirect
-	github.com/starter-go/units v0.1.1 // direct
+	github.com/starter-go/units v0.1.3 // direct
 )
 
 require golang.org/x/sys v0.22.0 // indirect
