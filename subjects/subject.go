@@ -1,7 +1,5 @@
 package subjects
 
-import "github.com/starter-go/v0/subjects"
-
 // // Subject 表示当前的操作主体
 // type Subject interface {
 // 	GetContext() context.Context
@@ -18,4 +16,4 @@ import "github.com/starter-go/v0/subjects"
 // 	Load(c context.Context) (Subject, error)
 // }
 
-type Subject = subjects.Subject
+// type Subject = subjects.Subject
