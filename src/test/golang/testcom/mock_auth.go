@@ -1,4 +1,4 @@
-package code
+package testcom
 
 import "github.com/starter-go/security/auth"
 

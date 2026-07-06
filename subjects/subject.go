@@ -1,24 +1,21 @@
 package subjects
 
-import (
-	"context"
+import "github.com/starter-go/v0/subjects"
 
-	"github.com/starter-go/rbac"
-	"github.com/starter-go/security"
-)
+// // Subject 表示当前的操作主体
+// type Subject interface {
+// 	GetContext() context.Context
 
-// Subject 表示当前的操作主体
-type Subject interface {
-	GetContext() context.Context
+// 	GetToken() security.Token
 
-	GetToken() security.Token
+// 	GetSession() security.Session
 
-	GetSession() security.Session
+// 	HasRole(role rbac.RoleName) bool
+// }
 
-	HasRole(role rbac.RoleName) bool
-}
+// // Loader 用于从上下文中加载 subject 对象
+// type Loader interface {
+// 	Load(c context.Context) (Subject, error)
+// }
 
-// Loader 用于从上下文中加载 subject 对象
-type Loader interface {
-	Load(c context.Context) (Subject, error)
-}
+type Subject = subjects.Subject

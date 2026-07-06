@@ -4,12 +4,12 @@
         "sources": [
             {
                 "id": "main",
-                "path": "internal",
+                "path": "impl",
                 "r": true
             },
             {
                 "id": "test",
-                "path": "src/test/code",
+                "path": "src/test/golang",
                 "r": true
             }
         ],

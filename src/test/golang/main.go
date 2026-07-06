@@ -4,15 +4,24 @@ import (
 	"os"
 
 	"github.com/starter-go/application"
+	"github.com/starter-go/units"
 
 	"github.com/starter-go/security/modules/security"
-	"github.com/starter-go/starter"
 )
 
 func main() {
-	i := starter.Init(os.Args)
-	i.MainModule(module())
-	i.WithPanic(true).Run()
+
+	a := os.Args
+	m := module()
+
+	c := &units.Context{
+		Arguments: a,
+		Module:    m,
+		UsePanic:  true,
+	}
+
+	units.Run(c)
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////

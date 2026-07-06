@@ -8,12 +8,18 @@ github.com/starter-go/application v0.9.28 h1:fQxnfXw8eNIbKaUSqBRWQpQLZsu8ICkNv/Y
 github.com/starter-go/application v0.9.28/go.mod h1:8JvdNU24P35K9pXBy4ip+XJKGKpOkUA0t7SXjeviwTs=
 github.com/starter-go/base v0.9.11 h1:QG5kcShJSV9cs2KEeqZ8UN9icM/0uPZwPFrh0XUOf+Q=
 github.com/starter-go/base v0.9.11/go.mod h1:MMqPMFzwPHjKyfX0cMmkpAAbeJ0tJupFbI8D+x27fJM=
+github.com/starter-go/base v0.9.15 h1:xtaOQ7egRJ0WuTFxLTGAzhlhxf8uXdhCqkWPE6qdWMg=
+github.com/starter-go/base v0.9.15/go.mod h1:MMqPMFzwPHjKyfX0cMmkpAAbeJ0tJupFbI8D+x27fJM=
 github.com/starter-go/configen v0.9.5 h1:KTwueLMQA3Ba70sJddK+hOLEifOI0dTXpPkX/jiBjIo=
 github.com/starter-go/configen v0.9.5/go.mod h1:n3qiv4z1nZ0h4qfcX9Ju8kUMgjuLUkv0EvL6lxQOwtQ=
 github.com/starter-go/keyvalues v0.0.1 h1:nwvE7xp0eCq5rjHfLyYFEfowgZkDYBZcIT39c9ECjjk=
 github.com/starter-go/keyvalues v0.0.1/go.mod h1:+S65W4rMjMYQZAmt766453lksB5C3PPp794W3iTCmVA=
 github.com/starter-go/rbac v0.0.14 h1:I0i4zhfxSzkCkZuhKQTG2RsQOZE9MVEM3zZWpfvQpYg=
 github.com/starter-go/rbac v0.0.14/go.mod h1:gXIuKkdcVPR/FXm2m+VBhl4Ri7ksyn1UCLjDXtC+H6Q=
+github.com/starter-go/rbac v0.0.15 h1:sUxDR/q6Dg10ku2eL6xtYIVRS8QNIiHWE5ahxMQJkxs=
+github.com/starter-go/rbac v0.0.15/go.mod h1:o5pYLXIR/t+VKslSDZMrXIUM+7CwALCFOPHXw3MT3XU=
+github.com/starter-go/rbac v0.0.16 h1:5eXGJ0Gv0ZsbX6dbLG8DV6WUa43HasK7/aCu97Ly7kw=
+github.com/starter-go/rbac v0.0.16/go.mod h1:o5pYLXIR/t+VKslSDZMrXIUM+7CwALCFOPHXw3MT3XU=
 github.com/starter-go/starter v1.0.14 h1:TPVTOlKrU/9XBuSVy2hzQb13gKT1Sbup/s3vQ5GrhqM=
 github.com/starter-go/starter v1.0.14/go.mod h1:6yqAF+I/kEXPbcCczo6Bg2icETyxG9AyhdjmMoUeFq8=
 github.com/starter-go/units v0.0.6 h1:1sLqKa+9r3k+F89up7tGxqiBZ0kX/e7bbjgmw0bc1A8=
@@ -24,6 +30,8 @@ github.com/starter-go/units v0.1.1 h1:Zd8tiu/+TiTO18afr7f8wRm4lViIG5EWUOjET+n0a3
 github.com/starter-go/units v0.1.1/go.mod h1:fnTy7hUsN6mWTak3/406hSaQ07RArTyPAX+lv5Dnr4o=
 github.com/starter-go/units v0.1.3 h1:MbpAAEY1dyRnuc1m2Ogq4Sp8qJfuhm+E9USQ7IEQv1k=
 github.com/starter-go/units v0.1.3/go.mod h1:fnTy7hUsN6mWTak3/406hSaQ07RArTyPAX+lv5Dnr4o=
+github.com/starter-go/v0/subjects v0.0.7 h1:wv1+JZRSEAPE+k9g7j0fo4X5/sQiPD5ufMROXraibZI=
+github.com/starter-go/v0/subjects v0.0.7/go.mod h1:ywhKQbs/V1Aos+B6EtLtKdODbMJFvQmV4QNCaNtR8+M=
 github.com/starter-go/vlog v0.9.12 h1:gaKCLPvEY6d8SoVfEemGTqyNdrFZlRqf1dVDimCqgZw=
 github.com/starter-go/vlog v0.9.12/go.mod h1:ywWUCfWNTqXrelvO4/3sQ04SCW4ClR3PiN3qpSlXhH0=
 golang.org/x/sys v0.22.0 h1:RI27ohtqKCnwULzJLqkv897zojh5/DwS/ENaMzUOaWI=

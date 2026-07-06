@@ -30,11 +30,12 @@ func (inst *autoRegistrar) register(factory comFactory) error {
 func (inst*autoRegistrar) addAll() error {
 
     
-    inst.register(&p5772338936_code_MockAuth{})
-    inst.register(&p5772338936_code_MockTokenAdapter{})
-    inst.register(&p5772338936_code_TestCom{})
-    inst.register(&p5772338936_code_TestRandom{})
-    inst.register(&p5772338936_code_TestUUID{})
+    inst.register(&p3197284801_testcom_MockAuth{})
+    inst.register(&p3197284801_testcom_MockPermRegDemo{})
+    inst.register(&p3197284801_testcom_MockTokenAdapter{})
+    inst.register(&p3197284801_testcom_TestCom{})
+    inst.register(&p3197284801_testcom_TestRandom{})
+    inst.register(&p3197284801_testcom_TestUUID{})
 
 
     return nil

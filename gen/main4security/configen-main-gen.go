@@ -30,16 +30,18 @@ func (inst *autoRegistrar) register(factory comFactory) error {
 func (inst*autoRegistrar) addAll() error {
 
     
-    inst.register(&pf41d62225c_internal_AuthService1{})
-    inst.register(&pf41d62225c_internal_AuthService2{})
-    inst.register(&pf41d62225c_internal_AuthenticatorManagerImpl{})
-    inst.register(&pf41d62225c_internal_AuthorizerManagerImpl{})
-    inst.register(&pf41d62225c_internal_DefaultRandomService{})
-    inst.register(&pf41d62225c_internal_DefaultRandomSource{})
-    inst.register(&pf41d62225c_internal_JWTCODEC{})
-    inst.register(&pf41d62225c_internal_JWTService{})
-    inst.register(&pf41d62225c_internal_SessionServiceImpl{})
-    inst.register(&pf41d62225c_internal_UUIDServiceImpl{})
+    inst.register(&p1579242dd0_impl_AuthService1{})
+    inst.register(&p1579242dd0_impl_AuthService2{})
+    inst.register(&p1579242dd0_impl_AuthenticatorManagerImpl{})
+    inst.register(&p1579242dd0_impl_AuthorizerManagerImpl{})
+    inst.register(&p1579242dd0_impl_DefaultRandomService{})
+    inst.register(&p1579242dd0_impl_DefaultRandomSource{})
+    inst.register(&p1579242dd0_impl_JWTCODEC{})
+    inst.register(&p1579242dd0_impl_JWTService{})
+    inst.register(&p1579242dd0_impl_SessionServiceImpl{})
+    inst.register(&p1579242dd0_impl_UUIDServiceImpl{})
+    inst.register(&pbf7e6103cc_ipermissions_PermissionCacheLoader{})
+    inst.register(&pbf7e6103cc_ipermissions_PermissionManagerImpl{})
 
 
     return nil

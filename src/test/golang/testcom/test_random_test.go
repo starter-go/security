@@ -1,4 +1,4 @@
-package code
+package testcom
 
 // func TestRandomCom(t *testing.T) {
 
